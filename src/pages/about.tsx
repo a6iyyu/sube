@@ -2,16 +2,16 @@ import React from "react";
 import { WebsiteMeta } from "../hooks/website-meta";
 import { ScrollIndicator } from "../components/global/scroll-indicator";
 import { Header } from "../components/global/header";
-import { CourseHero } from "../components/course/hero";
+import { AboutHero } from "../components/about/hero";
 import { Footer } from "../components/global/footer";
 
-export const CoursePage: React.FC = () => {
+export const AboutPage: React.FC = () => {
   return (
     <>
-      <WebsiteMeta title="Mari Belajar Disini!" description="" icon="" />
+      <WebsiteMeta title="Berkenalan Dengan Kami" description="" icon="" />
       <ScrollIndicator />
       <Header />
-      <CourseHero />
+      <AboutHero />
       <Footer />
     </>
   );

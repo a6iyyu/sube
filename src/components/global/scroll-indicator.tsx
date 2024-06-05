@@ -11,5 +11,5 @@ export const ScrollIndicator: React.FC = () => {
 
   window.addEventListener("scroll", ScrollPercentage);
 
-  return <section className="fixed top-28 z-40 h-1 bg-blue-500 lg:top-36" style={{ width: `${scrollProgress}` + "%" }}></section>;
+  return <section className="fixed z-40 h-1 bg-blue-500" style={{ width: `${scrollProgress}` + "%" }}></section>;
 };

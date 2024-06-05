@@ -8,7 +8,11 @@ import { Footer } from "../components/global/footer";
 export const IndexPage: React.FC = () => {
   return (
     <>
-      <WebsiteMeta title="Beranda" description="" icon="" />
+      <WebsiteMeta
+        title="Sube: Tempat Belajar Organisasi #1 di Indonesia!"
+        description=""
+        icon=""
+      />
       <ScrollIndicator />
       <Header />
       <IndexHero />
