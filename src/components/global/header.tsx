@@ -1,6 +1,18 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { styled } from "styled-components";
 import { HamburgerMenu } from "../global/hamburger-menu";
+
+const Hover = styled.section`
+  a:hover {
+    filter: blur(0);
+    transform: scale(1.05);
+  }
+  &:hover a:not(:hover) {
+    transform: scale(0.95);
+    filter: blur(0.1rem);
+  }
+`;
 
 export const Header: React.FC = () => {
   const Menus: string[] = ["About", "Course", "Sign Up"];
@@ -12,7 +24,7 @@ export const Header: React.FC = () => {
           <img src="" alt="Icon" className="font-semibold" />
         </a>
       </section>
-      <section className="hidden h-full w-3/5 text-lg font-semibold lg:flex lg:items-center lg:justify-end">
+      <Hover className="hidden h-full w-3/5 text-lg font-semibold lg:flex lg:items-center lg:justify-end">
         {Menus.map((menu, i) => (
           <Link
             to={`/${menu.toLowerCase().replace(/ /g, "-")}`}
@@ -22,7 +34,7 @@ export const Header: React.FC = () => {
             {menu}
           </Link>
         ))}
-      </section>
+      </Hover>
       <HamburgerMenu />
     </header>
   );
