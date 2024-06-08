@@ -1,11 +1,40 @@
 import React from "react";
+import styled from "styled-components";
+import { TabelSilabusKurikulum } from "../../hooks/tabel-silabus-kurikulum";
+
+const Konten = styled.div`
+  div:hover {
+    filter: blur(0);
+    transform: scale(1.05);
+  }
+  &:hover div:not(:hover) {
+    transform: scale(0.95);
+    filter: blur(0.1rem);
+  }
+`;
 
 export const SilabusKurikulum: React.FC = () => {
   return (
-    <main className="-mt-16 h-fit w-full bg-gradient-to-r from-[#141b1f] to-[#1a1f25] pb-16 pt-32 [border-radius:50%_50%_10%_10%_/_30%_30%_0%_0%]">
+    <main className="-mt-24 h-fit w-full bg-gradient-to-r from-[#141b1f] to-[#1a1f25] pb-16 pt-40 [border-radius:50%_50%_10%_10%_/_20%_20%_0%_0%] lg:-mt-16 lg:pt-32">
       <section className="mx-auto h-full w-4/5 cursor-default text-center text-slate-50">
-        <h2 className="text-4xl font-bold">Fitur Utama di Kurikulum Kami</h2>
-        <div className="grid grid-cols-4 place-items-center"></div>
+        <h2 className="text-4xl font-bold tracking-wider">
+          Fitur Utama di Kurikulum Kami
+        </h2>
+        <Konten className="mt-20 flex flex-col xl:grid xl:grid-cols-3 xl:place-items-center">
+          {TabelSilabusKurikulum.map((item, i) => (
+            <div key={i} className="mt-8 flex h-full w-full flex-col justify-start rounded-2xl bg-[#222831] text-slate-50 transition-all duration-300 ease-in-out [box-shadow:0.3rem_0.3rem_0_#bcbcbc50] xl:w-[90%]">
+              <span className="mx-auto -mt-16 grid h-32 w-32 place-items-center rounded-full bg-[#272d37]">
+                <img src={item.gambar} alt={item.judul} className="h-[4.5rem] w-[4.5rem] text-xs italic" />
+              </span>
+              <h3 className="mx-auto my-6 h-fit w-4/5 text-xl font-bold lg:text-2xl xl:text-xl">
+                {item.judul}
+              </h3>
+              <h5 className="mx-auto h-fit w-4/5 text-justify">
+                {item.deskripsi}
+              </h5>
+            </div>
+          ))}
+        </Konten>
       </section>
     </main>
   );

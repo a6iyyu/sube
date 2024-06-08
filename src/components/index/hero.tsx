@@ -19,7 +19,7 @@ export const IndexHero: React.FC = () => {
           Jelajahi Sekarang
         </button>
       </section>
-      <img src="/student.png" alt="Welcome to Sube!" />
+      <img src="/student.png" alt="Welcome to Sube!" className="transition-all duration-300 ease-in-out hover:scale-105" />
     </main>
   );
 };
