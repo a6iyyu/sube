@@ -3,6 +3,7 @@ import { WebsiteMeta } from "../hooks/website-meta";
 import { ScrollIndicator } from "../components/global/scroll-indicator";
 import { Header } from "../components/global/header";
 import { IndexHero } from "../components/index/hero";
+import { SilabusKurikulum } from "../components/index/silabus-kurikulum";
 import { Footer } from "../components/global/footer";
 
 export const IndexPage: React.FC = () => {
@@ -16,6 +17,7 @@ export const IndexPage: React.FC = () => {
       <ScrollIndicator />
       <Header />
       <IndexHero />
+      <SilabusKurikulum />
       <Footer />
     </>
   );
