@@ -4,7 +4,7 @@ import { HandleMouseEnter, HandleMouseLeave, Headline } from "../../hooks/hover-
 export const IndexHero: React.FC = () => {
   return (
     <main className="z-20 mx-auto mt-16 flex h-fit w-4/5 flex-col-reverse items-center justify-center gap-x-20 text-slate-50 lg:flex-row lg:justify-between">
-      <span className="absolute left-0 top-0 z-0 h-40 w-40 [background-color:#ff85ad] [filter:blur(8rem)]" />
+      <span className="absolute left-0 top-0 z-0 h-40 w-40 bg-[#ff85ad] [filter:blur(8rem)]" />
       <section className="mt-10 flex h-full w-full cursor-default flex-col items-center text-justify lg:mt-0 lg:items-start">
         <h2 className="text-center text-4xl font-bold [line-height:1.175] lg:text-left lg:text-5xl">
           {Headline("Manajemen Cerdas,", HandleMouseEnter, HandleMouseLeave)}
@@ -15,7 +15,7 @@ export const IndexHero: React.FC = () => {
           Kuasai strategi pengelolaan organisasi dengan kursus kami. Mulailah
           perjalanan Anda menuju kesuksesan dengan mendaftar sekarang!
         </h4>
-        <button className="mt-10 h-fit w-fit cursor-pointer rounded-xl bg-slate-50 px-8 py-4 text-xl font-semibold text-slate-950 transition-all duration-300 ease-in-out hover:bg-slate-200">
+        <button id="jelajahi-sekarang" className="mt-10 h-fit w-fit cursor-pointer rounded-xl bg-slate-50 px-8 py-4 text-xl font-semibold text-slate-950 transition-all duration-300 ease-in-out hover:bg-slate-200">
           Jelajahi Sekarang
         </button>
       </section>

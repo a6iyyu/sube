@@ -19,6 +19,9 @@ const GlobalStyles = createGlobalStyle`
   }
 }
 @media screen and (max-width: 3120px) {
+  html {
+    scroll-padding: 2.5rem;
+  }
   body {
     opacity: 1;
   }
