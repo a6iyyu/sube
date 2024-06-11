@@ -9,7 +9,7 @@ export const Fitur: Fitur[] = [
   {
     id: "1",
     gambar: "/test.png?url",
-    judul: "Tes Penilaian Pemahaman",
+    judul: "Tes Pemahaman",
     deskripsi: "Uji pemahaman konsep dengan latihan soal ganda.",
   },
   {
@@ -27,7 +27,7 @@ export const Fitur: Fitur[] = [
   {
     id: "4",
     gambar: "/clock.png?url",
-    judul: "Kapanpun dan Dimanapun",
+    judul: "Fleksibel",
     deskripsi: "Nikmati kursus kapanpun dan dimanapun berada."
   }
 ];

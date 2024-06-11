@@ -5,6 +5,7 @@ import { Header } from "../components/global/header";
 import { IndexHero } from "../components/index/hero";
 import { SilabusKurikulum } from "../components/index/silabus-kurikulum";
 import { FiturYangDisediakan } from "../components/index/fitur-yang-disediakan";
+import { JalurPembelajaran } from "../components/index/jalur-pembelajaran";
 import { Footer } from "../components/global/footer";
 
 export const IndexPage: React.FC = () => {
@@ -24,6 +25,7 @@ export const IndexPage: React.FC = () => {
       <IndexHero />
       <SilabusKurikulum />
       <FiturYangDisediakan />
+      <JalurPembelajaran />
       <Footer />
     </>
   );

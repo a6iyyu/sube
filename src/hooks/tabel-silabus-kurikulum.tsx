@@ -5,7 +5,7 @@ interface InitContent {
   deskripsi: string;
 }
 
-export const TabelSilabusKurikulum: InitContent[] = ([
+export const TabelSilabusKurikulum: InitContent[] = [
   {
     id: "1",
     gambar: "/needs.png?url",
@@ -24,4 +24,4 @@ export const TabelSilabusKurikulum: InitContent[] = ([
     judul: "Mengasah Keterampilan",
     deskripsi: "Membantu peserta didik menguasai teknik menjawab dengan latihan-latihan soal yang dirancang khusus.",
   },
-]);
+];

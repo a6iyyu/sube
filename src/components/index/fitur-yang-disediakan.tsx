@@ -22,7 +22,7 @@ export const FiturYangDisediakan: React.FC = () => {
           {Fitur.map((item) => (
             <div key={item.id} className="mt-5 flex transition-all duration-300 ease-in-out first:mt-0 lg:mt-0">
               <span className="grid place-items-center rounded-xl bg-[#222831] p-6 [box-shadow:0.15rem_0.15rem_0_#bcbcbc99]">
-                <img src={item.gambar} alt={item.judul} className="h-10 w-10 text-xs italic" />
+                <img src={item.gambar} alt={item.judul} className="w-8 text-xs italic md:w-10" />
               </span>
               <span className="my-auto ml-4 flex h-fit w-fit flex-col items-start text-left">
                 <strong className="text-lg">{item.judul}</strong>
@@ -32,6 +32,7 @@ export const FiturYangDisediakan: React.FC = () => {
           ))}
         </Konten>
       </section>
+      <span className="absolute top-[80rem] h-40 w-40 bg-[rgb(8,88,225)] [filter:blur(8rem)]" />
     </main>
   );
 };

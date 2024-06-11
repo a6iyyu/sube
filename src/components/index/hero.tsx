@@ -8,7 +8,8 @@ export const IndexHero: React.FC = () => {
       <section className="mt-10 flex h-full w-full cursor-default flex-col items-center text-justify lg:mt-0 lg:items-start">
         <h2 className="text-center text-4xl font-bold [line-height:1.175] lg:text-left lg:text-5xl">
           {Headline("Manajemen Cerdas,", HandleMouseEnter, HandleMouseLeave)}
-          <br />
+          <br className="hidden md:flex" />
+          <span className="inline-block md:hidden">&nbsp;</span>
           {Headline("Sumber Daya Optimal", HandleMouseEnter, HandleMouseLeave)}
         </h2>
         <h4 className="mt-6 text-xl font-medium [line-height:1.5] [text-align-last:center] lg:mt-5 lg:text-2xl lg:[text-align-last:left]">
