@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import { WebsiteMeta } from "../hooks/website-meta";
 import { ScrollIndicator } from "../components/global/scroll-indicator";
+import { ScrollToTop } from "../components/global/scroll-to-top";
 import { Header } from "../components/global/header";
 import { IndexHero } from "../components/index/hero";
 import { SilabusKurikulum } from "../components/index/silabus-kurikulum";
@@ -21,6 +22,7 @@ export const IndexPage: React.FC = () => {
     <>
       <WebsiteMeta title="Sube: Tempat Belajar Organisasi #1 di Indonesia!" description="" icon="" />
       <ScrollIndicator />
+      <ScrollToTop />
       <Header />
       <IndexHero />
       <SilabusKurikulum />

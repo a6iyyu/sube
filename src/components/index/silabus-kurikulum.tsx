@@ -16,7 +16,7 @@ const Konten = styled.div`
 export const SilabusKurikulum: React.FC = () => {
   return (
     <main className="-mt-24 h-fit w-full bg-gradient-to-r from-[#141b1f] to-[#1a1f25] pt-40 [border-radius:30%_30%_25%_25%_/_5%_5%_0%_0%] lg:-mt-16 lg:pt-32 lg:[border-radius:50%_50%_10%_10%_/_20%_20%_0%_0%]">
-      <span className="absolute right-0 top-[45rem] h-40 w-40 bg-[rgb(31,221,255,0.5)] opacity-0 [filter:blur(8rem)]" />
+      <span className="absolute right-0 top-[45rem] h-40 w-40 bg-[#1fddff38] opacity-0 [filter:blur(8rem)]" />
       <section id="silabus" className="mx-auto h-full w-4/5 cursor-default text-center text-slate-50">
         <h2 className="text-4xl font-bold tracking-wider">
           Fitur Utama di Kurikulum Kami

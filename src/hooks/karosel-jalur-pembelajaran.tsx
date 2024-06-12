@@ -13,26 +13,26 @@ export const DataKarosel: InitDataKarosel[] = [
   {
     id: "2",
     judul: "Inovasi",
-    gambar: "",
+    gambar: "/innovation.png?url",
   },
   {
     id: "3",
     judul: "Berpikir Kritis",
-    gambar: "",
+    gambar: "/critical-thinking.jpg?url",
   },
   {
     id: "4",
     judul: "Pengembangan Kepemimpinan",
-    gambar: "",
+    gambar: "/leadership.jpg?url",
   },
   {
     id: "5",
     judul: "Manajemen Proyek",
-    gambar: "",
+    gambar: "/project-management.jpg?url",
   },
   {
     id: "6",
     judul: "Transformasi Digital",
-    gambar: "",
+    gambar: "/digital-transformation.jpg?url",
   },
 ];
