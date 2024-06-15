@@ -20,7 +20,7 @@ const HamburgerAnimated = styled.div`
 
 export const HamburgerMenu: React.FC = () => {
   const [open, setOpen] = useState<boolean>(false);
-  const menus: string[] = ["About", "Course", "Sign Up"];
+  const menus: string[] = ["About", "Blog", "Course", "Sign Up"];
 
   useEffect(() => {
     const HandleOutside = (e: MouseEvent) => {

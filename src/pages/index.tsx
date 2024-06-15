@@ -6,7 +6,9 @@ import { Header } from "../components/global/header";
 import { IndexHero } from "../components/index/hero";
 import { SilabusKurikulum } from "../components/index/silabus-kurikulum";
 import { FiturYangDisediakan } from "../components/index/fitur-yang-disediakan";
-import { JalurPembelajaran } from "../components/index/jalur-pembelajaran";
+import { JalurPembelajaran } from "../components/index/karosel-jalur-pembelajaran";
+import { Persuasif } from "../components/index/persuasif";
+import { KenalLebihDekat } from "../components/index/kenal-lebih-dekat";
 import { Footer } from "../components/global/footer";
 
 export const IndexPage: React.FC = () => {
@@ -28,6 +30,8 @@ export const IndexPage: React.FC = () => {
       <SilabusKurikulum />
       <FiturYangDisediakan />
       <JalurPembelajaran />
+      <Persuasif />
+      <KenalLebihDekat />
       <Footer />
     </>
   );

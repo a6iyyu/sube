@@ -19,7 +19,7 @@ export const SilabusKurikulum: React.FC = () => {
       <span className="absolute right-0 top-[45rem] h-40 w-40 bg-[#1fddff38] opacity-0 [filter:blur(8rem)]" />
       <section id="silabus" className="mx-auto h-full w-4/5 cursor-default text-center text-slate-50">
         <h2 className="text-4xl font-bold tracking-wider">
-          Fitur Utama di Kurikulum Kami
+          Tujuan Kurikulum Kami
         </h2>
         <Konten className="mt-24 flex flex-col lg:grid lg:grid-cols-3 lg:place-items-center lg:justify-items-stretch">
           {TabelSilabusKurikulum.map((item) => (
