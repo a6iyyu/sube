@@ -1,8 +1,8 @@
 interface Fitur {
-  id?: string;
-  gambar?: string;
-  judul?: string;
-  deskripsi?: string;
+  id: string;
+  gambar: string;
+  judul: string;
+  deskripsi: string;
 }
 
 export const Fitur: Fitur[] = [

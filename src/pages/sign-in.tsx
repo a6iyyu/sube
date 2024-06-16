@@ -1,5 +1,5 @@
 import React from "react";
-import { WebsiteMeta } from "../hooks/website-meta";
+import { WebsiteMeta } from "../hooks/global/website-meta";
 import { SignInForm } from "../components/accounts/sign-in";
 
 export const SignInPage: React.FC = () => {

@@ -1,5 +1,5 @@
 import React from "react";
-import { WebsiteMeta } from "../hooks/website-meta";
+import { WebsiteMeta } from "../hooks/global/website-meta";
 import { ScrollIndicator } from "../components/global/scroll-indicator";
 import { ScrollToTop } from "../components/global/scroll-to-top";
 import { Header } from "../components/global/header";

@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import { Fitur } from "../../hooks/fitur-yang-disediakan";
+import { Fitur } from "../../hooks/index/fitur-yang-disediakan";
 
 const Konten = styled.div`
   div:hover {

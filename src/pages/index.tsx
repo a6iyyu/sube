@@ -1,13 +1,14 @@
 import React, { useEffect } from "react";
-import { WebsiteMeta } from "../hooks/website-meta";
+import { WebsiteMeta } from "../hooks/global/website-meta";
 import { ScrollIndicator } from "../components/global/scroll-indicator";
 import { ScrollToTop } from "../components/global/scroll-to-top";
 import { Header } from "../components/global/header";
 import { IndexHero } from "../components/index/hero";
-import { SilabusKurikulum } from "../components/index/silabus-kurikulum";
+import { SilabusKurikulum } from "../components/index/tujuan-kurikulum-kami";
 import { FiturYangDisediakan } from "../components/index/fitur-yang-disediakan";
-import { JalurPembelajaran } from "../components/index/karosel-jalur-pembelajaran";
+import { JalurPembelajaran } from "../components/index/jalur-pembelajaran";
 import { Persuasif } from "../components/index/persuasif";
+import { RingkasanBlog } from "../components/index/ringkasan-blog";
 import { KenalLebihDekat } from "../components/index/kenal-lebih-dekat";
 import { Footer } from "../components/global/footer";
 
@@ -31,6 +32,7 @@ export const IndexPage: React.FC = () => {
       <FiturYangDisediakan />
       <JalurPembelajaran />
       <Persuasif />
+      <RingkasanBlog />
       <KenalLebihDekat />
       <Footer />
     </>

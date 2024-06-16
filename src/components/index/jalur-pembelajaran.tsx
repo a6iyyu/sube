@@ -1,0 +1,54 @@
+import React from "react";
+import { Link } from "react-router-dom";
+import styled from "styled-components";
+import { ModulPembelajaran } from "../../hooks/index/modul-pembelajaran";
+import "@splidejs/splide/css";
+
+const SectionHover = styled.section`
+  &:hover a:not(:hover) {
+    filter: blur(0.1rem);
+    transform: scale(0.975);
+  }
+`;
+
+export const JalurPembelajaran: React.FC = () => {
+  return (
+    <main className="flex h-fit w-full flex-col bg-gradient-to-r from-[#141b1f] to-[#1a1f25] text-slate-50">
+      <h3 className="mx-auto mb-4 mt-6 h-fit w-4/5 cursor-default text-center text-4xl font-bold tracking-wider">
+        Alur Pembelajaran
+      </h3>
+      <h5 className="mx-auto mb-6 h-fit w-4/5 cursor-default text-justify text-base font-medium tracking-wider [text-align-last:center] lg:w-3/5 lg:text-center lg:text-xl lg:[text-align-last:center]">
+        Alur pembelajaran disusun untuk memberikan Anda pendidikan yang
+        menyeluruh berdasarkan tren dan kebutuhan saat ini.
+      </h5>
+      <SectionHover className="mx-auto grid h-full w-4/5 grid-cols-1 gap-x-10 gap-y-6 lg:grid-cols-2">
+        {ModulPembelajaran.slice(0, 4).map((modul) => (
+          <Link
+            key={modul.id}
+            to={`/course/${modul.judul.replace(/ /g, "-").toLowerCase()}`}
+            className="mt-8 flex h-fit w-fit flex-col transition-all duration-300 ease-in-out"
+          >
+            <div className="h-72 w-full lg:h-60">
+              <img
+                src={modul.gambar}
+                alt={modul.judul}
+                className="h-full w-full rounded-lg object-cover [box-shadow:0.3rem_0.3rem_0_#bcbcbc]"
+              />
+            </div>
+            <h2 className="group mt-4 text-center text-2xl font-bold text-slate-50 transition-all duration-300 ease-in-out lg:text-left">
+              <span className="bg-gradient-to-r from-sky-500 to-sky-500 bg-[length:0%_0.125rem] bg-left-bottom bg-no-repeat transition-all duration-500 ease-out group-hover:bg-[length:100%_0.125rem]">
+                {modul.judul}
+              </span>
+            </h2>
+            <h4 className="group mt-4 text-justify text-slate-50 transition-all duration-300 ease-in-out">
+              <span className="bg-gradient-to-r from-sky-500 to-sky-500 bg-[length:0%_0.125rem] bg-left-bottom bg-no-repeat transition-all duration-500 ease-out group-hover:bg-[length:100%_0.125rem]">
+                {modul.deskripsi}
+              </span>
+            </h4>
+          </Link>
+        ))}
+      </SectionHover>
+      <span className="absolute right-0 top-[120rem] h-40 w-40 bg-[#bf4e0880] [filter:blur(8rem)]" />
+    </main>
+  );
+};
