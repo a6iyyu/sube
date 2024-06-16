@@ -3,13 +3,22 @@ import styled from "styled-components";
 import { TabelSilabusKurikulum } from "../../hooks/index/tabel-silabus-kurikulum";
 
 const Konten = styled.div`
-  div:hover {
-    filter: blur(0);
-    transform: scale(1.05);
+  @media screen and (max-width: 3120px) {
+    div:hover {
+      filter: blur(0);
+      transform: scale(1.05);
+    }
+    &:hover div:not(:hover) {
+      transform: scale(0.95);
+      filter: blur(0.1rem);
+    }
   }
-  &:hover div:not(:hover) {
-    transform: scale(0.95);
-    filter: blur(0.1rem);
+  @media screen and (max-width: 1024px) {
+    div:hover,
+    &:hover div:not(:hover) {
+      filter: blur(0);
+      transform: scale(1);
+    }
   }
 `;
 

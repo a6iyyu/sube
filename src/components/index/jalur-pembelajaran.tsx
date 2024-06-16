@@ -5,9 +5,17 @@ import { ModulPembelajaran } from "../../hooks/index/modul-pembelajaran";
 import "@splidejs/splide/css";
 
 const SectionHover = styled.section`
-  &:hover a:not(:hover) {
-    filter: blur(0.1rem);
-    transform: scale(0.975);
+  @media screen and (max-width: 3120px) {
+    &:hover a:not(:hover) {
+      filter: blur(0.1rem);
+      transform: scale(0.975);
+    }
+  }
+  @media screen and (max-width: 1024px) {
+    &:hover a:not(:hover) {
+      filter: blur(0);
+      transform: scale(1);
+    }
   }
 `;
 
