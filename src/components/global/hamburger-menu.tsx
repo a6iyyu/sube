@@ -20,7 +20,7 @@ const HamburgerAnimated = styled.div`
 
 export const HamburgerMenu: React.FC = () => {
   const [open, setOpen] = useState<boolean>(false);
-  const menus: string[] = ["About", "Blog", "Course", "Sign Up"];
+  const menus: string[] = ["Blog", "Kursus", "Tantangan", "Registrasi"];
 
   useEffect(() => {
     const HandleOutside = (e: MouseEvent) => {
@@ -42,7 +42,7 @@ export const HamburgerMenu: React.FC = () => {
             <Link
               key={i}
               to={`/${menu.replace(/ /g, "-").toLowerCase()}`}
-              className="grid h-full w-full cursor-pointer place-items-center px-9 py-5 font-semibold text-slate-950 transition-all duration-300 ease-in-out first:rounded-t-xl last:rounded-b-xl hover:bg-slate-200 first:hover:rounded-t-xl last:hover:rounded-b-xl"
+              className="grid h-full w-full cursor-pointer place-items-center px-10 py-5 font-semibold text-slate-950 transition-all duration-300 ease-in-out first:rounded-t-xl last:rounded-b-xl hover:bg-slate-200 first:hover:rounded-t-xl last:hover:rounded-b-xl"
             >
               {menu}
             </Link>

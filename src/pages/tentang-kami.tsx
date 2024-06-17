@@ -3,17 +3,17 @@ import { WebsiteMeta } from "../hooks/global/website-meta";
 import { ScrollIndicator } from "../components/global/scroll-indicator";
 import { ScrollToTop } from "../components/global/scroll-to-top";
 import { Header } from "../components/global/header";
-import { BlogHero } from "../components/blog/hero";
+import { AboutHero } from "../components/tentang-kami/hero";
 import { Footer } from "../components/global/footer";
 
-export const Blog: React.FC = () => {
+export const TentangKami: React.FC = () => {
   return (
     <>
-      <WebsiteMeta title="Bacaan Informatif dan Inspiratif" description="" icon="" />
+      <WebsiteMeta title="Berkenalan Dengan Kami" description="" icon="" />
       <ScrollIndicator />
       <ScrollToTop />
       <Header />
-      <BlogHero />
+      <AboutHero />
       <Footer />
     </>
   );

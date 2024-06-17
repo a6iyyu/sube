@@ -1,12 +1,12 @@
 import React from "react";
 import { WebsiteMeta } from "../hooks/global/website-meta";
-import { SignUpForm } from "../components/accounts/sign-up";
+import { FormulirRegistrasi } from "../components/akun/registrasi";
 
-export const SignUpPage: React.FC = () => {
+export const Registrasi: React.FC = () => {
   return (
     <>
       <WebsiteMeta title="Daftarkan Dirimu Sekarang!" description="" icon="" />
-      <SignUpForm />
+      <FormulirRegistrasi />
     </>
   );
 };

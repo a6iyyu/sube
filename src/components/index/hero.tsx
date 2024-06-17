@@ -1,7 +1,7 @@
 import React from "react";
 import { HandleMouseEnter, HandleMouseLeave, Headline } from "../../hooks/index/hover-setiap-karakter";
 
-export const IndexHero: React.FC = () => {
+export const IndeksHero: React.FC = () => {
   return (
     <main className="z-20 mx-auto mt-16 flex h-fit w-4/5 flex-col-reverse items-center justify-center gap-x-20 text-slate-50 lg:flex-row lg:justify-between">
       <span className="absolute left-0 top-0 z-0 h-40 w-40 bg-[#ff85ad] [filter:blur(8rem)]" />

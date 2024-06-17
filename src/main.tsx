@@ -10,8 +10,7 @@ const GlobalStyles = createGlobalStyle`
     margin: 0;
     padding: 0;
   }
-  ::-webkit-scrollbar,
-  .splide__pagination {
+  ::-webkit-scrollbar {
     display: none !important;
   }
   @media screen and (max-width: 8192px) {

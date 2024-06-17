@@ -1,22 +1,26 @@
 import React from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { NotFoundPage } from "../pages/404";
-import { IndexPage } from "../pages/index";
-import { AboutPage } from "../pages/about";
-import { BlogPage } from "../pages/blog";
-import { CoursePage } from "../pages/course";
-import { SignUpPage } from "../pages/sign-up";
+import { Indeks } from "../pages/index";
+import { Blog } from "../pages/blog";
+import { Kursus } from "../pages/kursus";
+import { Masuk } from "../pages/masuk";
+import { Registrasi } from "../pages/registrasi";
+import { Tantangan } from "../pages/tantangan";
+import { TentangKami } from "../pages/tentang-kami";
 
 export const Router: React.FC = () => {
   return (
     <BrowserRouter>
       <Routes>
         <Route path="*" Component={NotFoundPage} />
-        <Route path="/" Component={IndexPage} />
-        <Route path="/about" Component={AboutPage} />
-        <Route path="/blog" Component={BlogPage} />
-        <Route path="/course" Component={CoursePage} />
-        <Route path="/sign-up" Component={SignUpPage} />
+        <Route path="/" Component={Indeks} />
+        <Route path="/blog" Component={Blog} />
+        <Route path="/kursus" Component={Kursus} />
+        <Route path="/sign-in" Component={Masuk} />
+        <Route path="/sign-up" Component={Registrasi} />
+        <Route path="/tantangan" Component={Tantangan} />
+        <Route path="/tentang-kami" Component={TentangKami} />
       </Routes>
     </BrowserRouter>
   );

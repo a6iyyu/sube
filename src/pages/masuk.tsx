@@ -1,8 +1,8 @@
 import React from "react";
 import { WebsiteMeta } from "../hooks/global/website-meta";
-import { SignInForm } from "../components/accounts/sign-in";
+import { FormulirMasuk } from "../components/akun/masuk";
 
-export const SignInPage: React.FC = () => {
+export const Masuk: React.FC = () => {
   return (
     <>
       <WebsiteMeta
@@ -10,7 +10,7 @@ export const SignInPage: React.FC = () => {
         description=""
         icon=""
       />
-      <SignInForm />
+      <FormulirMasuk />
     </>
   );
 };

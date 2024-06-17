@@ -15,7 +15,7 @@ const Hover = styled.section`
 `;
 
 export const Header: React.FC = () => {
-  const Menus: string[] = ["About", "Blog", "Course", "Sign Up"];
+  const Menus: string[] = ["Blog", "Kursus", "Tantangan", "Registrasi"];
 
   return (
     <header className="mx-auto flex h-24 w-4/5 items-center text-slate-50 lg:h-36">

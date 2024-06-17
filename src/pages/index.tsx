@@ -3,16 +3,15 @@ import { WebsiteMeta } from "../hooks/global/website-meta";
 import { ScrollIndicator } from "../components/global/scroll-indicator";
 import { ScrollToTop } from "../components/global/scroll-to-top";
 import { Header } from "../components/global/header";
-import { IndexHero } from "../components/index/hero";
+import { IndeksHero } from "../components/index/hero";
 import { SilabusKurikulum } from "../components/index/tujuan-kurikulum-kami";
 import { FiturYangDisediakan } from "../components/index/fitur-yang-disediakan";
 import { JalurPembelajaran } from "../components/index/jalur-pembelajaran";
-import { Persuasif } from "../components/index/persuasif";
 import { RingkasanBlog } from "../components/index/ringkasan-blog";
 import { KenalLebihDekat } from "../components/index/kenal-lebih-dekat";
 import { Footer } from "../components/global/footer";
 
-export const IndexPage: React.FC = () => {
+export const Indeks: React.FC = () => {
   useEffect(() => {
     ((document.getElementById("jelajahi-sekarang") as HTMLButtonElement) || null).addEventListener("click", () => {
       ((document.getElementById("silabus") as HTMLElement) || null).scrollIntoView({
@@ -27,11 +26,10 @@ export const IndexPage: React.FC = () => {
       <ScrollIndicator />
       <ScrollToTop />
       <Header />
-      <IndexHero />
+      <IndeksHero />
       <SilabusKurikulum />
       <FiturYangDisediakan />
       <JalurPembelajaran />
-      <Persuasif />
       <RingkasanBlog />
       <KenalLebihDekat />
       <Footer />

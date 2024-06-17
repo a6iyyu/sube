@@ -33,7 +33,7 @@ export const JalurPembelajaran: React.FC = () => {
         {ModulPembelajaran.slice(0, 4).map((modul) => (
           <Link
             key={modul.id}
-            to={`/course/${modul.judul.replace(/ /g, "-").toLowerCase()}`}
+            to={`/kursus/${modul.judul.replace(/ /g, "-").toLowerCase()}`}
             className="mt-8 flex h-fit w-fit flex-col transition-all duration-300 ease-in-out"
           >
             <div className="h-72 w-full lg:h-60">
@@ -43,7 +43,7 @@ export const JalurPembelajaran: React.FC = () => {
                 className="h-full w-full rounded-lg object-cover [box-shadow:0.3rem_0.3rem_0_#bcbcbc]"
               />
             </div>
-            <h2 className="group mt-4 text-center text-2xl font-bold text-slate-50 transition-all duration-300 ease-in-out lg:text-left">
+            <h2 className="group mt-6 text-center text-2xl font-bold text-slate-50 transition-all duration-300 ease-in-out lg:text-left">
               <span className="bg-gradient-to-r from-sky-500 to-sky-500 bg-[length:0%_0.125rem] bg-left-bottom bg-no-repeat transition-all duration-500 ease-out group-hover:bg-[length:100%_0.125rem]">
                 {modul.judul}
               </span>
@@ -56,6 +56,11 @@ export const JalurPembelajaran: React.FC = () => {
           </Link>
         ))}
       </SectionHover>
+      <section className="mx-auto mt-10 grid h-full w-4/5 place-items-center text-base font-bold text-slate-950 lg:text-lg">
+        <Link to={`/kursus`} className="rounded-xl bg-slate-50 px-8 py-4 transition-all duration-300 ease-in-out [box-shadow:0.3rem_0.3rem_0_#bcbcbc99] hover:scale-105 hover:bg-slate-200 lg:px-10 lg:py-5">
+          Pelajari Lebih Lanjut
+        </Link>
+      </section>
       <span className="absolute right-0 top-[120rem] h-40 w-40 bg-[#bf4e0880] [filter:blur(8rem)]" />
     </main>
   );
