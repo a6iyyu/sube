@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import { TabelSilabusKurikulum } from "../../utils/index/tabel-silabus-kurikulum";
+import { PropsSilabusKurikulum } from "~/utils/index/props-tujuan-kurikulum";
 
 const Konten = styled.div`
   @media screen and (max-width: 3120px) {
@@ -31,7 +31,7 @@ export const SilabusKurikulum: React.FC = () => {
           Tujuan Kurikulum Kami
         </h2>
         <Konten className="mt-24 flex flex-col lg:grid lg:grid-cols-3 lg:place-items-center lg:justify-items-stretch">
-          {TabelSilabusKurikulum.map((item) => (
+          {PropsSilabusKurikulum.map((item) => (
             <div key={item.id} className="mt-24 flex h-full w-full flex-col justify-start rounded-2xl bg-[#222831] text-slate-50 transition-all duration-300 ease-in-out [box-shadow:0.3rem_0.3rem_0_#bcbcbc50] first:mt-0 lg:mt-0 lg:w-[90%]">
               <span className="mx-auto -mt-16 grid h-32 w-32 place-items-center rounded-full bg-[#272d37]">
                 <img src={item.gambar} alt={item.judul} className="h-[4.5rem] w-[4.5rem] text-xs italic" />

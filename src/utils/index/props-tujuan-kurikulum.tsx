@@ -1,11 +1,11 @@
-interface InitContent {
+interface Props {
   id: string;
   gambar: string;
   judul: string;
   deskripsi: string;
 }
 
-export const TabelSilabusKurikulum: InitContent[] = [
+export const PropsSilabusKurikulum: Props[] = [
   {
     id: "1",
     gambar: "/needs.png?url",

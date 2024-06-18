@@ -1,13 +1,14 @@
 import React from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { NotFoundPage } from "../pages/404";
-import { Indeks } from "../pages/index";
-import { Blog } from "../pages/blog";
-import { Kursus } from "../pages/kursus";
-import { Masuk } from "../pages/masuk";
-import { Registrasi } from "../pages/registrasi";
-import { Tantangan } from "../pages/tantangan";
-import { TentangKami } from "../pages/tentang-kami";
+import { NotFoundPage } from "~/pages/404";
+import { Indeks } from "~/pages/index";
+import { Blog } from "~/pages/blog";
+import { DetailKaroselBlog } from "~/components/blog/detail-karosel-blog";
+import { Kursus } from "~/pages/kursus";
+import { Masuk } from "~/pages/masuk";
+import { Registrasi } from "~/pages/registrasi";
+import { Tantangan } from "~/pages/tantangan";
+import { TentangKami } from "~/pages/tentang-kami";
 
 export const Router: React.FC = () => {
   return (
@@ -16,6 +17,7 @@ export const Router: React.FC = () => {
         <Route path="*" Component={NotFoundPage} />
         <Route path="/" Component={Indeks} />
         <Route path="/blog" Component={Blog} />
+        <Route path="/blog/:judul" Component={DetailKaroselBlog} />
         <Route path="/kursus" Component={Kursus} />
         <Route path="/sign-in" Component={Masuk} />
         <Route path="/sign-up" Component={Registrasi} />

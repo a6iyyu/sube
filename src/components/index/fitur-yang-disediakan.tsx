@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import { Fitur } from "../../utils/index/fitur-yang-disediakan";
+import { Fitur } from "~/utils/index/props-fitur";
 
 const Konten = styled.div`
   @media screen and (max-width: 3120px) {

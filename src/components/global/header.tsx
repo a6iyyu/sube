@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { styled } from "styled-components";
-import { HamburgerMenu } from "../global/hamburger-menu";
+import { HamburgerMenu } from "./hamburger-menu";
 
 const Hover = styled.section`
   a:hover {

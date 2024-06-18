@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
-import { ModulPembelajaran } from "../../utils/index/modul-pembelajaran";
+import { ModulPembelajaran } from "~/utils/index/props-modul-pembelajaran";
 import "@splidejs/splide/css";
 
 const SectionHover = styled.section`

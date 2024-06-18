@@ -5,6 +5,7 @@ node_modules/
 /build
 dist/
 dist-ssr/
+.content-collections/
 
 # Ignoring files
 .env
