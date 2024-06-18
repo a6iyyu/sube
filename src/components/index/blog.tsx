@@ -1,7 +1,7 @@
 import React from "react";
 import { KaroselBlog } from "./karosel-blog";
 
-export const RingkasanBlog: React.FC = () => {
+export const Blog: React.FC = () => {
   return (
     <main className="-mt-28 h-full w-full cursor-default bg-gradient-to-r from-[#161e2c] to-[#222230] pb-28 pt-52 text-justify text-slate-50 [border-radius:45%_55%_10%_10%_/_2.5%_2.5%_0%_0%] lg:[border-radius:20%_20%_10%_10%_/_10%_10%_0%_0%]">
       <section className="mx-auto grid h-fit w-4/5 grid-cols-1 gap-x-10 lg:grid-cols-2">

@@ -4,6 +4,7 @@ import "@splidejs/splide/css";
 
 export const KaroselBlog: React.FC = () => {
   const splide = useRef<HTMLDivElement | null>(null);
+  
   useEffect(() => {
     if (splide.current) {
       new Splide(splide.current, {

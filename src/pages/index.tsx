@@ -7,7 +7,7 @@ import { IndeksHero } from "../components/index/hero";
 import { SilabusKurikulum } from "../components/index/tujuan-kurikulum-kami";
 import { FiturYangDisediakan } from "../components/index/fitur-yang-disediakan";
 import { JalurPembelajaran } from "../components/index/jalur-pembelajaran";
-import { RingkasanBlog } from "../components/index/ringkasan-blog";
+import { Blog } from "../components/index/blog";
 import { KenalLebihDekat } from "../components/index/kenal-lebih-dekat";
 import { Footer } from "../components/global/footer";
 
@@ -30,7 +30,7 @@ export const Indeks: React.FC = () => {
       <SilabusKurikulum />
       <FiturYangDisediakan />
       <JalurPembelajaran />
-      <RingkasanBlog />
+      <Blog />
       <KenalLebihDekat />
       <Footer />
     </>
