@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import { TabelSilabusKurikulum } from "../../hooks/index/tabel-silabus-kurikulum";
+import { TabelSilabusKurikulum } from "../../utils/index/tabel-silabus-kurikulum";
 
 const Konten = styled.div`
   @media screen and (max-width: 3120px) {

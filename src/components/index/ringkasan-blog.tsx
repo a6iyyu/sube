@@ -1,5 +1,5 @@
 import React from "react";
-// import { KaroselBlog } from "../../hooks/slug/karosel-blog";
+import { KaroselBlog } from "./karosel-blog";
 
 export const RingkasanBlog: React.FC = () => {
   return (
@@ -18,7 +18,7 @@ export const RingkasanBlog: React.FC = () => {
           </h4>
         </div>
         <div className="h-full w-full">
-          {/* <KaroselBlog /> */}
+          <KaroselBlog />
         </div>
       </section>
     </main>

@@ -1,5 +1,5 @@
 import React from "react";
-import { HandleMouseEnter, HandleMouseLeave, Headline } from "../../hooks/index/hover-setiap-karakter";
+import { HandleMouseEnter, HandleMouseLeave, Headline } from "../../utils/index/hover-setiap-karakter";
 
 export const IndeksHero: React.FC = () => {
   return (
