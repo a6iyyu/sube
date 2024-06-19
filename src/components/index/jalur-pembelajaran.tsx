@@ -43,12 +43,12 @@ export const JalurPembelajaran: React.FC = () => {
                 className="h-full w-full rounded-lg object-cover [box-shadow:0.3rem_0.3rem_0_#bcbcbc]"
               />
             </div>
-            <h2 className="group mt-6 text-center text-2xl font-bold text-slate-50 transition-all duration-300 ease-in-out lg:text-left">
+            <h2 className="group mt-6 text-center text-2xl font-bold text-slate-50 transition-all duration-300 ease-in-out lg:text-left lg:text-3xl">
               <span className="bg-gradient-to-r from-sky-500 to-sky-500 bg-[length:0%_0.125rem] bg-left-bottom bg-no-repeat transition-all duration-500 ease-out group-hover:bg-[length:100%_0.125rem]">
                 {modul.judul}
               </span>
             </h2>
-            <h4 className="group mt-4 text-justify text-slate-50 transition-all duration-300 ease-in-out">
+            <h4 className="group mt-4 text-justify text-base text-slate-50 transition-all duration-300 ease-in-out lg:text-lg">
               <span className="bg-gradient-to-r from-sky-500 to-sky-500 bg-[length:0%_0.125rem] bg-left-bottom bg-no-repeat transition-all duration-500 ease-out group-hover:bg-[length:100%_0.125rem]">
                 {modul.deskripsi}
               </span>

@@ -1,15 +1,15 @@
 import React, { useEffect } from "react";
 import { WebsiteMeta } from "~/utils/global/website-meta";
-import { ScrollIndicator } from "~/components/global/scroll-indicator";
-import { ScrollToTop } from "~/components/global/scroll-to-top";
-import { Header } from "~/components/global/header";
+import { ScrollIndicator } from "~/utils/global/scroll-indicator";
+import { ScrollToTop } from "~/utils/global/scroll-to-top";
+import { Header } from "~/utils/global/header";
 import { IndeksHero } from "~/components/index/hero";
 import { SilabusKurikulum } from "~/components/index/tujuan-kurikulum-kami";
 import { FiturYangDisediakan } from "~/components/index/fitur-yang-disediakan";
 import { JalurPembelajaran } from "~/components/index/jalur-pembelajaran";
 import { Blog } from "~/components/index/blog";
 import { KenalLebihDekat } from "~/components/index/kenal-lebih-dekat";
-import { Footer } from "~/components/global/footer";
+import { Footer } from "~/utils/global/footer";
 
 export const Indeks: React.FC = () => {
   useEffect(() => {

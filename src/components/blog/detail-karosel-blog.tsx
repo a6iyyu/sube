@@ -1,23 +1,48 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { NotFoundPage } from "~/pages/404";
-import { KeterampilanBerpikirKritis } from "~/content/blog/keterampilan-berpikir-kritis-untuk-pemimpin-masa-depan";
-import { MengembangkanKepemimpinan } from "~/content/blog/mengembangkan-kepemimpinan-di-era-digital";
-import { MeningkatkanInovasi } from "~/content/blog/meningkatkan-inovasi-di-tempat-kerja";
-import { StrategiManajemen } from "~/content/blog/strategi-manajemen-proyek-untuk-kesuksesan";
-import { TransformasiDigital } from "~/content/blog/transformasi-digital-dalam-pendidikan";
-
-const URLKaroselBlog: { [key: string]: React.FC } = {
-  "keterampilan-berpikir-kritis-untuk-pemimpin-masa-depan": KeterampilanBerpikirKritis,
-  "mengembangkan-kepemimpinan-di-era-digital": MengembangkanKepemimpinan,
-  "meningkatkan-inovasi-di-tempat-kerja": MeningkatkanInovasi,
-  "strategi-manajemen-proyek-untuk-kesuksesan": StrategiManajemen,
-  "transformasi-digital-dalam-pendidikan": TransformasiDigital,
-};
+import { MDXProvider } from "@mdx-js/react";
+import { Frontmatter, MDXModule } from "../../types/mdx";
+import { WebsiteMeta } from "~/utils/global/website-meta";
+import { Header } from "~/utils/global/header";
+import { Footer } from "~/utils/global/footer";
 
 export const DetailKaroselBlog: React.FC = () => {
-  const { judul } = useParams<{ judul: string }>();
-  const RenderKaroselBlog = URLKaroselBlog[judul!];
+  const { slug } = useParams<{ slug: string }>();
 
-  return <>{RenderKaroselBlog ? <RenderKaroselBlog /> : <NotFoundPage />}</>;
+  const [MDXContent, setMDXContent] = useState<React.ComponentType | null>(null);
+  const [frontmatter, setFrontmatter] = useState<Frontmatter | null>(null);
+  const [_, setNotFound] = useState(false);
+
+  useEffect(() => {
+    const importMDX = async (slug: string) => {
+      try {
+        const MDXModules: MDXModule = await import(`../../content/blog/${slug}.mdx`);
+        setMDXContent(() => MDXModules.default);
+        setFrontmatter(MDXModules.frontmatter);
+        setNotFound(false);
+      } catch (error) {
+        console.error("MDX file not found", error);
+        setNotFound(true);
+      }
+    };
+
+    if (slug) {
+      importMDX(slug);
+    }
+  }, [slug]);
+
+  if (!MDXContent) {
+    return null;
+  }
+
+  return (
+    <>
+      <WebsiteMeta title={frontmatter?.judul || "404: Halaman Tidak Ditemukan"} description={frontmatter?.deskripsi || ""} icon={"" || ""} />
+      <Header />
+      <MDXProvider>
+        <MDXContent />
+      </MDXProvider>
+      <Footer />
+    </>
+  );
 };

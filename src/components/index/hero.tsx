@@ -1,5 +1,9 @@
 import React from "react";
-import { HandleMouseEnter, HandleMouseLeave, Headline } from "~/utils/index/hover-setiap-karakter";
+import {
+  HandleMouseEnter,
+  HandleMouseLeave,
+  Headline,
+} from "~/utils/index/hover-setiap-karakter";
 
 export const IndeksHero: React.FC = () => {
   return (
@@ -16,7 +20,7 @@ export const IndeksHero: React.FC = () => {
           Kuasai strategi pengelolaan organisasi dengan kursus kami. Mulailah
           perjalanan Anda menuju kesuksesan dengan mendaftar sekarang!
         </h4>
-        <button id="jelajahi-sekarang" className="mt-10 h-fit w-fit cursor-pointer rounded-xl bg-slate-50 px-8 py-4 text-xl font-semibold text-slate-950 transition-all duration-300 ease-in-out hover:bg-slate-200">
+        <button id="jelajahi-sekarang" className="mt-10 h-fit w-fit cursor-pointer rounded-xl bg-slate-50 px-9 py-5 text-lg font-bold text-slate-950 transition-all duration-300 ease-in-out [box-shadow:0.3rem_0.3rem_0_#bcbcbc] hover:bg-slate-200 lg:hover:scale-105">
           Jelajahi Sekarang
         </button>
       </section>

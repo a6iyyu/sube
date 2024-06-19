@@ -17,7 +17,7 @@ export const Router: React.FC = () => {
         <Route path="*" Component={NotFoundPage} />
         <Route path="/" Component={Indeks} />
         <Route path="/blog" Component={Blog} />
-        <Route path="/blog/:judul" Component={DetailKaroselBlog} />
+        <Route path="/blog/:slug" Component={DetailKaroselBlog} />
         <Route path="/kursus" Component={Kursus} />
         <Route path="/sign-in" Component={Masuk} />
         <Route path="/sign-up" Component={Registrasi} />
