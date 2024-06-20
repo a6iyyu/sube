@@ -5,16 +5,20 @@ import { Frontmatter, MDXModule } from "../../types/mdx";
 import { WebsiteMeta } from "~/utils/global/website-meta";
 import { Header } from "~/utils/global/header";
 import { Footer } from "~/utils/global/footer";
+import { MemuatHalaman } from "./memuat-halaman";
+import { NotFoundPage } from "~/pages/404";
 
 export const DetailKaroselBlog: React.FC = () => {
   const { slug } = useParams<{ slug: string }>();
 
   const [MDXContent, setMDXContent] = useState<React.ComponentType | null>(null);
   const [frontmatter, setFrontmatter] = useState<Frontmatter | null>(null);
-  const [_, setNotFound] = useState(false);
+  const [notFound, setNotFound] = useState<boolean>(false);
+  const [loading, setLoading] = useState<boolean>(true);
 
   useEffect(() => {
     const importMDX = async (slug: string) => {
+      setLoading(true);
       try {
         const MDXModules: MDXModule = await import(`../../content/blog/${slug}.mdx`);
         setMDXContent(() => MDXModules.default);
@@ -23,6 +27,8 @@ export const DetailKaroselBlog: React.FC = () => {
       } catch (error) {
         console.error("MDX file not found", error);
         setNotFound(true);
+      } finally {
+        setLoading(false);
       }
     };
 
@@ -31,17 +37,23 @@ export const DetailKaroselBlog: React.FC = () => {
     }
   }, [slug]);
 
-  if (!MDXContent) {
-    return null;
+  if (loading) {
+    return <MemuatHalaman />;
+  }
+
+  if (!MDXContent || notFound) {
+    return <NotFoundPage />;
   }
 
   return (
     <>
       <WebsiteMeta title={frontmatter?.judul || "404: Halaman Tidak Ditemukan"} description={frontmatter?.deskripsi || ""} icon={"" || ""} />
       <Header />
-      <MDXProvider>
-        <MDXContent />
-      </MDXProvider>
+      <main className="mx-auto my-28 h-fit w-4/5 cursor-default text-justify font-medium text-slate-50">
+        <MDXProvider>
+          <MDXContent />
+        </MDXProvider>
+      </main>
       <Footer />
     </>
   );
