@@ -25,7 +25,7 @@ const Konten = styled.div`
 export const FiturYangDisediakan: React.FC = () => {
   return (
     <main className="h-fit w-full bg-gradient-to-r from-[#141b1f] to-[#1a1f25] py-20">
-      <span className="absolute right-0 top-[45rem] h-40 w-40 bg-[rgb(31,221,255)] [filter:blur(8rem)]" />
+      <span className="absolute right-0 top-[45rem] h-40 w-40 bg-[#4ea9b9] opacity-50 [filter:blur(8rem)]" />
       <section className="mx-auto h-full w-4/5 cursor-default text-center text-slate-50">
         <Konten className="gap-7 lg:grid lg:grid-cols-2 lg:grid-rows-2 lg:place-items-center lg:justify-items-stretch">
           {Fitur.map((item) => (

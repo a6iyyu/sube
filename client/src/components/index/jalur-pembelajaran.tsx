@@ -31,17 +31,9 @@ export const JalurPembelajaran: React.FC = () => {
       </h5>
       <SectionHover className="mx-auto grid h-full w-4/5 grid-cols-1 gap-x-10 gap-y-6 lg:grid-cols-2">
         {ModulPembelajaran.slice(0, 4).map((modul) => (
-          <Link
-            key={modul.id}
-            to={`/kursus/${modul.judul.replace(/ /g, "-").toLowerCase()}`}
-            className="mt-8 flex h-fit w-fit flex-col transition-all duration-300 ease-in-out"
-          >
+          <Link key={modul.id} to={`/kursus/${modul.judul.replace(/ /g, "-").toLowerCase()}`} className="mt-8 flex h-fit w-fit flex-col transition-all duration-300 ease-in-out">
             <div className="h-72 w-full lg:h-60">
-              <img
-                src={modul.gambar}
-                alt={modul.judul}
-                className="h-full w-full rounded-lg object-cover [box-shadow:0.3rem_0.3rem_0_#bcbcbc]"
-              />
+              <img src={modul.gambar} alt={modul.judul} className="h-full w-full rounded-lg object-cover [box-shadow:0.3rem_0.3rem_0_#bcbcbc]" />
             </div>
             <h2 className="group mt-6 text-center text-2xl font-bold text-slate-50 transition-all duration-300 ease-in-out lg:text-left lg:text-3xl">
               <span className="bg-gradient-to-r from-sky-500 to-sky-500 bg-[length:0%_0.125rem] bg-left-bottom bg-no-repeat transition-all duration-500 ease-out group-hover:bg-[length:100%_0.125rem]">
@@ -57,7 +49,7 @@ export const JalurPembelajaran: React.FC = () => {
         ))}
       </SectionHover>
       <section className="mx-auto mt-10 grid h-full w-4/5 place-items-center text-base font-bold text-slate-950 lg:text-lg">
-        <Link to={`/kursus`} className="rounded-xl bg-slate-50 px-8 py-4 transition-all duration-300 ease-in-out [box-shadow:0.3rem_0.3rem_0_#bcbcbc99] hover:scale-105 hover:bg-slate-200 lg:px-10 lg:py-5">
+        <Link to={`/kursus`} className="rounded-xl bg-slate-50 px-8 py-4 transition-all duration-300 ease-in-out [box-shadow:0.3rem_0.3rem_0_#bcbcbc99] hover:bg-slate-200 lg:px-10 lg:py-5 lg:hover:scale-105">
           Pelajari Lebih Lanjut
         </Link>
       </section>
