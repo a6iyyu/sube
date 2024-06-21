@@ -3,17 +3,17 @@ import { WebsiteMeta } from "~/utils/global/website-meta";
 import { ScrollIndicator } from "~/utils/global/scroll-indicator";
 import { ScrollToTop } from "~/utils/global/scroll-to-top";
 import { Header } from "~/utils/global/header";
-import { Redirect } from "~/components/404/redirect";
+import { FAQHero } from "~/components/faq/hero";
 import { Footer } from "~/utils/global/footer";
 
-export const NotFoundPage: React.FC = () => {
+export const FAQ: React.FC = () => {
   return (
     <>
-      <WebsiteMeta title="404: Halaman Tidak Ditemukan!" description="" />
+      <WebsiteMeta title="" description="" />
       <ScrollIndicator />
       <ScrollToTop />
       <Header />
-      <Redirect />
+      <FAQHero />
       <Footer />
     </>
   );

@@ -5,7 +5,7 @@ import { FormulirRegistrasi } from "~/components/akun/registrasi";
 export const Registrasi: React.FC = () => {
   return (
     <>
-      <WebsiteMeta title="Daftarkan Dirimu Sekarang!" description="" icon="" />
+      <WebsiteMeta title="Daftarkan Dirimu Sekarang!" description="" />
       <FormulirRegistrasi />
     </>
   );

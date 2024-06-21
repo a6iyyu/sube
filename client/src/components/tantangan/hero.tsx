@@ -1,5 +1,5 @@
 import React from "react";
 
-export const HeroTantangan: React.FC = () => {
+export const TantanganHero: React.FC = () => {
   return null;
 };

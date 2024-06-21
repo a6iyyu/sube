@@ -19,9 +19,9 @@ const BounceLoading = styled.div`
 export const MemuatHalaman: React.FC = () => {
   return (
     <>
-      <WebsiteMeta title="Sedang Memuat Halaman . . ." description="Kami sedang menyajikan konten yang terbaik untuk Anda . . ." icon="" />
+      <WebsiteMeta title="Sedang Memuat Halaman . . ." description="Kami sedang menyajikan konten yang terbaik untuk Anda . . ." />
       <Header />
-      <main className="mx-auto mb-28 mt-16 flex h-96 w-4/5 cursor-default flex-col items-center justify-center text-slate-50">
+      <main className="mx-auto mb-40 mt-16 flex h-96 w-4/5 cursor-default flex-col items-center justify-center text-slate-50">
         <BounceLoading className="flex justify-center">
           <span className="mx-1 my-12 h-4 w-4 animate-bounce rounded-full bg-slate-50" style={{ animationDelay: "0s" }}></span>
           <span className="mx-1 my-12 h-4 w-4 animate-bounce rounded-full bg-slate-50" style={{ animationDelay: "0.2s" }}></span>

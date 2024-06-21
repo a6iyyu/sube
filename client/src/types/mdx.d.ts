@@ -1,7 +1,7 @@
 export type Frontmatter = {
-  gambar?: string;
-  judul?: string;
-  deskripsi?: string;
+  gambar: string;
+  judul: string;
+  deskripsi: string;
 };
 
 export type MDXModule = {

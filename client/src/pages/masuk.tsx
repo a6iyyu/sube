@@ -5,11 +5,7 @@ import { FormulirMasuk } from "~/components/akun/masuk";
 export const Masuk: React.FC = () => {
   return (
     <>
-      <WebsiteMeta
-        title="Masuk dan Jelajahi Kursus Kami"
-        description=""
-        icon=""
-      />
+      <WebsiteMeta title="Masuk dan Jelajahi Kursus Kami" description="" />
       <FormulirMasuk />
     </>
   );

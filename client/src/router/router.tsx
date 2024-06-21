@@ -4,6 +4,8 @@ import { NotFoundPage } from "~/pages/404";
 import { Indeks } from "~/pages/index";
 import { Blog } from "~/pages/blog";
 import { DetailKaroselBlog } from "~/components/blog/detail-karosel-blog";
+import { FAQ } from "~/pages/faq";
+import { HubungiKami } from "~/pages/hubungi-kami";
 import { Kursus } from "~/pages/kursus";
 import { Masuk } from "~/pages/masuk";
 import { Registrasi } from "~/pages/registrasi";
@@ -18,6 +20,8 @@ export const Router: React.FC = () => {
         <Route path="/" Component={Indeks} />
         <Route path="/blog" Component={Blog} />
         <Route path="/blog/:slug" Component={DetailKaroselBlog} />
+        <Route path="/faq" Component={FAQ} />
+        <Route path="/hubungi-kami" Component={HubungiKami} />
         <Route path="/kursus" Component={Kursus} />
         <Route path="/sign-in" Component={Masuk} />
         <Route path="/sign-up" Component={Registrasi} />

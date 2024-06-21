@@ -47,7 +47,7 @@ export const DetailKaroselBlog: React.FC = () => {
 
   return (
     <>
-      <WebsiteMeta title={frontmatter?.judul || "404: Halaman Tidak Ditemukan"} description={frontmatter?.deskripsi || ""} icon={"" || ""} />
+      <WebsiteMeta title={frontmatter?.judul || "404: Halaman Tidak Ditemukan"} description={frontmatter?.deskripsi || ""} />
       <Header />
       <main className="mx-auto my-28 h-fit w-4/5 cursor-default text-justify font-medium text-slate-50">
         <MDXProvider>

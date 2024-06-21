@@ -24,7 +24,7 @@ export const IndeksHero: React.FC = () => {
           Jelajahi Sekarang
         </button>
       </section>
-      <img src="/student.png" alt="Welcome to Sube!" className="transition-all duration-300 ease-in-out hover:scale-105" />
+      <img src="/student.png" alt="Welcome to Sube!" className="transition-all duration-300 ease-in-out lg:hover:scale-105" />
     </main>
   );
 };

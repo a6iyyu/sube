@@ -9,7 +9,7 @@ import { Footer } from "~/utils/global/footer";
 export const Blog: React.FC = () => {
   return (
     <>
-      <WebsiteMeta title="Bacaan Informatif dan Inspiratif" description="" icon="" />
+      <WebsiteMeta title="Bacaan Informatif dan Inspiratif" description="" />
       <ScrollIndicator />
       <ScrollToTop />
       <Header />

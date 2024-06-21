@@ -22,7 +22,7 @@ export const Indeks: React.FC = () => {
 
   return (
     <>
-      <WebsiteMeta title="Sube: Tempat Belajar Organisasi #1 di Indonesia!" description="" icon="" />
+      <WebsiteMeta title="Sube: Tempat Belajar Organisasi #1 di Indonesia!" description="" />
       <ScrollIndicator />
       <ScrollToTop />
       <Header />

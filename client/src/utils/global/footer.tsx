@@ -1,10 +1,19 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 export const Footer: React.FC = () => {
+  const menus: string[] = [
+    "Blog",
+    "Kursus",
+    "Tantangan",
+    "FAQ",
+    "Hubungi Kami",
+  ];
+
   return (
     <footer className="-mt-16 h-fit w-full bg-gradient-to-r from-[#141b1f] to-[#1a1f25] py-24 [border-radius:45%_55%_10%_10%_/_2.5%_2.5%_0%_0%] lg:-mt-10 lg:[border-radius:20%_20%_10%_10%_/_10%_10%_0%_0%]">
-      <section className="mx-auto mt-10 flex h-full w-4/5 flex-col text-slate-50 lg:flex-row">
-        <div className="flex h-full w-full cursor-default flex-col lg:w-2/5">
+      <main className="mx-auto mt-10 flex h-full w-4/5 flex-col gap-x-10 text-slate-50 lg:flex-row">
+        <section className="flex h-full w-full cursor-default flex-col lg:w-1/3">
           <img src="" alt="Logo" className="mx-auto font-bold italic lg:mx-0" />
           <h4 className="mt-7 text-center text-2xl font-semibold lg:text-left">
             E-Learning Sube
@@ -15,9 +24,48 @@ export const Footer: React.FC = () => {
             pendidikan teknologi, kita membangun generasi unggul berdaya saing
             global.
           </h5>
-        </div>
-        <div className="grid h-full w-full grid-cols-3 lg:w-3/5"></div>
-      </section>
+        </section>
+        <section className="grid h-full w-full grid-cols-1 grid-rows-2 lg:w-2/3 lg:grid-cols-2 lg:grid-rows-1">
+          <div className="mt-14 lg:mt-0">
+            <h3 className="cursor-default text-xl font-extrabold leading-normal tracking-wide lg:text-2xl">
+              Learn Today
+              <br />
+              Lead Tomorrow
+            </h3>
+            <Link to={`/tentang-kami`}>
+              <h2 className="group mt-2 text-slate-50 transition-all duration-300 ease-in-out lg:mt-4">
+                <span className="bg-gradient-to-r from-sky-500 to-sky-500 bg-[length:0%_0.125rem] bg-left-bottom bg-no-repeat transition-all duration-500 ease-out group-hover:bg-[length:100%_0.125rem]">
+                  Tentang Kami
+                </span>
+              </h2>
+            </Link>
+          </div>
+          <div className="mt-14 grid grid-cols-2 lg:mt-0">
+            <span className="flex h-full w-full flex-col gap-y-3">
+              {menus.slice(0, 3).map((menu, i) => (
+                <Link key={i} to={`/${menu.replace(/ /g, "-").toLowerCase()}`}>
+                  <h2 className="group text-slate-50 transition-all duration-300 ease-in-out">
+                    <span className="bg-gradient-to-r from-sky-500 to-sky-500 bg-[length:0%_0.125rem] bg-left-bottom bg-no-repeat transition-all duration-500 ease-out group-hover:bg-[length:100%_0.125rem]">
+                      {menu}
+                    </span>
+                  </h2>
+                </Link>
+              ))}
+            </span>
+            <span className="flex h-full w-full flex-col gap-y-3">
+              {menus.slice(3, 5).map((menu, i) => (
+                <Link key={i} to={`/${menu.replace(/ /g, "-").toLowerCase()}`}>
+                  <h2 className="group text-slate-50 transition-all duration-300 ease-in-out">
+                    <span className="bg-gradient-to-r from-sky-500 to-sky-500 bg-[length:0%_0.125rem] bg-left-bottom bg-no-repeat transition-all duration-500 ease-out group-hover:bg-[length:100%_0.125rem]">
+                      {menu}
+                    </span>
+                  </h2>
+                </Link>
+              ))}
+            </span>
+          </div>
+        </section>
+      </main>
     </footer>
   );
 };
