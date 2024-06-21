@@ -9,6 +9,7 @@ import { FiturYangDisediakan } from "~/components/index/fitur-yang-disediakan";
 import { JalurPembelajaran } from "~/components/index/jalur-pembelajaran";
 import { Blog } from "~/components/index/blog";
 import { KenalLebihDekat } from "~/components/index/kenal-lebih-dekat";
+import { KamiTungguAntusiasmu } from "~/components/index/kami-tunggu-antusiasmu";
 import { Footer } from "~/utils/global/footer";
 
 export const Indeks: React.FC = () => {
@@ -22,7 +23,7 @@ export const Indeks: React.FC = () => {
 
   return (
     <>
-      <WebsiteMeta title="Sube: Tempat Belajar Organisasi #1 di Indonesia!" description="" />
+      <WebsiteMeta title="Sube - Tempat Belajar Organisasi #1 di Indonesia!" description="" />
       <ScrollIndicator />
       <ScrollToTop />
       <Header />
@@ -32,6 +33,7 @@ export const Indeks: React.FC = () => {
       <JalurPembelajaran />
       <Blog />
       <KenalLebihDekat />
+      <KamiTungguAntusiasmu />
       <Footer />
     </>
   );

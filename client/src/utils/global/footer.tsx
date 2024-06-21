@@ -2,16 +2,10 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 export const Footer: React.FC = () => {
-  const menus: string[] = [
-    "Blog",
-    "Kursus",
-    "Tantangan",
-    "FAQ",
-    "Hubungi Kami",
-  ];
+  const Menus: string[] = ["Blog", "Kursus", "Tantangan", "FAQ", "Hubungi Kami"];
 
   return (
-    <footer className="-mt-16 h-fit w-full bg-gradient-to-r from-[#141b1f] to-[#1a1f25] py-24 [border-radius:45%_55%_10%_10%_/_2.5%_2.5%_0%_0%] lg:-mt-10 lg:[border-radius:20%_20%_10%_10%_/_10%_10%_0%_0%]">
+    <footer className="z-0 -mt-16 h-fit w-full bg-gradient-to-r from-[#141b1f] to-[#1a1f25] py-24 [border-radius:45%_55%_10%_10%_/_2.5%_2.5%_0%_0%] lg:-mt-10 lg:[border-radius:20%_20%_10%_10%_/_10%_10%_0%_0%]">
       <main className="mx-auto mt-10 flex h-full w-4/5 flex-col gap-x-10 text-slate-50 lg:flex-row">
         <section className="flex h-full w-full cursor-default flex-col lg:w-1/3">
           <img src="" alt="Logo" className="mx-auto font-bold italic lg:mx-0" />
@@ -19,10 +13,9 @@ export const Footer: React.FC = () => {
             E-Learning Sube
           </h4>
           <h5 className="mt-4 text-justify text-base font-thin [text-align-last:center] lg:text-justify lg:[text-align-last:left]">
-            Dengan ilmu pengetahuan dan keterampilan, Sube mendukung dalam
-            mencerdaskan anak bangsa dan mewujudkan cita-cita Indonesia. Melalui
-            pendidikan teknologi, kita membangun generasi unggul berdaya saing
-            global.
+            Sube berupaya dan mendukung dalam mencerdaskan anak bangsa serta
+            merupakan langkah kecil untuk mewujudkan cita-cita Indonesia di
+            bidang kepemimpinan.
           </h5>
         </section>
         <section className="grid h-full w-full grid-cols-1 grid-rows-2 lg:w-2/3 lg:grid-cols-2 lg:grid-rows-1">
@@ -42,7 +35,7 @@ export const Footer: React.FC = () => {
           </div>
           <div className="mt-14 grid grid-cols-2 lg:mt-0">
             <span className="flex h-full w-full flex-col gap-y-3">
-              {menus.slice(0, 3).map((menu, i) => (
+              {Menus.slice(0, 3).map((menu, i) => (
                 <Link key={i} to={`/${menu.replace(/ /g, "-").toLowerCase()}`}>
                   <h2 className="group text-slate-50 transition-all duration-300 ease-in-out">
                     <span className="bg-gradient-to-r from-sky-500 to-sky-500 bg-[length:0%_0.125rem] bg-left-bottom bg-no-repeat transition-all duration-500 ease-out group-hover:bg-[length:100%_0.125rem]">
@@ -53,7 +46,7 @@ export const Footer: React.FC = () => {
               ))}
             </span>
             <span className="flex h-full w-full flex-col gap-y-3">
-              {menus.slice(3, 5).map((menu, i) => (
+              {Menus.slice(3, 5).map((menu, i) => (
                 <Link key={i} to={`/${menu.replace(/ /g, "-").toLowerCase()}`}>
                   <h2 className="group text-slate-50 transition-all duration-300 ease-in-out">
                     <span className="bg-gradient-to-r from-sky-500 to-sky-500 bg-[length:0%_0.125rem] bg-left-bottom bg-no-repeat transition-all duration-500 ease-out group-hover:bg-[length:100%_0.125rem]">
