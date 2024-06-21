@@ -6,7 +6,7 @@ export const KenalLebihDekat: React.FC = () => {
     <main className="h-fit w-full bg-gradient-to-r from-[#161e2c] to-[#222230] pb-32">
       <span className="absolute left-0 top-[215rem] h-40 w-40 bg-[#1fddff] opacity-50 [filter:blur(8rem)]" />
       <Link to={`/tentang-kami`}>
-        <section className="z-10 mx-auto h-full w-4/5 rounded-xl bg-[#293231] text-slate-50 transition-all duration-300 ease-in-out [box-shadow:0.3rem_0.3rem_0_#bcbcbc50] lg:hover:scale-[1.025]" style={{ backgroundImage: `url()` }}>
+        <section className="z-10 mx-auto h-full w-4/5 rounded-xl bg-[#293231] bg-cover bg-right-top bg-no-repeat text-slate-50 transition-all duration-300 ease-in-out [box-shadow:0.3rem_0.3rem_0_#bcbcbc50] lg:hover:scale-[1.025]" style={{ backgroundImage: `url()` }}>
           <h4 className="group hidden h-fit w-1/2 p-12 text-justify leading-relaxed text-slate-50 transition-all duration-300 ease-in-out lg:inline-block">
             <span className="bg-gradient-to-r from-sky-500 to-sky-500 bg-[length:0%_0.125rem] bg-left-bottom bg-no-repeat transition-all duration-500 ease-out group-hover:bg-[length:100%_0.125rem]">
               Kami adalah program edukasi yang berkomitmen untuk mengembangkan

@@ -1,8 +1,9 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
-import { ModulPembelajaran } from "~/utils/index/props-modul-pembelajaran";
 import "@splidejs/splide/css";
+import { ModulPembelajaran } from "~/utils/index/props-modul-pembelajaran";
+import { MemendekkanKalimat } from "~/utils/global/memendekkan-kalimat";
 
 const SectionHover = styled.section`
   @media screen and (max-width: 3120px) {
@@ -42,7 +43,7 @@ export const JalurPembelajaran: React.FC = () => {
             </h2>
             <h4 className="group mt-4 text-justify text-base text-slate-50 transition-all duration-300 ease-in-out lg:text-lg">
               <span className="bg-gradient-to-r from-sky-500 to-sky-500 bg-[length:0%_0.125rem] bg-left-bottom bg-no-repeat transition-all duration-500 ease-out group-hover:bg-[length:100%_0.125rem]">
-                {modul.deskripsi}
+                {MemendekkanKalimat(modul.deskripsi, 120)}
               </span>
             </h4>
           </Link>
