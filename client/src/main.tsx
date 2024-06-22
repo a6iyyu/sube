@@ -14,12 +14,12 @@ const GlobalStyles = createGlobalStyle`
     display: none !important;
   }
   @media screen and (max-width: 8192px) {
-    body {
+    * {
       opacity: 0;
     }
   }
   @media screen and (max-width: 3120px) {
-    body {
+    * {
       opacity: 1;
     }
   }

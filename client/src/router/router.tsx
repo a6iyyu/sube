@@ -23,8 +23,8 @@ export const Router: React.FC = () => {
         <Route path="/faq" Component={FAQ} />
         <Route path="/hubungi-kami" Component={HubungiKami} />
         <Route path="/kursus" Component={Kursus} />
-        <Route path="/sign-in" Component={Masuk} />
-        <Route path="/sign-up" Component={Registrasi} />
+        <Route path="/masuk" Component={Masuk} />
+        <Route path="/registrasi" Component={Registrasi} />
         <Route path="/tantangan" Component={Tantangan} />
         <Route path="/tentang-kami" Component={TentangKami} />
       </Routes>
