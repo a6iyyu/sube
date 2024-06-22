@@ -1,17 +1,16 @@
 import { Request, Response, NextFunction } from "express";
 import jwt from "jsonwebtoken";
+import "../types/express";
 
-export const AuthenticateJWT = (request: Request, response: Response, next: NextFunction) => {
-  const Token = request.header("Authorization")?.split(" ")[1];
-  if (!Token) {
-    return response.status(401).json({ error: "401: Tidak ada token, akses ditolak!" });
-  }
+export const AuthenticateToken = (request: Request, response: Response, next: NextFunction) => {
+  const AuthHeader = request.headers["authorization"];
+  const Token = AuthHeader && AuthHeader.split(" ")[1];
 
-  try {
-    const decoded = jwt.verify(Token, process.env.JWT_SECRET!);
-    (request as any).user = (decoded as any).user_id;
+  if (Token == null) return response.sendStatus(401);
+
+  jwt.verify(Token, process.env.JWT_SECRET || "", (err: any, user: any) => {
+    if (err) return response.sendStatus(403);
+    request.user = user;
     next();
-  } catch {
-    response.status(401).json({ error: "401: Token tidak valid!" });
-  }
+  });
 };

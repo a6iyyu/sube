@@ -1,19 +1,25 @@
-import mongoose, { Document, Schema } from "mongoose";
+import { createClient } from "@supabase/supabase-js";
 
-export interface IUser extends Document {
-  id_user: number;
+const SupabaseURL = process.env.SUPABASE_URL || "";
+const SupabaseAnonKey = process.env.SUPABASE_ANON_KEY || "";
+const SupabaseDB = createClient(SupabaseURL, SupabaseAnonKey);
+
+export interface User {
+  id_user: string;
   username: string;
   email: string;
   password: string;
-  confirm_password: string;
+  created_at: Date;
 }
 
-const UserSchema: Schema = new mongoose.Schema({
-  id_user: { type: Number, unique: true },
-  username: { type: String, require: true, unique: true },
-  email: { type: String, require: true, unique: true },
-  password: { type: String, require: true, unique: true },
-  confirm_password: { type: String, require: true },
-});
+export const CreateUser = async (user: User) => {
+  const { data, error } = await SupabaseDB.from("users").insert([user]);
+  if (error) throw error;
+  return data;
+};
 
-export default mongoose.model<IUser>("Users", UserSchema);
+export const FindUserByUsername = async (username: string) => {
+  const { data, error } = await SupabaseDB.from("users").select("*").eq("username", username).single();
+  if (error) throw error;
+  return data;
+};
