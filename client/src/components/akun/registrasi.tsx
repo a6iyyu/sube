@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 import { z } from "zod";
 import { RegisterSkema } from "./skema";
+import School from "/school.jpg?url";
 
 interface RegisterAttributes {
   username: string;
@@ -12,7 +13,7 @@ interface RegisterAttributes {
 }
 
 export const FormulirRegistrasi: React.FC = () => {
-  const centang = useRef<HTMLInputElement | null>(null);
+  const centang = useRef<HTMLDivElement | null>(null);
   const kata_sandi = useRef<HTMLInputElement | null>(null);
   const konfirmasi_kata_sandi = useRef<HTMLInputElement | null>(null);
   const [errorForm, setErrorForm] = useState<Partial<RegisterAttributes>>({});
@@ -37,14 +38,12 @@ export const FormulirRegistrasi: React.FC = () => {
       if (response.status === 201) {
         console.log("Selamat, Anda berhasil registrasi dan membuat akun!");
       } else {
-        console.error(
-          `Maaf, regitrasi Anda mengalami kesalahan karena ${response.data.message}`,
-        );
+        console.error(`Maaf, regitrasi Anda mengalami kesalahan karena ${response.data.message}`);
       }
     } catch (e) {
       if (e instanceof z.ZodError) {
         const FieldError: Partial<RegisterAttributes> = {};
-        e.errors.forEach((err) => {
+        e.errors.forEach(err => {
           if (err.path.length) {
             FieldError[err.path[0] as keyof RegisterAttributes] = err.message;
           }
@@ -56,18 +55,22 @@ export const FormulirRegistrasi: React.FC = () => {
     }
   };
 
-  useEffect(() => {
+  const ToggleChecked = () => {
     if (centang.current && kata_sandi.current && konfirmasi_kata_sandi.current) {
-      centang.current.addEventListener("click", () => {
-        (kata_sandi.current as HTMLInputElement || null).type = centang.current!.checked ? "text" : "password";
-        (konfirmasi_kata_sandi.current as HTMLInputElement || null).type = centang.current!.checked ? "text" : "password";
-      });
-    };
+      (kata_sandi.current as HTMLInputElement || null).type = (konfirmasi_kata_sandi.current as HTMLInputElement || null).type = centang.current!.querySelector("input")!.checked ? "text" : "password";
+    }
+  };
+
+  useEffect(() => {
+    if (centang.current) centang.current.addEventListener("click", ToggleChecked);
+    return () => {
+      if (centang.current) centang.current.removeEventListener("click", ToggleChecked);
+    }
   }, []);
 
   return (
-    <main className="grid h-[65rem] max-h-[300vh] lg:max-h-[200vh] w-full grid-cols-1 overflow-x-hidden bg-gradient-to-r from-[#0c0c1e] to-[#141414] lg:grid-cols-2">
-      <span className="absolute left-0 top-0 h-40 w-40 bg-[#1fddff] opacity-60 [filter:blur(8rem)]" />
+    <main className="grid h-[70rem] max-h-[300vh] w-full grid-cols-1 overflow-x-hidden bg-gradient-to-r from-[#0c0c1e] to-[#141414] lg:max-h-[200vh] lg:grid-cols-2">
+      <span className="absolute left-0 top-0 h-40 w-40 bg-[#1fddff] opacity-80 [filter:blur(8rem)]" />
       <section className="flex h-full w-full flex-col items-center justify-center text-slate-50">
         <img src="" alt="Logo" className="h-16 w-16 italic" />
         <h3 className="mx-auto h-fit w-4/5 cursor-default text-center text-3xl font-bold lg:text-4xl">
@@ -135,25 +138,24 @@ export const FormulirRegistrasi: React.FC = () => {
             />
             {errorForm.confirm_password && <span className="mt-3 cursor-default text-base italic text-red-500">{errorForm.confirm_password}</span>}
           </div>
-          <div className="mt-5 flex flex-col justify-between sm:flex-row">
-            <span>
-              <input ref={centang} type="checkbox" name="centang" />
-              <label htmlFor="centang" className="ml-3">Tampilkan Kata Sandi</label>
-            </span>
-            <span className="mt-2 h-fit w-fit text-[#a0a0ff] transition-all duration-300 ease-in-out hover:text-[#babaff] hover:underline sm:mt-0">
-              <Link to={`/masuk`}>Belum punya akun?</Link>
-            </span>
+          <div ref={centang} className="mt-5 h-fit w-fit">
+            <input type="checkbox" name="centang" id="centang" className="cursor-pointer" />
+            <label htmlFor="centang" className="ml-3 cursor-pointer">Tampilkan Kata Sandi</label>
           </div>
           <button className="mx-auto mt-12 h-fit w-full rounded-lg bg-[#0000ee] py-4 text-base font-semibold transition-all duration-300 ease-in-out hover:bg-[#4d4dff] md:py-5">
             Registrasi
           </button>
         </form>
-        <button className="mx-auto mt-7 flex h-fit w-4/5 items-center justify-center gap-x-3 rounded-lg bg-slate-50 py-4 text-base font-semibold text-slate-950 transition-all duration-300 ease-in-out hover:bg-slate-300 md:py-5">
-          <img src="/google.png?url" alt="" className="h-5 w-5" />
-          <h5>Masuk dengan Google</h5>
-        </button>
+        <span className="h-fit w-4/5">
+          <Link to={`/auth/google`}>
+            <button className="mx-auto mt-7 flex h-fit w-full items-center justify-center gap-x-3 rounded-lg bg-slate-50 py-4 text-base font-semibold text-slate-950 transition-all duration-300 ease-in-out hover:bg-slate-300 md:py-5">
+              <img src="/google.png?url" alt="" className="h-5 w-5" />
+              <h5>Masuk dengan Google</h5>
+            </button>
+          </Link>
+        </span>
       </section>
-      <section className="hidden h-full w-full cursor-default flex-col items-end justify-center bg-cover bg-center bg-no-repeat text-slate-50 lg:flex">
+      <section className="hidden h-full w-full cursor-default flex-col items-end justify-center bg-cover bg-center bg-no-repeat text-slate-50 lg:flex" style={{ backgroundImage: `url(${School})` }}>
         <span className="absolute"></span>
         <h3></h3>
       </section>
