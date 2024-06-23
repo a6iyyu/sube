@@ -29,7 +29,7 @@ export const FormulirMasuk: React.FC = () => {
 
     try {
       LoginSkema.parse(loginData);
-      const response = await axios.post("http://localhost:2001/auth/masuk", loginData);
+      const response = await axios.post("http://localhost:2001/masuk", loginData);
       if (response.status === 201) {
         localStorage.setItem("token", response.data.Token);
       } else {

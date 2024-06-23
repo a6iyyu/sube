@@ -35,7 +35,7 @@ export const FormulirRegistrasi: React.FC = () => {
 
     try {
       RegisterSkema.parse(registerData);
-      const response = await axios.post("http://localhost:2001/auth/registrasi", registerData);
+      const response = await axios.post("http://localhost:2001/registrasi", registerData);
       if (response.status === 201) {
         console.log("Selamat, Anda berhasil registrasi dan membuat akun!");
         navigate("/masuk");
@@ -53,7 +53,7 @@ export const FormulirRegistrasi: React.FC = () => {
         setErrorForm(FieldError);
       }
 
-      if (axios.isAxiosError(e) && e.response) throw e;
+      if (axios.isAxiosError(e) && e.response) console.error(e.message);
     }
   };
 
