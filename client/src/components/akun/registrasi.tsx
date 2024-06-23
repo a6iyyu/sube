@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import axios from "axios";
 import { z } from "zod";
 import { RegisterSkema } from "./skema";
@@ -16,7 +16,6 @@ export const FormulirRegistrasi: React.FC = () => {
   const centang = useRef<HTMLDivElement | null>(null);
   const kata_sandi = useRef<HTMLInputElement | null>(null);
   const konfirmasi_kata_sandi = useRef<HTMLInputElement | null>(null);
-  const navigate = useNavigate();
   const [errorForm, setErrorForm] = useState<Partial<RegisterAttributes>>({});
   const [registerData, setRegisterData] = useState<RegisterAttributes>({
     username: "",
@@ -38,7 +37,6 @@ export const FormulirRegistrasi: React.FC = () => {
       const response = await axios.post("http://localhost:2001/registrasi", registerData);
       if (response.status === 201) {
         console.log("Selamat, Anda berhasil registrasi dan membuat akun!");
-        navigate("/masuk");
       } else {
         console.error(`Maaf, regitrasi Anda mengalami kesalahan karena ${response.data.message}`);
       }

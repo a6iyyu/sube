@@ -39,3 +39,5 @@ export const ValidateRegister = (request: Request, response: Response, next: Nex
     response.status(400).json({ error });
   }
 }
+
+export const LoginWithGoogle = async (response: Response) => {};

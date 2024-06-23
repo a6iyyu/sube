@@ -1,15 +1,7 @@
 import { PrismaClient } from "@prisma/client";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
-
-interface users {
-  id_user: string;
-  username: string;
-  email: string;
-  password: string;
-  created_at: Date;
-  updated_at: Date;
-}
+import { users } from "~/types/users";
 
 const Prisma = new PrismaClient();
 

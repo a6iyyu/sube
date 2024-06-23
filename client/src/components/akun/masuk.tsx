@@ -47,6 +47,8 @@ export const FormulirMasuk: React.FC = () => {
       } else {
         console.error("Proses masuk Anda mengalami kegagalan!");
       }
+
+      if (axios.isAxiosError(e) && e.response) console.error(e.message);
     }
   };
 
