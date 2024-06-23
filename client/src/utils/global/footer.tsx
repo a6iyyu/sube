@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 export const Footer: React.FC = () => {
-  const Menus: string[] = ["Blog", "Kursus", "Tantangan", "FAQ", "Hubungi Kami"];
+  const Menus: string[] = [ "Blog", "Kursus", "Tantangan", "FAQ", "Hubungi Kami"];
 
   return (
     <footer className="z-0 -mt-16 h-fit w-full bg-gradient-to-r from-[#141b1f] to-[#1a1f25] py-24 [border-radius:45%_55%_10%_10%_/_2.5%_2.5%_0%_0%] lg:-mt-10 lg:[border-radius:20%_20%_10%_10%_/_10%_10%_0%_0%]">
@@ -36,24 +36,24 @@ export const Footer: React.FC = () => {
           <div className="mt-14 grid grid-cols-2 lg:mt-0">
             <span className="flex h-full w-full flex-col gap-y-3">
               {Menus.slice(0, 3).map((menu, i) => (
-                <Link key={i} to={`/${menu.replace(/ /g, "-").toLowerCase()}`}>
-                  <h2 className="group text-slate-50 transition-all duration-300 ease-in-out">
-                    <span className="bg-gradient-to-r from-sky-500 to-sky-500 bg-[length:0%_0.125rem] bg-left-bottom bg-no-repeat transition-all duration-500 ease-out group-hover:bg-[length:100%_0.125rem]">
+                <h2 className="group h-fit w-fit text-slate-50 transition-all duration-300 ease-in-out">
+                  <span className="bg-gradient-to-r from-sky-500 to-sky-500 bg-[length:0%_0.125rem] bg-left-bottom bg-no-repeat transition-all duration-500 ease-out group-hover:bg-[length:100%_0.125rem]">
+                    <Link key={i} to={`/${menu.replace(/ /g, "-").toLowerCase()}`}>
                       {menu}
-                    </span>
-                  </h2>
-                </Link>
+                    </Link>
+                  </span>
+                </h2>
               ))}
             </span>
             <span className="flex h-full w-full flex-col gap-y-3">
               {Menus.slice(3, 5).map((menu, i) => (
-                <Link key={i} to={`/${menu.replace(/ /g, "-").toLowerCase()}`}>
-                  <h2 className="group text-slate-50 transition-all duration-300 ease-in-out">
-                    <span className="bg-gradient-to-r from-sky-500 to-sky-500 bg-[length:0%_0.125rem] bg-left-bottom bg-no-repeat transition-all duration-500 ease-out group-hover:bg-[length:100%_0.125rem]">
+                <h2 className="group h-fit w-fit text-slate-50 transition-all duration-300 ease-in-out">
+                  <span className="bg-gradient-to-r from-sky-500 to-sky-500 bg-[length:0%_0.125rem] bg-left-bottom bg-no-repeat transition-all duration-500 ease-out group-hover:bg-[length:100%_0.125rem]">
+                    <Link key={i} to={`/${menu.replace(/ /g, "-").toLowerCase()}`}>
                       {menu}
-                    </span>
-                  </h2>
-                </Link>
+                    </Link>
+                  </span>
+                </h2>
               ))}
             </span>
           </div>
