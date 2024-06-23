@@ -29,9 +29,9 @@ export const FormulirMasuk: React.FC = () => {
 
     try {
       LoginSkema.parse(loginData);
-      const response = await axios.post("/auth/masuk", loginData);
+      const response = await axios.post("http://localhost:2001/auth/masuk", loginData);
       if (response.status === 201) {
-        console.log("Selamat, Anda berhasil masuk!");
+        localStorage.setItem("token", response.data.Token);
       } else {
         console.error(`Maaf, proses masuk Anda mengalami kegagalan karena ${response.data.message}`);
       }
@@ -76,7 +76,7 @@ export const FormulirMasuk: React.FC = () => {
         </h5>
         <form onSubmit={HandleSubmit} className="mx-auto mt-10 h-fit w-4/5">
           <div className="flex flex-col">
-            <label htmlFor="username_or_email">Username/Email</label>
+            <label htmlFor="username_or_email">Username</label>
             <input
               type="text"
               name="username_or_email"

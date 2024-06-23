@@ -1,7 +1,7 @@
 import { Router } from "express";
-import { LoginAuth, RegisterAuth } from "../middleware/authentication";
+import { LoginAuth, ValidateLogin, RegisterAuth, ValidateRegister } from "../middleware/authentication";
 
 export const Controllers = () => {
-  Router().post("/masuk", LoginAuth);
-  Router().post("/registrasi", RegisterAuth);
+  Router().post("/masuk", ValidateLogin, LoginAuth);
+  Router().post("/registrasi", ValidateRegister, RegisterAuth);
 };

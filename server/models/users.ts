@@ -1,4 +1,3 @@
-import { createClient } from "@supabase/supabase-js";
 import { PrismaClient } from "@prisma/client";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
@@ -13,8 +12,6 @@ interface users {
 }
 
 const Prisma = new PrismaClient();
-
-export const SupabaseDB = createClient(process.env.SUPABASE_URL || "", process.env.SUPABASE_ANON_KEY || "");
 
 export const CreateUser = async (id_user: string, username: string, email: string, password: string, created_at: Date, updated_at: Date): Promise<users> => {
   const HashedPassword = await bcrypt.hash(password, 10);
@@ -31,8 +28,16 @@ export const CreateUser = async (id_user: string, username: string, email: strin
   return User;
 };
 
-export const LoginUser = async (username: string, email: string, password: string) => {
-  const User = await Prisma.users.findUnique({ where: { username, email } });
+export const LoginUser = async (username_or_email: string, password: string) => {
+  const User = await Prisma.users.findFirst({
+    where: {
+      OR: [
+        { username: username_or_email },
+        { email: username_or_email },
+      ]
+    }
+  });
+
   if (!User) throw new Error("Pengguna tidak ditemukan!");
 
   const CheckPasswordValidation = await bcrypt.compare(password, User.password);
