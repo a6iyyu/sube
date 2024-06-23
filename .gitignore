@@ -6,6 +6,7 @@ node_modules/
 dist/
 dist-ssr/
 .content-collections/
+migrations/
 
 # Ignoring files
 .env

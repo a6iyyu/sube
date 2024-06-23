@@ -1,25 +1,43 @@
 import { createClient } from "@supabase/supabase-js";
+import { PrismaClient } from "@prisma/client";
+import bcrypt from "bcrypt";
+import jwt from "jsonwebtoken";
 
-const SupabaseURL = process.env.SUPABASE_URL || "";
-const SupabaseAnonKey = process.env.SUPABASE_ANON_KEY || "";
-const SupabaseDB = createClient(SupabaseURL, SupabaseAnonKey);
-
-export interface User {
+interface users {
   id_user: string;
   username: string;
   email: string;
   password: string;
   created_at: Date;
+  updated_at: Date;
 }
 
-export const CreateUser = async (user: User) => {
-  const { data, error } = await SupabaseDB.from("users").insert([user]);
-  if (error) throw error;
-  return data;
+const Prisma = new PrismaClient();
+
+export const SupabaseDB = createClient(process.env.SUPABASE_URL || "", process.env.SUPABASE_ANON_KEY || "");
+
+export const CreateUser = async (id_user: string, username: string, email: string, password: string, created_at: Date, updated_at: Date): Promise<users> => {
+  const HashedPassword = await bcrypt.hash(password, 10);
+  const User = await Prisma.users.create({
+    data: {
+      id_user,
+      username,
+      email,
+      password: HashedPassword,
+      created_at,
+      updated_at,
+    },
+  });
+  return User;
 };
 
-export const FindUserByUsername = async (username: string) => {
-  const { data, error } = await SupabaseDB.from("users").select("*").eq("username", username).single();
-  if (error) throw error;
-  return data;
+export const LoginUser = async (username: string, email: string, password: string) => {
+  const User = await Prisma.users.findUnique({ where: { username, email } });
+  if (!User) throw new Error("Pengguna tidak ditemukan!");
+
+  const CheckPasswordValidation = await bcrypt.compare(password, User.password);
+  if (!CheckPasswordValidation) throw new Error("Kredensial Anda tidak valid!");
+
+  const Token = jwt.sign({ id_user: User.id_user }, process.env.JWT_SECRET || "", { expiresIn: "1h" });
+  return Token;
 };

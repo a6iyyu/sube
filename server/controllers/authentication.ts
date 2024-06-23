@@ -1,9 +1,7 @@
 import { Router } from "express";
-import { Login, Register } from "../lib/authentication";
+import { LoginAuth, RegisterAuth } from "../middleware/authentication";
 
-const router = Router();
-
-export const AuthRoutes = () => {
-  router.post("/masuk", Login);
-  router.post("/registrasi", Register);
+export const Controllers = () => {
+  Router().post("/masuk", LoginAuth);
+  Router().post("/registrasi", RegisterAuth);
 };

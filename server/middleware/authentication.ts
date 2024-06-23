@@ -1,16 +1,22 @@
-import { Request, Response, NextFunction } from "express";
-import jwt from "jsonwebtoken";
-import "../types/express";
+import { Request, Response } from "express";
+import { CreateUser, LoginUser } from "../models/users";
 
-export const AuthenticateToken = (request: Request, response: Response, next: NextFunction) => {
-  const AuthHeader = request.headers["authorization"];
-  const Token = AuthHeader && AuthHeader.split(" ")[1];
+export const LoginAuth = async (request: Request, response: Response) => {
+  try {
+    const { id_user, username, email, password, created_at, updated_at } = request.body;
+    const User = await CreateUser(id_user, username, email, password, created_at, updated_at);
+    response.status(201).json(User);
+  } catch (error) {
+    response.status(400).json({ error });
+  }
+};
 
-  if (Token == null) return response.sendStatus(401);
-
-  jwt.verify(Token, process.env.JWT_SECRET || "", (err: any, user: any) => {
-    if (err) return response.sendStatus(403);
-    request.user = user;
-    next();
-  });
+export const RegisterAuth = async (request: Request, response: Response) => {
+  try {
+    const { username, email, password } = request.body;
+    const Token = await LoginUser(username, email, password);
+    response.status(200).json({ Token });
+  } catch (error) {
+    response.status(400).json({ error });
+  }
 };
