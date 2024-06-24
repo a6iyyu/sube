@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { MDXProvider } from "@mdx-js/react";
-import { Frontmatter, MDXModule } from "../../types/mdx";
+import { Frontmatter, MDXModule } from "~/types/mdx";
 import { WebsiteMeta } from "~/utils/global/website-meta";
 import { Header } from "~/utils/global/header";
 import { Footer } from "~/utils/global/footer";
@@ -17,7 +17,7 @@ export const DetailKaroselBlog: React.FC = () => {
   const [loading, setLoading] = useState<boolean>(true);
 
   useEffect(() => {
-    const importMDX = async (slug: string) => {
+    const ImportMDX = async (slug: string) => {
       setLoading(true);
       try {
         const MDXModules: MDXModule = await import(`../../content/blog/${slug}.mdx`);
@@ -33,17 +33,12 @@ export const DetailKaroselBlog: React.FC = () => {
     };
 
     if (slug) {
-      importMDX(slug);
+      ImportMDX(slug);
     }
   }, [slug]);
 
-  if (loading) {
-    return <MemuatHalaman />;
-  }
-
-  if (!MDXContent || notFound) {
-    return <NotFoundPage />;
-  }
+  if (loading) return <MemuatHalaman />;
+  if (!MDXContent || notFound)  return <NotFoundPage />;
 
   return (
     <>

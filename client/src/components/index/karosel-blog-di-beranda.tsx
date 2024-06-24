@@ -2,7 +2,7 @@ import React, { useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 import Splide from "@splidejs/splide";
 import "@splidejs/splide/css";
-import { PropsKaroselBlog } from "~/utils/index/props-karosel-blog";
+import { PropsKaroselBlog } from "~/utils/global/props-karosel-blog";
 import { MemendekkanKalimat } from "~/utils/global/memendekkan-kalimat";
 
 export const KaroselBlog: React.FC = () => {
@@ -24,10 +24,10 @@ export const KaroselBlog: React.FC = () => {
   }, []);
 
   return (
-    <div ref={splide} className="splide mt-8 h-full w-full overflow-hidden">
+    <div ref={splide} className="splide mt-8 h-full w-full overflow-x-hidden">
       <div className="splide__track h-full w-full">
         <ul className="splide__list">
-          {PropsKaroselBlog.map((karosel) => (
+          {PropsKaroselBlog.slice(0, 5).map(karosel => (
             <Link to={`/blog/${karosel.judul.replace(/ /g, "-").toLowerCase()}`} key={karosel.id} className="splide__slide flex h-full w-full">
               <span className="mx-auto h-full w-[95%] flex-col items-center">
                 <img src={karosel.gambar} alt={karosel.judul} className="h-72 w-full rounded-2xl object-cover [box-shadow:0.3rem_0.3rem_0_#bcbcbc]" />

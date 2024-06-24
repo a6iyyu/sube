@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { KaroselBlog } from "./karosel-blog";
+import { KaroselBlog } from "./karosel-blog-di-beranda";
 
 export const Blog: React.FC = () => {
   return (

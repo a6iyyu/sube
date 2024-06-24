@@ -36,4 +36,46 @@ export const PropsKaroselBlog: InitPropsKaroselBlog[] = [
     judul: "Dampak Dari Transformasi Digital Dalam Pendidikan",
     deskripsi: "Jelajahi bagaimana teknologi digital merevolusi pendidikan, dari e-learning hingga penggunaan AI dalam kelas, dan bagaimana kita dapat memanfaatkannya untuk menciptakan pengalaman belajar yang lebih baik.",
   },
+  {
+    id: "6",
+    gambar: "",
+    judul: "",
+    deskripsi: "",
+  },
+  {
+    id: "7",
+    gambar: "",
+    judul: "",
+    deskripsi: "",
+  },
+  {
+    id: "8",
+    gambar: "",
+    judul: "",
+    deskripsi: "",
+  },
+  {
+    id: "9",
+    gambar: "",
+    judul: "",
+    deskripsi: "",
+  },
+  {
+    id: "10",
+    gambar: "",
+    judul: "",
+    deskripsi: "",
+  },
+  {
+    id: "11",
+    gambar: "",
+    judul: "",
+    deskripsi: "",
+  },
+  {
+    id: "12",
+    gambar: "",
+    judul: "",
+    deskripsi: "",
+  },
 ];
