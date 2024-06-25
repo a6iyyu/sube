@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
-import { HandleChangeForm, HandleRegisterSubmit } from "~/utils/menangani-akun";
+import { FetchCSRFToken, HandleChangeForm, HandleRegisterSubmit } from "~/utils/menangani-akun";
 import School from "/school.jpg?url";
 
 export const FormulirRegistrasi: React.FC = () => {
@@ -25,6 +25,7 @@ export const FormulirRegistrasi: React.FC = () => {
   };
 
   useEffect(() => {
+    FetchCSRFToken();
     if (centang.current) centang.current.addEventListener("click", ToggleChecked);
     return () => {
       if (centang.current) centang.current.removeEventListener("click", ToggleChecked);
@@ -43,6 +44,7 @@ export const FormulirRegistrasi: React.FC = () => {
           Jadilah bagian dari generasi unggul!
         </h5>
         <form onSubmit={HandleSubmit} className="mx-auto mt-10 h-fit w-4/5">
+          <input type="hidden" name="_csrf" />
           <div className="flex flex-col">
             <label htmlFor="username" className="font-semibold">
               Username

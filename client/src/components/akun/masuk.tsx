@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
-import { HandleChangeForm, HandleLoginSubmit } from "~/utils/menangani-akun";
+import { FetchCSRFToken, HandleChangeForm, HandleLoginSubmit } from "~/utils/menangani-akun";
 import Student3 from "/student-3.jpg?url"
 
 interface LoginAttributes {
@@ -27,6 +27,7 @@ export const FormulirMasuk: React.FC = () => {
   };
 
   useEffect(() => {
+    FetchCSRFToken();
     if (centang.current) centang.current.addEventListener("click", ToggleVisible);
     return () => {
       if (centang.current) centang.current.removeEventListener("click", ToggleVisible);
@@ -46,7 +47,7 @@ export const FormulirMasuk: React.FC = () => {
         </h5>
         <form onSubmit={HandleSubmit} className="mx-auto mt-10 h-fit w-4/5">
           <div className="flex flex-col">
-            <label htmlFor="username_or_email">Username</label>
+            <label htmlFor="username_or_email">Username/Email</label>
             <input
               type="text"
               name="username_or_email"
