@@ -1,8 +1,8 @@
 import React from "react";
 import styled from "styled-components";
-import { WebsiteMeta } from "~/utils/global/website-meta";
-import { Header } from "~/utils/global/header";
-import { Footer } from "~/utils/global/footer";
+import { WebsiteMeta } from "~/common/website-meta";
+import { Header } from "~/common/header";
+import { Footer } from "~/common/footer";
 
 const BounceLoading = styled.div`
   @keyframes bouncing-loader {

@@ -1,8 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
-import axios from "axios";
-import { z } from "zod";
-import { LoginSkema } from "./skema";
+import { HandleChangeForm, HandleLoginSubmit } from "~/utils/menangani-akun";
 import Student3 from "/student-3.jpg?url"
 
 interface LoginAttributes {
@@ -19,38 +17,8 @@ export const FormulirMasuk: React.FC = () => {
     password: "",
   });
 
-  const HandleChangeForm = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.target;
-    setLoginData({ ...loginData, [name]: value });
-  };
-
-  const HandleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-
-    try {
-      LoginSkema.parse(loginData);
-      const response = await axios.post("http://localhost:2001/masuk", loginData);
-      if (response.status === 201) {
-        localStorage.setItem("token", response.data.Token);
-      } else {
-        console.error(`Maaf, proses masuk Anda mengalami kegagalan karena ${response.data.message}`);
-      }
-    } catch (e) {
-      if (e instanceof z.ZodError) {
-        const FieldError: Partial<LoginAttributes> = {};
-        e.errors.forEach(err => {
-          if (err.path.length) {
-            FieldError[err.path[0] as keyof LoginAttributes] = err.message;
-          }
-        });
-        setErrorForm(FieldError);
-      } else {
-        console.error("Proses masuk Anda mengalami kegagalan!");
-      }
-
-      if (axios.isAxiosError(e) && e.response) console.error(e.message);
-    }
-  };
+  const HandleChange = (e: React.ChangeEvent<HTMLInputElement>) => HandleChangeForm(e, setLoginData, loginData);
+  const HandleSubmit = async (e: React.FormEvent) => HandleLoginSubmit(e, loginData, setErrorForm);
 
   const ToggleVisible = () => {
     if (centang.current && kata_sandi.current) {
@@ -63,7 +31,7 @@ export const FormulirMasuk: React.FC = () => {
     return () => {
       if (centang.current) centang.current.removeEventListener("click", ToggleVisible);
     };
-  }, []);
+  }, [centang.current]);
 
   return (
     <main className="grid h-[55rem] max-h-[300vh] w-full grid-cols-1 overflow-x-hidden bg-gradient-to-r from-[#0c0c1e] to-[#141414] lg:max-h-[200vh] lg:grid-cols-2">
@@ -84,7 +52,7 @@ export const FormulirMasuk: React.FC = () => {
               name="username_or_email"
               placeholder="Masukkan Nama"
               className="mt-4 rounded-lg px-6 py-4 text-slate-950 focus:outline-none lg:px-4 lg:py-3"
-              onChange={HandleChangeForm}
+              onChange={HandleChange}
             />
             {errorForm.username_or_email && (<span className="mt-3 cursor-default text-base italic text-red-500">{errorForm.username_or_email}</span>)}
           </div>
@@ -98,7 +66,7 @@ export const FormulirMasuk: React.FC = () => {
               name="password"
               placeholder="Masukkan Kata Sandi"
               className="mt-4 rounded-lg px-6 py-4 text-slate-950 focus:outline-none lg:px-4 lg:py-3"
-              onChange={HandleChangeForm}
+              onChange={HandleChange}
             />
             {errorForm.password && (<span className="mt-3 cursor-default text-base italic text-red-500">{errorForm.password}</span>)}
           </div>

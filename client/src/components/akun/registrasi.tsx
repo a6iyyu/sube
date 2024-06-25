@@ -1,59 +1,22 @@
 import React, { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
-import axios from "axios";
-import { z } from "zod";
-import { RegisterSkema } from "./skema";
+import { HandleChangeForm, HandleRegisterSubmit } from "~/utils/menangani-akun";
 import School from "/school.jpg?url";
-
-interface RegisterAttributes {
-  username: string;
-  email: string;
-  password: string;
-  confirm_password: string;
-}
 
 export const FormulirRegistrasi: React.FC = () => {
   const centang = useRef<HTMLDivElement | null>(null);
   const kata_sandi = useRef<HTMLInputElement | null>(null);
   const konfirmasi_kata_sandi = useRef<HTMLInputElement | null>(null);
-  const [errorForm, setErrorForm] = useState<Partial<RegisterAttributes>>({});
-  const [registerData, setRegisterData] = useState<RegisterAttributes>({
+  const [errorForm, setErrorForm] = useState<Partial<typeof registerData>>({});
+  const [registerData, setRegisterData] = useState({
     username: "",
     email: "",
     password: "",
     confirm_password: "",
   });
 
-  const HandleChangeForm = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.target;
-    setRegisterData({ ...registerData, [name]: value });
-  };
-
-  const HandleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-
-    try {
-      RegisterSkema.parse(registerData);
-      const response = await axios.post("http://localhost:2001/registrasi", registerData);
-      if (response.status === 201) {
-        console.log("Selamat, Anda berhasil registrasi dan membuat akun!");
-      } else {
-        console.error(`Maaf, regitrasi Anda mengalami kesalahan karena ${response.data.message}`);
-      }
-    } catch (e) {
-      if (e instanceof z.ZodError) {
-        const FieldError: Partial<RegisterAttributes> = {};
-        e.errors.forEach(err => {
-          if (err.path.length) {
-            FieldError[err.path[0] as keyof RegisterAttributes] = err.message;
-          }
-        });
-        setErrorForm(FieldError);
-      }
-
-      if (axios.isAxiosError(e) && e.response) console.error(e.message);
-    }
-  };
+  const HandleChange = (e: React.ChangeEvent<HTMLInputElement>) => HandleChangeForm(e, setRegisterData, registerData);
+  const HandleSubmit = (e: React.FormEvent) => HandleRegisterSubmit(e, registerData, setErrorForm);
 
   const ToggleChecked = () => {
     if (centang.current && kata_sandi.current && konfirmasi_kata_sandi.current) {
@@ -66,7 +29,7 @@ export const FormulirRegistrasi: React.FC = () => {
     return () => {
       if (centang.current) centang.current.removeEventListener("click", ToggleChecked);
     }
-  }, []);
+  }, [centang.current]);
 
   return (
     <main className="grid h-[70rem] max-h-[300vh] w-full grid-cols-1 overflow-x-hidden bg-gradient-to-r from-[#0c0c1e] to-[#141414] lg:max-h-[200vh] lg:grid-cols-2">
@@ -89,7 +52,7 @@ export const FormulirRegistrasi: React.FC = () => {
               name="username"
               placeholder="Masukkan Nama"
               className="mt-4 rounded-lg px-6 py-4 text-slate-950 focus:outline-none lg:px-4 lg:py-3"
-              onChange={HandleChangeForm}
+              onChange={HandleChange}
               value={registerData.username}
             />
             {errorForm.username && <span className="mt-3 cursor-default text-base italic text-red-500">{errorForm.username}</span>}
@@ -103,7 +66,7 @@ export const FormulirRegistrasi: React.FC = () => {
               name="email"
               placeholder="Masukkan Surel"
               className="mt-4 rounded-lg px-6 py-4 text-slate-950 focus:outline-none lg:px-4 lg:py-3"
-              onChange={HandleChangeForm}
+              onChange={HandleChange}
               value={registerData.email}
             />
             {errorForm.email && <span className="mt-3 cursor-default text-base italic text-red-500">{errorForm.email}</span>}
@@ -118,7 +81,7 @@ export const FormulirRegistrasi: React.FC = () => {
               name="password"
               placeholder="Masukkan Kata Sandi"
               className="mt-4 rounded-lg px-6 py-4 text-slate-950 focus:outline-none lg:px-4 lg:py-3"
-              onChange={HandleChangeForm}
+              onChange={HandleChange}
               value={registerData.password}
             />
             {errorForm.password && <span className="mt-3 cursor-default text-base italic text-red-500">{errorForm.password}</span>}
@@ -133,7 +96,7 @@ export const FormulirRegistrasi: React.FC = () => {
               name="confirm_password"
               placeholder="Konfirmasi Kata Sandi"
               className="mt-4 rounded-lg px-6 py-4 text-slate-950 focus:outline-none lg:px-4 lg:py-3"
-              onChange={HandleChangeForm}
+              onChange={HandleChange}
               value={registerData.confirm_password}
             />
             {errorForm.confirm_password && <span className="mt-3 cursor-default text-base italic text-red-500">{errorForm.confirm_password}</span>}

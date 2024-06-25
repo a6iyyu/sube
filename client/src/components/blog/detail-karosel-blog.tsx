@@ -2,9 +2,9 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { MDXProvider } from "@mdx-js/react";
 import { Frontmatter, MDXModule } from "~/types/mdx";
-import { WebsiteMeta } from "~/utils/global/website-meta";
-import { Header } from "~/utils/global/header";
-import { Footer } from "~/utils/global/footer";
+import { WebsiteMeta } from "~/common/website-meta";
+import { Header } from "~/common/header";
+import { Footer } from "~/common/footer";
 import { MemuatHalaman } from "./memuat-halaman";
 import { NotFoundPage } from "~/pages/404";
 

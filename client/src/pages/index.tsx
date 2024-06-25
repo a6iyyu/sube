@@ -1,8 +1,8 @@
 import React, { useEffect } from "react";
-import { WebsiteMeta } from "~/utils/global/website-meta";
-import { ScrollIndicator } from "~/utils/global/scroll-indicator";
-import { ScrollToTop } from "~/utils/global/scroll-to-top";
-import { Header } from "~/utils/global/header";
+import { WebsiteMeta } from "~/common/website-meta";
+import { ScrollIndicator } from "~/common/scroll-indicator";
+import { ScrollToTop } from "~/common/scroll-to-top";
+import { Header } from "~/common/header";
 import { IndeksHero } from "~/components/index/hero";
 import { SilabusKurikulum } from "~/components/index/tujuan-kurikulum-kami";
 import { FiturYangDisediakan } from "~/components/index/fitur-yang-disediakan";
@@ -10,7 +10,7 @@ import { JalurPembelajaran } from "~/components/index/jalur-pembelajaran";
 import { Blog } from "~/components/index/blog";
 import { KenalLebihDekat } from "~/components/index/kenal-lebih-dekat";
 import { KamiTungguAntusiasmu } from "~/components/index/kami-tunggu-antusiasmu";
-import { Footer } from "~/utils/global/footer";
+import { Footer } from "~/common/footer";
 
 export const Indeks: React.FC = () => {
   useEffect(() => {

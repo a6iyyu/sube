@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import { PropsSilabusKurikulum } from "~/utils/index/props-tujuan-kurikulum";
+import { PropsSilabusKurikulum } from "~/data/props-tujuan-kurikulum";
 
 const Konten = styled.div`
   @media screen and (max-width: 3120px) {

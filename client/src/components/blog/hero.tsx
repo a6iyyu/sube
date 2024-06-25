@@ -1,6 +1,6 @@
 import React, { useEffect, useRef } from "react";
 import Typed from "typed.js";
-import { HandleMouseEnter, HandleMouseLeave, Headline } from "~/utils/global/hover-setiap-karakter";
+import { HandleMouseEnter, HandleMouseLeave, Headline } from "~/utils/hover-setiap-karakter";
 
 export const BlogHero: React.FC = () => {
   const kalimat = useRef<HTMLParagraphElement | null>(null);
@@ -10,7 +10,6 @@ export const BlogHero: React.FC = () => {
       const typed = new Typed(kalimat.current, {
         backSpeed: 50,
         loop: true,
-        showCursor: false,
         strings: [
           "Bingung mau ngapain?",
           "Kamu gabut ya?",
@@ -27,7 +26,9 @@ export const BlogHero: React.FC = () => {
     <main className="mx-auto mb-28 mt-28 flex h-fit w-4/5 cursor-default flex-col justify-center text-slate-50 lg:w-3/5">
       <span className="absolute left-0 h-40 w-40 bg-[#4ea9b9] opacity-50 [filter:blur(8rem)]" />
       <span className="absolute right-0 h-40 w-40 bg-[#0aa2bd] opacity-50 [filter:blur(8rem)]" />
-      <span ref={kalimat} className="mb-4 text-5xl font-bold"></span>
+      <div className="mb-4 inline text-5xl font-bold">
+        <span ref={kalimat}></span>
+      </div>
       <h2 className="text-5xl font-bold">
         {Headline("Yuk, bacain artikelnya disini!", HandleMouseEnter, HandleMouseLeave)}
       </h2>

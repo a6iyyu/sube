@@ -2,8 +2,8 @@ import React from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import "@splidejs/splide/css";
-import { ModulPembelajaran } from "~/utils/index/props-modul-pembelajaran";
-import { MemendekkanKalimat } from "~/utils/global/memendekkan-kalimat";
+import { ModulPembelajaran } from "~/data/props-modul-pembelajaran";
+import { MemendekkanKalimat } from "~/utils/memendekkan-kalimat";
 
 const SectionHover = styled.section`
   @media screen and (max-width: 3120px) {

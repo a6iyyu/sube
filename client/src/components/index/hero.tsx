@@ -3,7 +3,7 @@ import {
   HandleMouseEnter,
   HandleMouseLeave,
   Headline,
-} from "~/utils/global/hover-setiap-karakter";
+} from "~/utils/hover-setiap-karakter";
 
 export const IndeksHero: React.FC = () => {
   return (

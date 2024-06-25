@@ -1,10 +1,10 @@
 import React from "react";
-import { WebsiteMeta } from "~/utils/global/website-meta";
-import { ScrollIndicator } from "~/utils/global/scroll-indicator";
-import { ScrollToTop } from "~/utils/global/scroll-to-top";
-import { Header } from "~/utils/global/header";
+import { WebsiteMeta } from "~/common/website-meta";
+import { ScrollIndicator } from "~/common/scroll-indicator";
+import { ScrollToTop } from "~/common/scroll-to-top";
+import { Header } from "~/common/header";
 import { TentangKamiHero } from "~/components/tentang-kami/hero";
-import { Footer } from "~/utils/global/footer";
+import { Footer } from "~/common/footer";
 
 export const TentangKami: React.FC = () => {
   return (

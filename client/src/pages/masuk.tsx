@@ -1,5 +1,5 @@
 import React from "react";
-import { WebsiteMeta } from "~/utils/global/website-meta";
+import { WebsiteMeta } from "~/common/website-meta";
 import { FormulirMasuk } from "~/components/akun/masuk";
 
 export const Masuk: React.FC = () => {

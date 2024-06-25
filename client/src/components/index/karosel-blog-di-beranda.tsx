@@ -2,8 +2,8 @@ import React, { useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 import Splide from "@splidejs/splide";
 import "@splidejs/splide/css";
-import { PropsKaroselBlog } from "~/utils/global/props-karosel-blog";
-import { MemendekkanKalimat } from "~/utils/global/memendekkan-kalimat";
+import { PropsKaroselBlog } from "~/data/props-karosel-blog";
+import { MemendekkanKalimat } from "~/utils/memendekkan-kalimat";
 
 export const KaroselBlog: React.FC = () => {
   const splide = useRef<HTMLDivElement | null>(null);
