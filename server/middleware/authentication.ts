@@ -40,9 +40,4 @@ export const ValidateRegister = (request: Request, response: Response, next: Nex
   }
 };
 
-export const CSRFToken = (request: Request, response: Response) => {
-  const Token = request.headers["X-CSRF-Token"];
-  if (!Token || Token !== request.csrfToken()) return response.status(403).json({ message: "Token CSRF Anda tidak valid!" });
-};
-
 export const LoginWithGoogle = async (response: Response) => {};

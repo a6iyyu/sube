@@ -66,7 +66,7 @@ export const HandleChangeForm = <T extends RegisterAttributes | LoginAttributes>
 export const FetchCSRFToken = async () => {
   try {
     const response = await axios.get("http://localhost:2001/csrf-token");
-    CSRFToken = response.data["X-CSRF-Token"];
+    CSRFToken = response.headers["X-CSRF-Token"];
   } catch (e) {
     console.error(e);
   }
