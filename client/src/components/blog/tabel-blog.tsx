@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { ImporBlog } from "~/utils/impor-blog";
-import { blogs } from "../../../../server/types/blogs";
+import { blogs } from "~/types/blogs";
 
 export const TabelBlog: React.FC = () => {
   const [importBlogs, setImportBlogs] = useState<blogs[]>([]);

@@ -5,6 +5,7 @@ import { ScrollToTop } from "~/common/scroll-to-top";
 import { Header } from "~/common/header";
 import { BlogHero } from "~/components/blog/hero";
 import { KaroselBlogTerbaru } from "~/components/blog/karosel-blog-terbaru";
+import { TabelBlog } from "~/components/blog/tabel-blog";
 import { Footer } from "~/common/footer";
 
 export const Blog: React.FC = () => {
@@ -16,6 +17,7 @@ export const Blog: React.FC = () => {
       <Header />
       <BlogHero />
       <KaroselBlogTerbaru />
+      <TabelBlog />
       <Footer />
     </>
   );

@@ -18,9 +18,6 @@ export const FormulirMasuk: React.FC = () => {
     password: "",
   });
 
-  const HandleChange = (e: React.ChangeEvent<HTMLInputElement>) => HandleChangeForm(e, setLoginData, loginData);
-  const HandleSubmit = async (e: React.FormEvent) => HandleLoginSubmit(e, loginData, setErrorForm, CSRFToken);
-
   const ToggleVisible = () => {
     if (centang.current && kata_sandi.current) {
       (kata_sandi.current as HTMLInputElement || null).type = centang.current!.querySelector("input")!.checked ? "text" : "password";
@@ -28,12 +25,15 @@ export const FormulirMasuk: React.FC = () => {
   };
 
   useEffect(() => {
-    FetchCSRFToken(setCSRFToken);
+    FetchCSRFToken(setCSRFToken, "masuk");
     if (centang.current) centang.current.addEventListener("click", ToggleVisible);
     return () => {
       if (centang.current) centang.current.removeEventListener("click", ToggleVisible);
     };
   }, [centang.current]);
+
+  const HandleChange = (e: React.ChangeEvent<HTMLInputElement>) => HandleChangeForm(e, setLoginData, loginData);
+  const HandleSubmit = async (e: React.FormEvent) => HandleLoginSubmit(e, loginData, setErrorForm, CSRFToken);
 
   return (
     <main className="grid h-[55rem] max-h-[300vh] w-full grid-cols-1 overflow-x-hidden bg-gradient-to-r from-[#0c0c1e] to-[#141414] lg:max-h-[200vh] lg:grid-cols-2">

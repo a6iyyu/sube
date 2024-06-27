@@ -4,8 +4,8 @@ import { LoginValidation, RegisterValidation } from "./validation";
 
 export const LoginAuth = async (request: Request, response: Response, next: NextFunction) => {
   try {
-    const { email, password } = request.body;
-    const Token = await LoginUser(email, password);
+    const { id_user, username_or_email, password } = request.body;
+    const Token = await LoginUser({ id_user, username_or_email, password });
     LoginValidation.parse(request.body);
     response.status(200).json({ Token });
     next();

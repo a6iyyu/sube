@@ -50,15 +50,15 @@ const MenanganiPengiriman = async (e: FormEvent, formData: RegisterAttributes | 
       },
       withCredentials: true,
     });
-    if (response.status !== 201) console.error(`${response.data.message}`);
+    response.status !== 201 ? console.error(`${response.data.message}`) : (formType === "registrasi" ? window.location.href = "/masuk" : window.location.href = "/dashboard");
   } catch (e) {
-    if (axios.isAxiosError(e) && e.response) console.error(e.message);
+    if (axios.isAxiosError(e) && e.response) console.error(e);
   }
 };
 
-export const FetchCSRFToken = async (setCSRFToken: Dispatch<SetStateAction<string>>) => {
+export const FetchCSRFToken = async (setCSRFToken: Dispatch<SetStateAction<string>>, formType: TipeFormulir) => {
   try {
-    const response = await axios.get("http://localhost:2001/registrasi", {
+    const response = await axios.get(formType === "registrasi" ? "http://localhost:2001/registrasi" : "http://localhost:2001/masuk", {
       withCredentials: true,
     });
 

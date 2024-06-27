@@ -1,11 +1,11 @@
 import { PrismaClient } from "@prisma/client";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
-import { users } from "~/types/users";
+import { registerusers, loginusers } from "~/types/users";
 
 const Prisma = new PrismaClient();
 
-export const CreateUser = async ({id_user, username, email, password, created_at, updated_at}: users) => {
+export const CreateUser = async ({ id_user, username, email, password, created_at, updated_at }: registerusers) => {
   const HashedPassword = await bcrypt.hash(password, 10);
   const User = await Prisma.users.create({
     data: {
@@ -20,10 +20,11 @@ export const CreateUser = async ({id_user, username, email, password, created_at
   return User;
 };
 
-export const LoginUser = async (username_or_email: string, password: string) => {
+export const LoginUser = async ({ id_user, username_or_email, password }: loginusers) => {
   const User = await Prisma.users.findFirst({
     where: {
       OR: [
+        { id_user },
         { username: username_or_email },
         { email: username_or_email },
       ]

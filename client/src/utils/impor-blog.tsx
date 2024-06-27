@@ -1,6 +1,6 @@
 import { Dispatch, SetStateAction } from "react";
 import axios from "axios";
-import { blogs } from "../../../server/types/blogs";
+import { blogs } from "~/types/blogs";
 
 export const ImporBlog = async (setImportBlogs: Dispatch<SetStateAction<blogs[]>>) => {
   try {

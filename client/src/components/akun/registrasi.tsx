@@ -23,7 +23,7 @@ export const FormulirRegistrasi: React.FC = () => {
   };
 
   useEffect(() => {
-    FetchCSRFToken(setCSRFToken);
+    FetchCSRFToken(setCSRFToken, "registrasi");
     if (centang.current) centang.current.addEventListener("click", ToggleChecked);
     return () => {
       if (centang.current) centang.current.removeEventListener("click", ToggleChecked);
