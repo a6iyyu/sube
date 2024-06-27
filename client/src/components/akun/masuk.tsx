@@ -11,6 +11,7 @@ interface LoginAttributes {
 export const FormulirMasuk: React.FC = () => {
   const centang = useRef<HTMLInputElement | null>(null);
   const kata_sandi = useRef<HTMLInputElement | null>(null);
+  const [CSRFToken, setCSRFToken] = useState<string>("");
   const [errorForm, setErrorForm] = useState<Partial<LoginAttributes>>({});
   const [loginData, setLoginData] = useState<LoginAttributes>({
     username_or_email: "",
@@ -18,7 +19,7 @@ export const FormulirMasuk: React.FC = () => {
   });
 
   const HandleChange = (e: React.ChangeEvent<HTMLInputElement>) => HandleChangeForm(e, setLoginData, loginData);
-  const HandleSubmit = async (e: React.FormEvent) => HandleLoginSubmit(e, loginData, setErrorForm);
+  const HandleSubmit = async (e: React.FormEvent) => HandleLoginSubmit(e, loginData, setErrorForm, CSRFToken);
 
   const ToggleVisible = () => {
     if (centang.current && kata_sandi.current) {
@@ -27,7 +28,7 @@ export const FormulirMasuk: React.FC = () => {
   };
 
   useEffect(() => {
-    FetchCSRFToken();
+    FetchCSRFToken(setCSRFToken);
     if (centang.current) centang.current.addEventListener("click", ToggleVisible);
     return () => {
       if (centang.current) centang.current.removeEventListener("click", ToggleVisible);
@@ -46,6 +47,7 @@ export const FormulirMasuk: React.FC = () => {
           Siapkah Anda menjadi yang terdepan?
         </h5>
         <form onSubmit={HandleSubmit} className="mx-auto mt-10 h-fit w-4/5">
+          {/* <input type="hidden" name="_csrf" value={GetCSRFToken() || ""} /> */}
           <div className="flex flex-col">
             <label htmlFor="username_or_email">Username/Email</label>
             <input

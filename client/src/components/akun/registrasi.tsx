@@ -7,6 +7,7 @@ export const FormulirRegistrasi: React.FC = () => {
   const centang = useRef<HTMLDivElement | null>(null);
   const kata_sandi = useRef<HTMLInputElement | null>(null);
   const konfirmasi_kata_sandi = useRef<HTMLInputElement | null>(null);
+  const [CSRFToken, setCSRFToken] = useState<string>("");
   const [errorForm, setErrorForm] = useState<Partial<typeof registerData>>({});
   const [registerData, setRegisterData] = useState({
     username: "",
@@ -15,9 +16,6 @@ export const FormulirRegistrasi: React.FC = () => {
     confirm_password: "",
   });
 
-  const HandleChange = (e: React.ChangeEvent<HTMLInputElement>) => HandleChangeForm(e, setRegisterData, registerData);
-  const HandleSubmit = (e: React.FormEvent) => HandleRegisterSubmit(e, registerData, setErrorForm);
-
   const ToggleChecked = () => {
     if (centang.current && kata_sandi.current && konfirmasi_kata_sandi.current) {
       (kata_sandi.current as HTMLInputElement || null).type = (konfirmasi_kata_sandi.current as HTMLInputElement || null).type = centang.current!.querySelector("input")!.checked ? "text" : "password";
@@ -25,12 +23,15 @@ export const FormulirRegistrasi: React.FC = () => {
   };
 
   useEffect(() => {
-    FetchCSRFToken();
+    FetchCSRFToken(setCSRFToken);
     if (centang.current) centang.current.addEventListener("click", ToggleChecked);
     return () => {
       if (centang.current) centang.current.removeEventListener("click", ToggleChecked);
     }
   }, [centang.current]);
+
+  const HandleChange = (e: React.ChangeEvent<HTMLInputElement>) => HandleChangeForm(e, setRegisterData, registerData);
+  const HandleSubmit = (e: React.FormEvent) => HandleRegisterSubmit(e, registerData, setErrorForm, CSRFToken);
 
   return (
     <main className="grid h-[70rem] max-h-[300vh] w-full grid-cols-1 overflow-x-hidden bg-gradient-to-r from-[#0c0c1e] to-[#141414] lg:max-h-[200vh] lg:grid-cols-2">
@@ -44,7 +45,6 @@ export const FormulirRegistrasi: React.FC = () => {
           Jadilah bagian dari generasi unggul!
         </h5>
         <form onSubmit={HandleSubmit} className="mx-auto mt-10 h-fit w-4/5">
-          <input type="hidden" name="_csrf" />
           <div className="flex flex-col">
             <label htmlFor="username" className="font-semibold">
               Username

@@ -17,8 +17,6 @@ interface LoginAttributes {
   password: string;
 }
 
-let CSRFToken: string = "";
-
 const MenanganiValidasi = (formData: RegisterAttributes | LoginAttributes, formType: TipeFormulir) => {
   try {
     formType === "registrasi" ? RegisterSkema.parse(formData as RegisterAttributes) : LoginSkema.parse(formData as LoginAttributes);
@@ -35,7 +33,7 @@ const MenanganiValidasi = (formData: RegisterAttributes | LoginAttributes, formT
   }
 };
 
-const MenanganiPengiriman = async (e: FormEvent, formData: RegisterAttributes | LoginAttributes, formType: TipeFormulir, setErrorForm: Dispatch<SetStateAction<Partial<RegisterAttributes | LoginAttributes>>>) => {
+const MenanganiPengiriman = async (e: FormEvent, formData: RegisterAttributes | LoginAttributes, formType: TipeFormulir, setErrorForm: Dispatch<SetStateAction<Partial<RegisterAttributes | LoginAttributes>>>, CSRFToken: string) => {
   e.preventDefault();
   const ValidasiGagal = MenanganiValidasi(formData, formType);
 
@@ -45,16 +43,30 @@ const MenanganiPengiriman = async (e: FormEvent, formData: RegisterAttributes | 
   }
 
   try {
-    if (!CSRFToken) await FetchCSRFToken();
-
     const response = await axios.post(formType === "registrasi" ? "http://localhost:2001/registrasi" : "http://localhost:2001/masuk", formData, {
       headers: {
-        "X-CSRF-Token": CSRFToken,
+        "Content-Type": "application/json",
+        "XSRF-Token": CSRFToken,
       },
+      withCredentials: true,
     });
-    response.status !== 201 ? console.error(`${response.data.message}`) : null;
+    if (response.status !== 201) console.error(`${response.data.message}`);
   } catch (e) {
     if (axios.isAxiosError(e) && e.response) console.error(e.message);
+  }
+};
+
+export const FetchCSRFToken = async (setCSRFToken: Dispatch<SetStateAction<string>>) => {
+  try {
+    const response = await axios.get("http://localhost:2001/registrasi", {
+      withCredentials: true,
+    });
+
+    const data = await response.data["XSRF-Token"];
+    setCSRFToken(data);
+  
+  } catch (e) {
+    console.error("Tidak bisa mendapatkan token CSRF karena " + e);
   }
 };
 
@@ -63,19 +75,10 @@ export const HandleChangeForm = <T extends RegisterAttributes | LoginAttributes>
   setData({ ...data, [name]: value });
 };
 
-export const FetchCSRFToken = async () => {
-  try {
-    const response = await axios.get("http://localhost:2001/csrf-token");
-    CSRFToken = response.headers["X-CSRF-Token"];
-  } catch (e) {
-    console.error(e);
-  }
+export const HandleRegisterSubmit = (e: FormEvent, registerData: RegisterAttributes, setErrorForm: Dispatch<SetStateAction<Partial<RegisterAttributes>>>, CSRFToken: string) => {
+  MenanganiPengiriman(e, registerData, "registrasi", setErrorForm, CSRFToken);
 };
 
-export const HandleRegisterSubmit = (e: FormEvent, registerData: RegisterAttributes, setErrorForm: Dispatch<SetStateAction<Partial<RegisterAttributes>>>) => {
-  MenanganiPengiriman(e, registerData, "registrasi", setErrorForm);
-};
-
-export const HandleLoginSubmit = (e: FormEvent, loginData: LoginAttributes, setErrorForm: Dispatch<SetStateAction<Partial<LoginAttributes>>>) => {
-  MenanganiPengiriman(e, loginData, "masuk", setErrorForm);
+export const HandleLoginSubmit = (e: FormEvent, loginData: LoginAttributes, setErrorForm: Dispatch<SetStateAction<Partial<LoginAttributes>>>, CSRFToken: string) => {
+  MenanganiPengiriman(e, loginData, "masuk", setErrorForm, CSRFToken);
 };

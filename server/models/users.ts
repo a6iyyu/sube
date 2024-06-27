@@ -5,7 +5,7 @@ import { users } from "~/types/users";
 
 const Prisma = new PrismaClient();
 
-export const CreateUser = async (id_user: string, username: string, email: string, password: string, created_at: Date, updated_at: Date): Promise<users> => {
+export const CreateUser = async ({id_user, username, email, password, created_at, updated_at}: users) => {
   const HashedPassword = await bcrypt.hash(password, 10);
   const User = await Prisma.users.create({
     data: {
