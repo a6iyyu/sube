@@ -33,7 +33,7 @@ const MenanganiValidasi = (formData: RegisterAttributes | LoginAttributes, formT
   }
 };
 
-const MenanganiPengiriman = async (e: FormEvent, formData: RegisterAttributes | LoginAttributes, formType: TipeFormulir, setErrorForm: Dispatch<SetStateAction<Partial<RegisterAttributes | LoginAttributes>>>, CSRFToken: string) => {
+const MenanganiPengiriman = async <T extends RegisterAttributes | LoginAttributes>(e: FormEvent, formData: T, formType: TipeFormulir, setErrorForm: Dispatch<SetStateAction<Partial<T>>>, CSRFToken: string) => {
   e.preventDefault();
   const ValidasiGagal = MenanganiValidasi(formData, formType);
 
@@ -50,9 +50,9 @@ const MenanganiPengiriman = async (e: FormEvent, formData: RegisterAttributes | 
       },
       withCredentials: true,
     });
-    response.status !== 201 ? console.error(`${response.data.message}`) : (formType === "registrasi" ? window.location.href = "/masuk" : window.location.href = "/dashboard");
+    response.status !== 201 ? console.error(`${response.data.message}`) : (formType === "registrasi" ? window.location.href = "http://localhost:2000/masuk" : window.location.href = "http://localhost:2000/dashboard");
   } catch (e) {
-    if (axios.isAxiosError(e) && e.response) console.error(e);
+    if (axios.isAxiosError(e) && e.response) console.error(e.response.data);
   }
 };
 
@@ -64,7 +64,6 @@ export const FetchCSRFToken = async (setCSRFToken: Dispatch<SetStateAction<strin
 
     const data = await response.data["XSRF-Token"];
     setCSRFToken(data);
-  
   } catch (e) {
     console.error("Tidak bisa mendapatkan token CSRF karena " + e);
   }

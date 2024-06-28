@@ -1,19 +1,21 @@
 import React from "react";
 import { WebsiteMeta } from "~/common/website-meta";
-import { ScrollIndicator } from "~/common/scroll-indicator";
 import { ScrollToTop } from "~/common/scroll-to-top";
+import { ScrollIndicator } from "~/common/scroll-indicator";
 import { Header } from "~/common/header";
-import { HubungiKamiHero } from "~/components/hubungi-kami/hero";
+import { ProfilPengguna } from "~/components/akun/profil-pengguna";
+import { PengaturanPengguna } from "~/components/akun/pengaturan-pengguna";
 import { Footer } from "~/common/footer";
 
-export const HubungiKami: React.FC = () => {
+export const Dashboard: React.FC = () => {
   return (
     <>
       <WebsiteMeta title="" description="" />
-      <ScrollIndicator />
       <ScrollToTop />
+      <ScrollIndicator />
       <Header />
-      <HubungiKamiHero />
+      <ProfilPengguna />
+      <PengaturanPengguna />
       <Footer />
     </>
   );

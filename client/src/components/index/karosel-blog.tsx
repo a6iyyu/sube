@@ -19,7 +19,7 @@ export const KaroselBlog: React.FC = () => {
         type: "loop",
       }).mount();
     } else {
-      throw new Error("Error: Carousel cannot be loaded!");
+      throw new Error("Ada kesalahan dalam memuat karosel!");
     }
   }, []);
 

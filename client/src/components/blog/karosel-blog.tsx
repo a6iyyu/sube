@@ -5,7 +5,7 @@ import { AutoScroll } from "@splidejs/splide-extension-auto-scroll";
 import { PropsKaroselBlog } from "~/data/props-karosel-blog";
 import { MemendekkanKalimat } from "~/utils/memendekkan-kalimat";
 
-export const KaroselBlogTerbaru: React.FC = () => {
+export const KaroselBlog: React.FC = () => {
   const karosel = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
@@ -36,7 +36,7 @@ export const KaroselBlogTerbaru: React.FC = () => {
   }, []);
 
   return (
-    <main ref={karosel} className="splide mb-60 h-fit w-full overflow-x-hidden">
+    <main ref={karosel} className="splide h-fit w-full overflow-x-hidden">
       <section className="splide__track h-full w-full">
         <ul className="splide__list">
           {PropsKaroselBlog.slice(0, 5).map(karosel => (

@@ -66,16 +66,4 @@ export const PropsKaroselBlog: InitPropsKaroselBlog[] = [
     judul: "",
     deskripsi: "",
   },
-  {
-    id: "11",
-    gambar: "",
-    judul: "",
-    deskripsi: "",
-  },
-  {
-    id: "12",
-    gambar: "",
-    judul: "",
-    deskripsi: "",
-  },
 ];

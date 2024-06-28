@@ -1,4 +1,4 @@
-import express, { Request, Response, NextFunction } from "express";
+import express, { Request, Response } from "express";
 import bodyParser from "body-parser";
 import cookieParser from "cookie-parser";
 import cors from "cors";
@@ -6,7 +6,7 @@ import csrf from "csurf";
 import dotenv from "dotenv";
 import logger from "morgan";
 import { LoginAuth, RegisterAuth } from "./middleware/authentication";
-import { ImportBlog } from "./models/blogs";
+import { ImportBlog, RenderBlog } from "./models/blogs";
 
 dotenv.config();
 
@@ -32,6 +32,19 @@ app.get("/masuk", (request: Request, response: Response) => {
   response.json({ "XSRF-Token": request.csrfToken() });
 });
 
-app.get("/blog", ImportBlog);
+app.get("/dashboard", (request: Request, response: Response) => {
+  response.json({ "XSRF-Token": request.csrfToken() });
+});
+
+app.get("/blog", async (response: Response) => {
+  try {
+    const Blogs = await ImportBlog();
+    response.status(200).json(Blogs);
+  } catch (e: any) {
+    response.status(e.status === 404 ? 404 : 500).send(e.status === 404 ? "Blog tidak ada di dalam basis data!" : "Terjadi kesalahan pada server!").end();
+  }
+});
+
+app.get("/blog/:title", RenderBlog);
 
 app.listen(port, () => console.log(`Server berjalan di http://localhost:${port}`));

@@ -3,9 +3,10 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { NotFoundPage } from "~/pages/404";
 import { Indeks } from "~/pages/index";
 import { Blog } from "~/pages/blog";
-import { DetailKaroselBlog } from "~/components/blog/detail-karosel-blog";
+import { Dashboard } from "~/pages/dashboard";
+import { DetailKaroselBlog } from "~/pages/detail-karosel-blog";
+import { DetailTabelBlog } from "~/pages/detail-tabel-blog";
 import { FAQ } from "~/pages/faq";
-import { HubungiKami } from "~/pages/hubungi-kami";
 import { Kursus } from "~/pages/kursus";
 import { Masuk } from "~/pages/masuk";
 import { Registrasi } from "~/pages/registrasi";
@@ -20,8 +21,9 @@ export const Router: React.FC = () => {
         <Route path="/" Component={Indeks} />
         <Route path="/blog" Component={Blog} />
         <Route path="/blog/:slug" Component={DetailKaroselBlog} />
+        <Route path="/blog/:title" Component={DetailTabelBlog} />
+        <Route path="/dashboard" Component={Dashboard} />
         <Route path="/faq" Component={FAQ} />
-        <Route path="/hubungi-kami" Component={HubungiKami} />
         <Route path="/kursus" Component={Kursus} />
         <Route path="/masuk" Component={Masuk} />
         <Route path="/registrasi" Component={Registrasi} />

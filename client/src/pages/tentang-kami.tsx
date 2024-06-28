@@ -3,7 +3,8 @@ import { WebsiteMeta } from "~/common/website-meta";
 import { ScrollIndicator } from "~/common/scroll-indicator";
 import { ScrollToTop } from "~/common/scroll-to-top";
 import { Header } from "~/common/header";
-import { TentangKamiHero } from "~/components/tentang-kami/hero";
+import { SambutanDariPengembang } from "~/components/tentang-kami/sambutan-dari-pengembang";
+import { MengenalPengembangSube } from "~/components/tentang-kami/mengenal-pengembang-sube";
 import { Footer } from "~/common/footer";
 
 export const TentangKami: React.FC = () => {
@@ -13,7 +14,8 @@ export const TentangKami: React.FC = () => {
       <ScrollIndicator />
       <ScrollToTop />
       <Header />
-      <TentangKamiHero />
+      <SambutanDariPengembang />
+      <MengenalPengembangSube />
       <Footer />
     </>
   );
