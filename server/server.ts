@@ -23,12 +23,17 @@ app.use(csrf({ cookie: true }));
 
 app.post("/registrasi", csrf({ cookie: true }), RegisterAuth);
 app.post("/masuk", csrf({ cookie: true }), LoginAuth);
+app.post("/tentang-kami/kritik-dan-saran", csrf({ cookie: true }));
 
 app.get("/registrasi", (request: Request, response: Response) => {
   response.json({ "XSRF-Token": request.csrfToken() });
 });
 
 app.get("/masuk", (request: Request, response: Response) => {
+  response.json({ "XSRF-Token": request.csrfToken() });
+});
+
+app.get("/tentang-kami/kritik-dan-saran", (request: Request, response: Response) => {
   response.json({ "XSRF-Token": request.csrfToken() });
 });
 

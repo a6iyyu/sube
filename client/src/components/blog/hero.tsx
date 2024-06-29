@@ -29,8 +29,11 @@ export const BlogHero: React.FC = () => {
       <div className="mb-4 inline text-5xl font-bold">
         <span ref={kalimat}></span>
       </div>
-      <h2 className="text-5xl font-bold">
+      <h2 className="hidden text-5xl font-bold xl:inline">
         {Headline("Yuk, bacain artikelnya disini!", HandleMouseEnter, HandleMouseLeave)}
+      </h2>
+      <h2 className="inline text-5xl font-bold xl:hidden">
+        Yuk, bacain artikelnya disini!
       </h2>
       <h5 className="mt-6 text-justify text-base font-medium italic lg:text-lg">
         Di sini, Anda dapat menemukan berbagai artikel menarik yang akan

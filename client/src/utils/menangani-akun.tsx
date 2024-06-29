@@ -1,5 +1,5 @@
-import axios from "axios";
 import React, { Dispatch, FormEvent, SetStateAction } from "react";
+import axios, { isAxiosError } from "axios";
 import { ZodError } from "zod";
 import { RegisterSkema, LoginSkema } from "~/utils/skema";
 
@@ -17,9 +17,9 @@ interface LoginAttributes {
   password: string;
 }
 
-const MenanganiValidasi = (formData: RegisterAttributes | LoginAttributes, formType: TipeFormulir) => {
+const MenanganiValidasi = (FormData: RegisterAttributes | LoginAttributes, FormType: TipeFormulir) => {
   try {
-    formType === "registrasi" ? RegisterSkema.parse(formData as RegisterAttributes) : LoginSkema.parse(formData as LoginAttributes);
+    FormType === "registrasi" ? RegisterSkema.parse(FormData as RegisterAttributes) : LoginSkema.parse(FormData as LoginAttributes);
     return null;
   } catch (e) {
     if (e instanceof ZodError) {
@@ -33,9 +33,9 @@ const MenanganiValidasi = (formData: RegisterAttributes | LoginAttributes, formT
   }
 };
 
-const MenanganiPengiriman = async <T extends RegisterAttributes | LoginAttributes>(e: FormEvent, formData: T, formType: TipeFormulir, setErrorForm: Dispatch<SetStateAction<Partial<T>>>, CSRFToken: string) => {
+const MenanganiPengiriman = async <T extends RegisterAttributes | LoginAttributes>(e: FormEvent, FormData: T, FormType: TipeFormulir, setErrorForm: Dispatch<SetStateAction<Partial<T>>>, CSRFToken: string) => {
   e.preventDefault();
-  const ValidasiGagal = MenanganiValidasi(formData, formType);
+  const ValidasiGagal = MenanganiValidasi(FormData, FormType);
 
   if (ValidasiGagal) {
     setErrorForm(ValidasiGagal);
@@ -43,29 +43,29 @@ const MenanganiPengiriman = async <T extends RegisterAttributes | LoginAttribute
   }
 
   try {
-    const response = await axios.post(formType === "registrasi" ? "http://localhost:2001/registrasi" : "http://localhost:2001/masuk", formData, {
+    const response = await axios.post(FormType === "registrasi" ? "http://localhost:2001/registrasi" : "http://localhost:2001/masuk", FormData, {
       headers: {
         "Content-Type": "application/json",
         "XSRF-Token": CSRFToken,
       },
       withCredentials: true,
     });
-    response.status !== 201 ? console.error(`${response.data.message}`) : (formType === "registrasi" ? window.location.href = "http://localhost:2000/masuk" : window.location.href = "http://localhost:2000/dashboard");
+    response.status !== 201 ? console.error(`${response.data.message}`) : (FormType === "registrasi" ? window.location.href = "http://localhost:2000/masuk" : window.location.href = "http://localhost:2000/dashboard");
   } catch (e) {
-    if (axios.isAxiosError(e) && e.response) console.error(e.response.data);
+    if (isAxiosError(e) && e.response) console.error(e.response.data);
   }
 };
 
-export const FetchCSRFToken = async (setCSRFToken: Dispatch<SetStateAction<string>>, formType: TipeFormulir) => {
+export const FetchCSRFToken = async (setCSRFToken: Dispatch<SetStateAction<string>>, FormType: TipeFormulir) => {
   try {
-    const response = await axios.get(formType === "registrasi" ? "http://localhost:2001/registrasi" : "http://localhost:2001/masuk", {
+    const response = await axios.get(FormType === "registrasi" ? "http://localhost:2001/registrasi" : "http://localhost:2001/masuk", {
       withCredentials: true,
     });
 
     const data = await response.data["XSRF-Token"];
     setCSRFToken(data);
   } catch (e) {
-    console.error("Tidak bisa mendapatkan token CSRF karena " + e);
+    if (isAxiosError(e) && e.response) console.error(`${e.response.data}`);
   }
 };
 

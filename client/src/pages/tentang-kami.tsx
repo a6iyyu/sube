@@ -5,6 +5,9 @@ import { ScrollToTop } from "~/common/scroll-to-top";
 import { Header } from "~/common/header";
 import { SambutanDariPengembang } from "~/components/tentang-kami/sambutan-dari-pengembang";
 import { MengenalPengembangSube } from "~/components/tentang-kami/mengenal-pengembang-sube";
+import { MetodologiPembelajaran } from "~/components/tentang-kami/metodologi-pembelajaran";
+import { Komunitas } from "~/components/tentang-kami/komunitas";
+import { HubungiKami } from "~/components/tentang-kami/hubungi-kami";
 import { Footer } from "~/common/footer";
 
 export const TentangKami: React.FC = () => {
@@ -16,6 +19,9 @@ export const TentangKami: React.FC = () => {
       <Header />
       <SambutanDariPengembang />
       <MengenalPengembangSube />
+      <MetodologiPembelajaran />
+      <Komunitas />
+      <HubungiKami />
       <Footer />
     </>
   );
