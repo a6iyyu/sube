@@ -81,19 +81,15 @@ export const FormulirMasuk: React.FC = () => {
               </label>
             </span>
             <span className="mt-2 flex h-fit w-fit flex-col items-start text-[#a0a0ff] transition-all duration-300 ease-in-out sm:mt-0 lg:items-end">
-              <Link to={`/registrasi`}>
-                <h5 className="hover:text-[#babaff] hover:underline">
-                  Belum punya akun?
-                </h5>
+              <Link to={`/registrasi`} className="hover:text-[#babaff] hover:underline">
+                Belum punya akun?
               </Link>
-              <Link to={`/lupa-kata-sandi`}>
-                <h5 className="mt-0.5 hover:text-[#babaff] hover:underline">
-                  Lupa kata sandi?
-                </h5>
+              <Link to={`/lupa-kata-sandi`} className="mt-0.5 hover:text-[#babaff] hover:underline">
+                Lupa kata sandi?
               </Link>
             </span>
           </div>
-          <button className="mx-auto mt-12 h-fit w-full rounded-lg bg-[#0000ee] py-4 text-base font-semibold transition-all duration-300 ease-in-out hover:bg-[#4d4dff] md:py-5">
+          <button className="mx-auto mt-12 h-fit w-full rounded-lg bg-[#0000ee] py-4 text-base font-semibold transition-all duration-300 ease-in-out md:py-5 lg:hover:bg-[#4d4dff]">
             Masuk
           </button>
         </form>

@@ -5,7 +5,7 @@ import cors from "cors";
 import csrf from "csurf";
 import dotenv from "dotenv";
 import logger from "morgan";
-import { LoginAuth, RegisterAuth } from "./middleware/authentication";
+import { RegisterAuth, LoginAuth, RequireAuth } from "./middleware/authentication";
 import { ImportBlog, RenderBlog } from "./models/blogs";
 
 dotenv.config();
@@ -37,11 +37,11 @@ app.get("/tentang-kami/kritik-dan-saran", (request: Request, response: Response)
   response.json({ "XSRF-Token": request.csrfToken() });
 });
 
-app.get("/dashboard", (request: Request, response: Response) => {
+app.get("/dashboard", RequireAuth, (request: Request, response: Response) => {
   response.json({ "XSRF-Token": request.csrfToken() });
 });
 
-app.get("/blog", async (response: Response) => {
+app.get("/blog", async (_: Request, response: Response) => {
   try {
     const Blogs = await ImportBlog();
     response.status(200).json(Blogs);

@@ -50,7 +50,12 @@ const MenanganiPengiriman = async <T extends RegisterAttributes | LoginAttribute
       },
       withCredentials: true,
     });
-    response.status !== 201 ? console.error(`${response.data.message}`) : (FormType === "registrasi" ? window.location.href = "http://localhost:2000/masuk" : window.location.href = "http://localhost:2000/dashboard");
+
+    if (response.status === 200) {
+      FormType === "registrasi" ? window.location.href = "/masuk" : window.location.href = "/dashboard";
+    } else {
+      console.error(`${response.data.message}`);
+    }
   } catch (e) {
     if (isAxiosError(e) && e.response) console.error(e.response.data);
   }

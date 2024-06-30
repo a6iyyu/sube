@@ -10,7 +10,7 @@ import { Footer } from "~/common/footer";
 export const Dashboard: React.FC = () => {
   return (
     <>
-      <WebsiteMeta title="" description="" />
+      <WebsiteMeta title="Halaman Profil Anda" description="" />
       <ScrollToTop />
       <ScrollIndicator />
       <Header />

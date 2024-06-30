@@ -103,11 +103,24 @@ export const FormulirRegistrasi: React.FC = () => {
             />
             {errorForm.confirm_password && <span className="mt-3 cursor-default text-base italic text-red-500">{errorForm.confirm_password}</span>}
           </div>
-          <div ref={centang} className="mt-5 h-fit w-fit">
+          {/* <div ref={centang} className="mt-5 h-fit w-fit">
             <input type="checkbox" name="centang" id="centang" className="cursor-pointer" />
             <label htmlFor="centang" className="ml-3 cursor-pointer">Tampilkan Kata Sandi</label>
+          </div> */}
+          <div className="mt-5 flex flex-col justify-between sm:flex-row">
+            <span ref={centang} className="h-fit w-fit">
+              <input type="checkbox" name="centang" id="centang" className="cursor-pointer" />
+              <label htmlFor="centang" className="ml-3 cursor-pointer">
+                Tampilkan Kata Sandi
+              </label>
+            </span>
+            <span className="mt-2 flex h-fit w-fit items-start text-[#a0a0ff] transition-all duration-300 ease-in-out sm:mt-0 lg:items-end">
+              <Link to={`/masuk`} className="hover:text-[#babaff] hover:underline">
+                Sudah punya akun?
+              </Link>
+            </span>
           </div>
-          <button className="mx-auto mt-12 h-fit w-full rounded-lg bg-[#0000ee] py-4 text-base font-semibold transition-all duration-300 ease-in-out hover:bg-[#4d4dff] md:py-5">
+          <button className="mx-auto mt-12 h-fit w-full rounded-lg bg-[#0000ee] py-4 text-base font-semibold transition-all duration-300 ease-in-out md:py-5 lg:hover:bg-[#4d4dff]">
             Registrasi
           </button>
         </form>
