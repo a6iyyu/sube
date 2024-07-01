@@ -37,10 +37,7 @@ const MenanganiPengiriman = async <T extends RegisterAttributes | LoginAttribute
   e.preventDefault();
   const ValidasiGagal = MenanganiValidasi(FormData, FormType);
 
-  if (ValidasiGagal) {
-    setErrorForm(ValidasiGagal);
-    return;
-  }
+  if (ValidasiGagal) return setErrorForm(ValidasiGagal);
 
   try {
     const response = await axios.post(FormType === "registrasi" ? "http://localhost:2001/registrasi" : "http://localhost:2001/masuk", FormData, {
@@ -50,12 +47,8 @@ const MenanganiPengiriman = async <T extends RegisterAttributes | LoginAttribute
       },
       withCredentials: true,
     });
-
-    if (response.status === 200) {
-      FormType === "registrasi" ? window.location.href = "/masuk" : window.location.href = "/dashboard";
-    } else {
-      console.error(`${response.data.message}`);
-    }
+    
+    FormType === "registrasi" ? (response.status === 201 ? window.location.href = "http://localhost:2000/masuk" : console.error(`${response.data.message}`)) : (response.status === 200 ? window.location.href = "http://localhost:2000/dashboard" : console.error(`${response.data.message}`));
   } catch (e) {
     if (isAxiosError(e) && e.response) console.error(e.response.data);
   }
@@ -67,8 +60,7 @@ export const FetchCSRFToken = async (setCSRFToken: Dispatch<SetStateAction<strin
       withCredentials: true,
     });
 
-    const data = await response.data["XSRF-Token"];
-    setCSRFToken(data);
+    setCSRFToken(await response.data["XSRF-Token"]);
   } catch (e) {
     if (isAxiosError(e) && e.response) console.error(`${e.response.data}`);
   }

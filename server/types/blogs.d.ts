@@ -3,6 +3,6 @@ export interface blogs {
   image: string;
   title: string;
   description: string;
-  created_at: Date;
   content: string;
+  created_at: Date;
 }

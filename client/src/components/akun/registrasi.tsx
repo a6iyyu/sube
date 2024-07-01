@@ -103,10 +103,6 @@ export const FormulirRegistrasi: React.FC = () => {
             />
             {errorForm.confirm_password && <span className="mt-3 cursor-default text-base italic text-red-500">{errorForm.confirm_password}</span>}
           </div>
-          {/* <div ref={centang} className="mt-5 h-fit w-fit">
-            <input type="checkbox" name="centang" id="centang" className="cursor-pointer" />
-            <label htmlFor="centang" className="ml-3 cursor-pointer">Tampilkan Kata Sandi</label>
-          </div> */}
           <div className="mt-5 flex flex-col justify-between sm:flex-row">
             <span ref={centang} className="h-fit w-fit">
               <input type="checkbox" name="centang" id="centang" className="cursor-pointer" />
