@@ -7,6 +7,7 @@ import { Dashboard } from "~/pages/dashboard";
 import { DetailKaroselBlog } from "~/pages/detail-karosel-blog";
 import { DetailTabelBlog } from "~/pages/detail-tabel-blog";
 import { FAQ } from "~/pages/faq";
+import { KritikDanSaran } from "~/pages/kritik-dan-saran";
 import { Kursus } from "~/pages/kursus";
 import { Masuk } from "~/pages/masuk";
 import { Registrasi } from "~/pages/registrasi";
@@ -24,6 +25,7 @@ export const Router: React.FC = () => {
         <Route path="/blog/:title" Component={DetailTabelBlog} />
         <Route path="/dashboard" Component={Dashboard} />
         <Route path="/faq" Component={FAQ} />
+        <Route path="/kritik-dan-saran" Component={KritikDanSaran} />
         <Route path="/kursus" Component={Kursus} />
         <Route path="/masuk" Component={Masuk} />
         <Route path="/registrasi" Component={Registrasi} />

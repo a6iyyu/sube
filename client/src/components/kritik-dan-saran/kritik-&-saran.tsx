@@ -1,6 +1,6 @@
 import React from "react";
 
-export const KritikSaran: React.FC = () => {
+export const FormulirKritikDanSaran: React.FC = () => {
   return (
     <main>
       <section></section>
