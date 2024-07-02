@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { FetchCSRFToken, HandleChangeForm, HandleSubmitForm } from "~/utils/menangani-kritik-&-saran";
+import { PengirimanBerhasil } from "./pengiriman-berhasil";
 
 const MainForm = styled.main`
   input:-webkit-autofill,
@@ -16,6 +17,7 @@ export const FormulirKritikDanSaran: React.FC = () => {
   const [countCharacter, setCountCharacter] = useState<number>(0);
   const [CSRFToken, setCSRFToken] = useState<string>("");
   const [errorForm, setErrorForm] = useState<Partial<typeof feedbackData>>({});
+  const [successForm, setSuccessForm] = useState<boolean>(false);
   const [feedbackData, setFeedbackData] = useState({
     email: "",
     subject: "",
@@ -34,10 +36,11 @@ export const FormulirKritikDanSaran: React.FC = () => {
   }, [feedbackData.description]);
 
   const HandleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => HandleChangeForm(e, setFeedbackData, feedbackData);
-  const HandleSubmit = (e: React.FormEvent) => HandleSubmitForm(e, feedbackData, setErrorForm, CSRFToken);
+  const HandleSubmit = (e: React.FormEvent) => HandleSubmitForm(e, feedbackData, setErrorForm, CSRFToken, setSuccessForm, () => setFeedbackData({ email: "", subject: "", description: "" }));
 
   return (
     <MainForm className="mx-auto mb-60 mt-24 h-fit w-4/5 text-slate-50 lg:mt-32">
+      {successForm && <PengirimanBerhasil />}
       <form onSubmit={HandleSubmit} className="flex flex-col">
         <section className="grid grid-cols-1 gap-x-10 lg:grid-cols-2">
           <div className="flex flex-col">

@@ -17,6 +17,7 @@ export const CreateUser = async ({ id_user, username, email, password, created_a
       updated_at,
     },
   });
+  if (!User) throw ("Proses registrasi Anda mengalami kesalahan pada server!");
   return User;
 };
 

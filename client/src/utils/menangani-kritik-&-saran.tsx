@@ -24,7 +24,7 @@ const MenanganiValidasi = (FormData: KritikSaranAttributes) => {
   }
 };
 
-const MenanganiPengiriman = async <T extends KritikSaranAttributes>(e: FormEvent, FormData: T, setErrorForm: Dispatch<SetStateAction<Partial<T>>>, XSRFToken: string) => {
+const MenanganiPengiriman = async <T extends KritikSaranAttributes>(e: FormEvent, FormData: T, setErrorForm: Dispatch<SetStateAction<Partial<T>>>, XSRFToken: string, setSuccessForm: Dispatch<SetStateAction<boolean>>, ResetForm: () => void) => {
   e.preventDefault();
 
   const ValidasiGagal = MenanganiValidasi(FormData);
@@ -38,7 +38,7 @@ const MenanganiPengiriman = async <T extends KritikSaranAttributes>(e: FormEvent
       },
       withCredentials: true,
     });
-    if (response.status !== 201) console.error(`${response.data.message}`);
+    response.status !== 201 ? console.error(`${response.data.message}`) : (setSuccessForm(true), ResetForm());
   } catch (e) {
     if (isAxiosError(e) && e.response) console.error(e.response.data);
   }
@@ -61,6 +61,6 @@ export const HandleChangeForm = <T extends KritikSaranAttributes>(e: React.Chang
   setFormData({ ...FormData, [name]: value });
 };
 
-export const HandleSubmitForm = (e: FormEvent, FormData: KritikSaranAttributes, setErrorForm: Dispatch<SetStateAction<Partial<KritikSaranAttributes>>>, XSRFToken: string) => {
-  MenanganiPengiriman(e, FormData, setErrorForm, XSRFToken);
+export const HandleSubmitForm = (e: FormEvent, FormData: KritikSaranAttributes, setErrorForm: Dispatch<SetStateAction<Partial<KritikSaranAttributes>>>, XSRFToken: string, setSuccessForm: Dispatch<SetStateAction<boolean>>, ResetForm: () => void) => {
+  MenanganiPengiriman(e, FormData, setErrorForm, XSRFToken, setSuccessForm, ResetForm);
 };
