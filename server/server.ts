@@ -7,7 +7,7 @@ import dotenv from "dotenv";
 import logger from "morgan";
 import { RegisterAuth, LoginAuth, RequireAuth } from "./middleware/authentication";
 import { ImportBlog, RenderBlog } from "./models/blogs";
-import { SendFeedback } from "./middleware/send-feedback";
+import { CreateFeedback } from "./models/feedback";
 
 dotenv.config();
 
@@ -24,7 +24,7 @@ app.use(csrf({ cookie: true }));
 
 app.post("/registrasi", csrf({ cookie: true }), RegisterAuth);
 app.post("/masuk", csrf({ cookie: true }), LoginAuth);
-app.post("/tentang-kami/kritik-dan-saran", csrf({ cookie: true }), SendFeedback);
+app.post("/tentang-kami/kritik-dan-saran", csrf({ cookie: true }), CreateFeedback);
 
 app.get("/registrasi", (request: Request, response: Response) => {
   response.json({ "XSRF-Token": request.csrfToken() });

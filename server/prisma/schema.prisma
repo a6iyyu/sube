@@ -17,11 +17,12 @@ model blogs {
 }
 
 model feedback {
-  id_feedback String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
-  email       String   @unique @default("255") @db.VarChar
-  subject     String   @unique @default("255") @db.VarChar
-  description String
-  created_at  DateTime @default(dbgenerated("(now() AT TIME ZONE 'utc'::text)")) @db.Timestamptz(6)
+  id_feedback      String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  email            String   @default("255") @db.VarChar
+  subject          String   @unique @default("255") @db.VarChar
+  description      String
+  created_at       DateTime @default(dbgenerated("(now() AT TIME ZONE 'utc'::text)")) @db.Timestamptz(6)
+  submission_count Int      @default(1) @db.SmallInt
 }
 
 model users {

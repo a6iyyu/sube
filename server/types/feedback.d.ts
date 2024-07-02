@@ -4,4 +4,5 @@ export interface feedback {
   subject: string;
   description: string;
   created_at: Date;
+  submission_count: number;
 }

@@ -17,10 +17,7 @@ export const ImportBlog = async () => {
 export const RenderBlog = async (request: Request, response: Response) => {
   const { title } = request.params;
   try {
-    const Blogs = await Prisma.blogs.findFirst({
-      where: { title },
-    });
-
+    const Blogs = await Prisma.blogs.findFirst({ where: { title } });
     !Blogs ? response.status(404).send("Blog tidak ditemukan di dalam basis data!").end() : response.status(200).json(Blogs);
   } catch (e) {
     console.error(e);
