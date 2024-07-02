@@ -4,15 +4,6 @@ import { Router } from "./router/router";
 import { createGlobalStyle } from "styled-components";
 
 const GlobalStyles = createGlobalStyle`
-  * {
-    box-sizing: border-box;
-    font-family: "Plus Jakarta Sans", Times, sans-serif, serif;
-    margin: 0;
-    padding: 0;
-  }
-  ::-webkit-scrollbar {
-    display: none !important;
-  }
   @media screen and (max-width: 8192px) {
     * {
       opacity: 0;
@@ -20,7 +11,14 @@ const GlobalStyles = createGlobalStyle`
   }
   @media screen and (max-width: 3120px) {
     * {
+      box-sizing: border-box;
+      font-family: "Plus Jakarta Sans", Times, sans-serif, serif;
+      margin: 0;
+      padding: 0;
       opacity: 1;
+    }
+    ::-webkit-scrollbar {
+      display: none !important;
     }
   }
   @media screen and (max-width: 324px) {

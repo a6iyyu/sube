@@ -1,16 +1,13 @@
 import { Dispatch, FormEvent, SetStateAction } from "react";
-import { useNavigate } from "react-router-dom";
 import axios, { isAxiosError } from "axios";
 import { ZodError } from "zod";
 import { KritikSaranSkema } from "./skema";
 
 interface KritikSaranAttributes {
-  username: string;
   email: string;
-  kritik_dan_saran: string;
+  subject: string;
+  description: string;
 }
-
-const navigate = useNavigate();
 
 const MenanganiValidasi = (FormData: KritikSaranAttributes) => {
   try {
@@ -20,7 +17,7 @@ const MenanganiValidasi = (FormData: KritikSaranAttributes) => {
     if (e instanceof ZodError) {
       const FieldError: any = {};
       e.errors.forEach((err) => {
-        if (err.path.length) FieldError[err.path[0]] === err.message;
+        if (err.path.length) FieldError[err.path[0]] = err.message;
       });
       return FieldError;
     }
@@ -29,12 +26,9 @@ const MenanganiValidasi = (FormData: KritikSaranAttributes) => {
 
 const MenanganiPengiriman = async <T extends KritikSaranAttributes>(e: FormEvent, FormData: T, setErrorForm: Dispatch<SetStateAction<Partial<T>>>, XSRFToken: string) => {
   e.preventDefault();
-  const ValidasiGagal = MenanganiValidasi(FormData);
 
-  if (ValidasiGagal) {
-    setErrorForm(ValidasiGagal);
-    return;
-  }
+  const ValidasiGagal = MenanganiValidasi(FormData);
+  if (ValidasiGagal) return setErrorForm(ValidasiGagal);
 
   try {
     const response = await axios.post("http://localhost:2001/tentang-kami/kritik-dan-saran", FormData, {
@@ -44,7 +38,7 @@ const MenanganiPengiriman = async <T extends KritikSaranAttributes>(e: FormEvent
       },
       withCredentials: true,
     });
-    response.status !== 201 ? console.error(`${response.data.message}`) : navigate("http://localhost:/2000/tentang-kami/berhasil");
+    if (response.status !== 201) console.error(`${response.data.message}`);
   } catch (e) {
     if (isAxiosError(e) && e.response) console.error(e.response.data);
   }
@@ -56,18 +50,17 @@ export const FetchCSRFToken = async (setCSRFToken: Dispatch<SetStateAction<strin
       withCredentials: true,
     });
     
-    const data = await response.data["XSRF-Token"];
-    setCSRFToken(data);
+    setCSRFToken(await response.data["XSRF-Token"]);
   } catch (e) {
     if (isAxiosError(e) && e.response) console.error(e.response.data);
   }
 };
 
-export const HandleChangeForm = <T extends KritikSaranAttributes>(e: React.ChangeEvent<HTMLInputElement>, setFormData: Dispatch<SetStateAction<T>>, FormData: T) => {
+export const HandleChangeForm = <T extends KritikSaranAttributes>(e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>, setFormData: Dispatch<SetStateAction<T>>, FormData: T) => {
   const { name, value } = e.target;
   setFormData({ ...FormData, [name]: value });
 };
 
-export const HandleSubmit = (e: FormEvent, FormData: KritikSaranAttributes, setErrorForm: Dispatch<SetStateAction<Partial<KritikSaranAttributes>>>, XSRFToken: string) => {
+export const HandleSubmitForm = (e: FormEvent, FormData: KritikSaranAttributes, setErrorForm: Dispatch<SetStateAction<Partial<KritikSaranAttributes>>>, XSRFToken: string) => {
   MenanganiPengiriman(e, FormData, setErrorForm, XSRFToken);
 };

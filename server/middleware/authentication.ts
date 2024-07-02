@@ -39,7 +39,7 @@ export const RequireAuth = async (request: Request, response: Response, next: Ne
     if (!id_user || !FindUser) return response.status(401).json({ error: "Anda tidak bisa masuk ke halaman profil karena belum memiliki akun atau tidak melakukan autentikasi!" });
     next();
   } catch (error) {
-    response.status(500).json({ error: "Terjadi kesalahan pada server!" });
+    return response.status(500).json({ error: "Terjadi kesalahan pada server!" });
   }
 };
 

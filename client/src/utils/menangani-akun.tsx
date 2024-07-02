@@ -35,8 +35,8 @@ const MenanganiValidasi = (FormData: RegisterAttributes | LoginAttributes, FormT
 
 const MenanganiPengiriman = async <T extends RegisterAttributes | LoginAttributes>(e: FormEvent, FormData: T, FormType: TipeFormulir, setErrorForm: Dispatch<SetStateAction<Partial<T>>>, CSRFToken: string) => {
   e.preventDefault();
-  const ValidasiGagal = MenanganiValidasi(FormData, FormType);
 
+  const ValidasiGagal = MenanganiValidasi(FormData, FormType);
   if (ValidasiGagal) return setErrorForm(ValidasiGagal);
 
   try {
@@ -66,9 +66,9 @@ export const FetchCSRFToken = async (setCSRFToken: Dispatch<SetStateAction<strin
   }
 };
 
-export const HandleChangeForm = <T extends RegisterAttributes | LoginAttributes>(e: React.ChangeEvent<HTMLInputElement>, setData: Dispatch<SetStateAction<T>>, data: T) => {
+export const HandleChangeForm = <T extends RegisterAttributes | LoginAttributes>(e: React.ChangeEvent<HTMLInputElement>, setFormData: Dispatch<SetStateAction<T>>, formData: T) => {
   const { name, value } = e.target;
-  setData({ ...data, [name]: value });
+  setFormData({ ...formData, [name]: value });
 };
 
 export const HandleRegisterSubmit = (e: FormEvent, registerData: RegisterAttributes, setErrorForm: Dispatch<SetStateAction<Partial<RegisterAttributes>>>, CSRFToken: string) => {
