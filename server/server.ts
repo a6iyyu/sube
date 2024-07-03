@@ -5,7 +5,8 @@ import cors from "cors";
 import csrf from "csurf";
 import dotenv from "dotenv";
 import logger from "morgan";
-import { RegisterAuth, LoginAuth, Logout, RequireAuth, LoginWithGoogle } from "./models/users";
+import rateLimit from "express-rate-limit";
+import { RegisterAuth, LoginAuth, LogoutAuth, RequireAuth, LoginWithGoogle } from "./models/users";
 import { ImportBlog, RenderBlog } from "./models/blogs";
 import { CreateFeedback } from "./models/feedback";
 
@@ -19,14 +20,19 @@ app.use(cookieParser());
 app.use(cors({ credentials: true, origin: "http://localhost:2000" }));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
-app.use(logger("dev"));
+app.use(logger("combined"));
 app.use(csrf({ cookie: true }));
 
 app.post("/auth/registrasi", csrf({ cookie: true }), RegisterAuth);
 app.post("/auth/masuk", csrf({ cookie: true }), LoginAuth);
-app.post("/auth/keluar", csrf({ cookie: true }), Logout);
+app.post("/auth/keluar", csrf({ cookie: true }), LogoutAuth);
 app.post("/auth/google", csrf({ cookie: true }), LoginWithGoogle);
-app.post("/tentang-kami/kritik-dan-saran", csrf({ cookie: true }), CreateFeedback);
+app.post("/tentang-kami/kritik-dan-saran", csrf({ cookie: true }), CreateFeedback, rateLimit({
+  keyGenerator: (request: Request) => request.body.email,
+  max: 3,
+  message: "Terlalu banyak permintaan dari IP, silakan coba lagi nanti.",
+  windowMs: 60 * 60 * 1000,
+}));
 
 app.get("/auth/registrasi", (request: Request, response: Response) => {
   response.json({ "XSRF-Token": request.csrfToken() });
@@ -44,15 +50,7 @@ app.get("/dashboard", RequireAuth, (request: Request, response: Response) => {
   response.json({ "XSRF-Token": request.csrfToken() });
 });
 
-app.get("/blog", async (_: Request, response: Response) => {
-  try {
-    const Blogs = await ImportBlog();
-    response.status(200).json(Blogs);
-  } catch (e: any) {
-    response.status(e.status === 404 ? 404 : 500).send(e.status === 404 ? "Blog tidak ada di dalam basis data!" : "Terjadi kesalahan pada server!").end();
-  }
-});
-
+app.get("/blog", ImportBlog);
 app.get("/blog/:title", RenderBlog);
 
 app.listen(port, () => console.log(`Server berjalan di http://localhost:${port}`));

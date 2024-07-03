@@ -3,24 +3,28 @@ import { PrismaClient } from "@prisma/client";
 
 const Prisma = new PrismaClient();
 
-export const ImportBlog = async () => {
+// Mengatur RESTful API agar halaman situs web bisa mengimpor
+// data-data yang ada di dalam basis data.
+export const ImportBlog = async (_: Request, response: Response) => {
   try {
     const Blogs = await Prisma.blogs.findMany();
-    if (Blogs.length === 0) throw { status: 404 };
-    return Blogs;
+    if (!Blogs || Blogs.length === 0) return response.status(404).send("Blog tidak ditemukan di dalam basis data!");
+    response.status(200).json({ Blogs });
   } catch (e) {
     console.error(e);
-    throw e;
+    response.status(500).json({ error: "Terjadi kesalahan pada server!" });
   }
 };
 
+// Merender blog setelah berhasil mengimpor blog dari basis data.
 export const RenderBlog = async (request: Request, response: Response) => {
   const { title } = request.params;
   try {
-    const Blogs = await Prisma.blogs.findFirst({ where: { title } });
-    !Blogs ? response.status(404).send("Blog tidak ditemukan di dalam basis data!").end() : response.status(200).json(Blogs);
+    const Blogs = await Prisma.blogs.findUnique({ where: { title } });
+    if (!Blogs) return response.status(404).send("Blog tidak ditemukan di dalam basis data!");
+    response.status(200).json({ Blogs });
   } catch (e) {
     console.error(e);
-    response.status(500).send("Terjadi kesalahan pada server dalam memuat blog!").end();
+    response.status(500).send("Terjadi kesalahan pada server dalam memuat blog!");
   }
 };

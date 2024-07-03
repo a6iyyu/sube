@@ -7,6 +7,7 @@ import jwt from "jsonwebtoken";
 
 const Prisma = new PrismaClient();
 
+// Mengatur RESTful API ketika pengguna ingin membuat akun.
 export const RegisterAuth = async (request: Request, response: Response, next: NextFunction) => {
   try {
     RegisterValidation.parse(request.body);
@@ -22,14 +23,17 @@ export const RegisterAuth = async (request: Request, response: Response, next: N
       },
     });
 
-    if (!User) return response.status(400).json({ error: "Proses registrasi Anda mengalami kesalahan, harap coba lagi!" });
+    if (!User) return response.status(400).send("Proses registrasi Anda mengalami kesalahan, harap coba lagi!");
     response.status(201).json({ User });
     next();
-  } catch {
-    response.status(500).json({ error: "Terjadi kesalahan pada server saat membuat akun Anda!" });
+  } catch (e) {
+    console.error(e);
+    response.status(500).send("Terjadi kesalahan pada server saat membuat akun Anda!");
   }
 };
 
+// Mengatur RESTful API pada pengguna setelah berhasil membuat akun
+// dan melakukan proses masuk ke dalam situs web.
 export const LoginAuth = async (request: Request, response: Response) => {
   try {
     LoginValidation.parse(request.body);
@@ -42,46 +46,61 @@ export const LoginAuth = async (request: Request, response: Response) => {
         ],
       },
     });
-    if (!User) return response.status(404).json({ error: "Pengguna tidak ditemukan!" });
+    if (!User) return response.status(404).send("Pengguna tidak ditemukan!");
 
     const CheckPasswordValidation = await bcrypt.compare(password, User.password);
-    if (!CheckPasswordValidation) return response.status(403).json({ error: "Akun Anda tidak valid!" });
+    if (!CheckPasswordValidation) return response.status(403).send("Akun Anda tidak valid!");
 
     const Token = jwt.sign({ id_user: User.id_user }, process.env.JWT_SECRET || "", { expiresIn: "4h" });
     response.cookie("id_user", Token, { httpOnly: true });
     response.status(200).json({ Token });
-  } catch {
-    response.status(500).json({ error: "Terjadi kesalahan pada server saat proses masuk ke Sube!" });
+  } catch (e) {
+    console.error(e);
+    response.status(500).send("Terjadi kesalahan pada server saat proses masuk ke Sube!");
   }
 };
 
+// Jika pengguna tidak melakukan proses masuk atau belum membuat akun,
+// tetapi masuk ke halaman profil secara paksa, maka halaman profil
+// akan otomatis mengarahkan ke halaman masuk.
 export const RequireAuth = async (request: Request, response: Response, next: NextFunction) => {
   try {
     const Token = request.cookies["id_user"];
-    if (!Token) return response.status(401).json({ error: "Autentikasi diperlukan untuk mengakses halaman dashboard!" });
+    if (!Token) return response.status(401).send("Autentikasi diperlukan untuk mengakses halaman profil!");
 
     const Decoded = jwt.verify(Token, process.env.JWT_SECRET || "");
-    if (!Decoded) return response.status(403).json({ error: "Token Anda tidak valid!" });
+    if (!Decoded) return response.status(403).send("Token Anda tidak valid!");
 
     const id_user = (Decoded as { id_user: string }).id_user;
     const FindUser = await Prisma.users.findUnique({ where: { id_user } });
-    if (!FindUser) return response.status(404).json({ error: "Pengguna tidak ditemukan!" });
+    if (!FindUser) return response.status(404).send("Pengguna tidak ditemukan!");
     next();
-  } catch {
-    response.status(500).json({ error: "Terjadi kesalahan pada server!" });
+  } catch (e) {
+    console.error(e);
+    response.status(500).send("Terjadi kesalahan pada server!");
   }
 };
 
-export const Logout = async (request: Request, response: Response, next: NextFunction) => {
+// Mengatur RESTful API agar pengguna keluar dari akun.
+export const LogoutAuth = async (request: Request, response: Response) => {
   try {
-  } catch {
-    response.status(500).json({ error: "Terjadi kesalahan pada server!" });
+    const { id_user } = request.cookies["id_user"];
+    if (!id_user) return response.status(404).send("ID akun Anda tidak ditemukan di dalam cookies!");
+    
+    await Prisma.users.delete({ where: { id_user } });
+    response.status(200).send("Anda berhasil keluar, jangan lupa datang lagi!");
+  } catch (e) {
+    console.error(e);
+    response.status(500).send("Terjadi kesalahan pada server!");
   }
 };
 
+// Mengatur RESTful API agar pengguna bisa masuk ke situs web
+// menggunakan Google.
 export const LoginWithGoogle = async (_: Request, response: Response) => {
   try {
-  } catch {
-    response.status(500).json({ error: "Terjadi kesalahan pada server!" });
+  } catch (e) {
+    console.error(e);
+    response.status(500).send("Terjadi kesalahan pada server!");
   }
 };
