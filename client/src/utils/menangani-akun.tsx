@@ -40,7 +40,7 @@ const MenanganiPengiriman = async <T extends RegisterAttributes | LoginAttribute
   if (ValidasiGagal) return setErrorForm(ValidasiGagal);
 
   try {
-    const response = await axios.post(FormType === "registrasi" ? "http://localhost:2001/registrasi" : "http://localhost:2001/masuk", FormData, {
+    const response = await axios.post(FormType === "registrasi" ? "http://localhost:2001/auth/registrasi" : "http://localhost:2001/auth/masuk", FormData, {
       headers: {
         "Content-Type": "application/json",
         "XSRF-Token": CSRFToken,
@@ -56,7 +56,7 @@ const MenanganiPengiriman = async <T extends RegisterAttributes | LoginAttribute
 
 export const FetchCSRFToken = async (setCSRFToken: Dispatch<SetStateAction<string>>, FormType: TipeFormulir) => {
   try {
-    const response = await axios.get(FormType === "registrasi" ? "http://localhost:2001/registrasi" : "http://localhost:2001/masuk", {
+    const response = await axios.get(FormType === "registrasi" ? "http://localhost:2001/auth/registrasi" : "http://localhost:2001/auth/masuk", {
       withCredentials: true,
     });
 

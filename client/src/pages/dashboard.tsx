@@ -20,8 +20,8 @@ export const Dashboard: React.FC = () => {
         });
         if (response.status !== 200) navigate("/masuk");
       } catch (e) {
-        console.error(e);
         navigate("/masuk");
+        throw e;
       }
     };
 

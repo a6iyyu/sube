@@ -1,4 +1,4 @@
-import path from "path";
+const path = require("path");
 
 module.exports = {
   entry: "./server.ts",
@@ -6,22 +6,19 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\.txt/i,
-        use: [
-          {
-            loader: "raw-loader",
-            options: {
-              esModule: false,
-            },
-          },
-        ],
+        test: /\.ts$/,
+        use: "ts-loader",
+        exclude: /node_modules/,
       },
     ],
+  },
+  resolve: {
+    extensions: [".ts", ".js"],
   },
   output: {
     path: path.join(__dirname, "dist"),
     publicPath: "/",
-    filename: "server.bundle.js",
+    filename: "server.js",
   },
   target: "node",
 };

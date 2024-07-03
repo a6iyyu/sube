@@ -5,7 +5,7 @@ import cors from "cors";
 import csrf from "csurf";
 import dotenv from "dotenv";
 import logger from "morgan";
-import { RegisterAuth, LoginAuth, RequireAuth } from "./middleware/authentication";
+import { RegisterAuth, LoginAuth, Logout, RequireAuth, LoginWithGoogle } from "./models/users";
 import { ImportBlog, RenderBlog } from "./models/blogs";
 import { CreateFeedback } from "./models/feedback";
 
@@ -22,15 +22,17 @@ app.use(express.json());
 app.use(logger("dev"));
 app.use(csrf({ cookie: true }));
 
-app.post("/registrasi", csrf({ cookie: true }), RegisterAuth);
-app.post("/masuk", csrf({ cookie: true }), LoginAuth);
+app.post("/auth/registrasi", csrf({ cookie: true }), RegisterAuth);
+app.post("/auth/masuk", csrf({ cookie: true }), LoginAuth);
+app.post("/auth/keluar", csrf({ cookie: true }), Logout);
+app.post("/auth/google", csrf({ cookie: true }), LoginWithGoogle);
 app.post("/tentang-kami/kritik-dan-saran", csrf({ cookie: true }), CreateFeedback);
 
-app.get("/registrasi", (request: Request, response: Response) => {
+app.get("/auth/registrasi", (request: Request, response: Response) => {
   response.json({ "XSRF-Token": request.csrfToken() });
 });
 
-app.get("/masuk", (request: Request, response: Response) => {
+app.get("/auth/masuk", (request: Request, response: Response) => {
   response.json({ "XSRF-Token": request.csrfToken() });
 });
 
