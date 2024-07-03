@@ -8,11 +8,7 @@
     // "disableSolutionSearching": true,
     // "disableReferencedProjectLoad": true,
     "target": "ES6",
-<<<<<<< HEAD
-    "lib": ["ES6"],
-=======
     "lib": ["ES2020"],
->>>>>>> 18f1cf5 (:boom: Re-push because the git is corrupted.)
     // "jsx": "preserve",
     // "experimentalDecorators": true,
     // "emitDecoratorMetadata": true,
@@ -23,11 +19,7 @@
     // "noLib": true,
     // "useDefineForClassFields": true,
     // "moduleDetection": "auto",
-<<<<<<< HEAD
-    "module": "CommonJS",
-=======
     // "module": "ES6",
->>>>>>> 18f1cf5 (:boom: Re-push because the git is corrupted.)
     "rootDir": "./",
     "moduleResolution": "Node",
     // "baseUrl": "./",
@@ -46,21 +38,13 @@
     // "resolveJsonModule": true,
     // "allowArbitraryExtensions": true,
     // "noResolve": true,
-<<<<<<< HEAD
-    // "allowJs": true,
-=======
     "allowJs": true,
->>>>>>> 18f1cf5 (:boom: Re-push because the git is corrupted.)
     // "checkJs": true,
     // "maxNodeModuleJsDepth": 1,
     // "declaration": true,
     // "declarationMap": true,
     // "emitDeclarationOnly": true,
-<<<<<<< HEAD
-    // "sourceMap": true,
-=======
     "sourceMap": true,
->>>>>>> 18f1cf5 (:boom: Re-push because the git is corrupted.)
     // "inlineSourceMap": true,
     // "outFile": "./",
     "outDir": "./dist",
@@ -76,11 +60,7 @@
     // "newLine": "crlf",
     // "stripInternal": true,
     // "noEmitHelpers": true,
-<<<<<<< HEAD
-    "noEmitOnError": true,
-=======
     "noEmitOnError": false,
->>>>>>> 18f1cf5 (:boom: Re-push because the git is corrupted.)
     // "preserveConstEnums": true,
     // "declarationDir": "./",
     // "preserveValueImports": true,
@@ -91,11 +71,7 @@
     // "preserveSymlinks": true,
     "forceConsistentCasingInFileNames": true,
     "strict": true,
-<<<<<<< HEAD
-    // "noImplicitAny": true,
-=======
     "noImplicitAny": true,
->>>>>>> 18f1cf5 (:boom: Re-push because the git is corrupted.)
     // "strictNullChecks": true,
     // "strictFunctionTypes": true,
     // "strictBindCallApply": true,
@@ -116,10 +92,6 @@
     // "skipDefaultLibCheck": true,
     "skipLibCheck": true
   },
-<<<<<<< HEAD
-  "include": ["**/*.ts", "webpack.dev.cts", "webpack.prod.cts"],
-=======
   "include": ["./**/*.ts"],
->>>>>>> 18f1cf5 (:boom: Re-push because the git is corrupted.)
   "exclude": ["node_modules"]
 }

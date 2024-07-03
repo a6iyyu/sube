@@ -2,13 +2,8 @@
   "name": "sube-server",
   "version": "1.0.0",
   "scripts": {
-<<<<<<< HEAD
-    "build": "webpack --config webpack.prod.cts --mode production",
-    "dev": "webpack --config webpack.dev.cts --mode development",
-=======
     "build": "webpack --config webpack.prod.ts --mode production",
     "dev": "webpack --config webpack.dev.ts --mode development",
->>>>>>> 18f1cf5 (:boom: Re-push because the git is corrupted.)
     "eslint": "eslint ./ && eslint ./ --fix",
     "prod": "node dist/server.js",
     "start": "nodemon server.ts",
@@ -20,11 +15,7 @@
   "description": "",
   "dependencies": {
     "@prisma/client": "^5.16.1",
-<<<<<<< HEAD
-    "bcrypt": "^5.1.1",
-=======
     "bcryptjs": "^2.4.3",
->>>>>>> 18f1cf5 (:boom: Re-push because the git is corrupted.)
     "body-parser": "^1.20.2",
     "cookie-parser": "^1.4.6",
     "cors": "^2.8.5",
@@ -43,11 +34,7 @@
     "@eslint/js": "^9.6.0",
     "@mapbox/node-pre-gyp": "^1.0.11",
     "@supabase/supabase-js": "^2.43.5",
-<<<<<<< HEAD
-    "@types/bcrypt": "^5.0.2",
-=======
     "@types/bcryptjs": "^2.4.6",
->>>>>>> 18f1cf5 (:boom: Re-push because the git is corrupted.)
     "@types/cookie-parser": "^1.4.7",
     "@types/cors": "^2.8.17",
     "@types/csurf": "^1.11.5",
@@ -66,19 +53,10 @@
     "nock": "^13.5.4",
     "node-gyp": "^10.1.0",
     "prisma": "^5.16.1",
-<<<<<<< HEAD
-    "raw-loader": "^4.0.2",
-=======
->>>>>>> 18f1cf5 (:boom: Re-push because the git is corrupted.)
     "ts-loader": "^9.5.1",
     "ts-node": "^10.9.2",
     "typescript-eslint": "^7.15.0",
     "webpack": "^5.92.1",
-<<<<<<< HEAD
-    "webpack-cli": "^5.1.4",
-    "webpack-dev-server": "^5.0.4"
-=======
     "webpack-cli": "^5.1.4"
->>>>>>> 18f1cf5 (:boom: Re-push because the git is corrupted.)
   }
 }
