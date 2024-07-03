@@ -1,9 +1,16 @@
 import { Request, Response, NextFunction } from "express";
 import { PrismaClient } from "@prisma/client";
+<<<<<<< HEAD
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import { RegisterValidation, LoginValidation } from "./validation";
 import { registerusers, loginusers } from "../types/users";
+=======
+import { RegisterValidation, LoginValidation } from "./validation";
+import { registerusers, loginusers } from "../types/users";
+import bcrypt from "bcryptjs";
+import jwt from "jsonwebtoken";
+>>>>>>> 18f1cf5 (:boom: Re-push because the git is corrupted.)
 
 const Prisma = new PrismaClient();
 
