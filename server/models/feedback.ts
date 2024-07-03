@@ -1,6 +1,6 @@
 import { Request, Response, NextFunction } from "express";
 import { PrismaClient } from "@prisma/client";
-import { feedback } from "~/types/feedback";
+import { feedback } from "../types/feedback";
 
 const Prisma = new PrismaClient();
 

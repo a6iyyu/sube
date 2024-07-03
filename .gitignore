@@ -1,8 +1,8 @@
 # Ignoring modules
 node_modules/
 /.pnp
-/coverage
-/build
+coverage/
+build/
 dist/
 dist-ssr/
 .content-collections/

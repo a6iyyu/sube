@@ -7,8 +7,8 @@
     // "disableSourceOfProjectReferenceRedirect": true,
     // "disableSolutionSearching": true,
     // "disableReferencedProjectLoad": true,
-    "target": "ES2020",
-    // "lib": [],
+    "target": "ES6",
+    "lib": ["ES6"],
     // "jsx": "preserve",
     // "experimentalDecorators": true,
     // "emitDecoratorMetadata": true,
@@ -60,7 +60,7 @@
     // "newLine": "crlf",
     // "stripInternal": true,
     // "noEmitHelpers": true,
-    // "noEmitOnError": true,
+    "noEmitOnError": true,
     // "preserveConstEnums": true,
     // "declarationDir": "./",
     // "preserveValueImports": true,
@@ -92,6 +92,6 @@
     // "skipDefaultLibCheck": true,
     "skipLibCheck": true
   },
-  "include": ["**/*.ts", "webpack.config.ts"],
+  "include": ["**/*.ts", "webpack.dev.cts", "webpack.prod.cts"],
   "exclude": ["node_modules"]
 }
