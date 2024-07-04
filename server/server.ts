@@ -6,9 +6,10 @@ import csrf from "csurf";
 import dotenv from "dotenv";
 import logger from "morgan";
 import rateLimit from "express-rate-limit";
-import { RegisterAuth, LoginAuth, LogoutAuth, RequireAuth, LoginWithGoogle } from "./models/users";
 import { ImportBlog, RenderBlog } from "./models/blogs";
+import { LogoutAuth, UpdateDataUser, UpdateProfilePicture } from "./models/dashboard";
 import { CreateFeedback } from "./models/feedback";
+import { RegisterAuth, LoginAuth, RequireAuth, LoginWithGoogle } from "./models/users";
 
 dotenv.config();
 
@@ -27,6 +28,8 @@ app.post("/auth/registrasi", csrf({ cookie: true }), RegisterAuth);
 app.post("/auth/masuk", csrf({ cookie: true }), LoginAuth);
 app.post("/auth/keluar", csrf({ cookie: true }), LogoutAuth);
 app.post("/auth/google", csrf({ cookie: true }), LoginWithGoogle);
+app.post("/dashboard/memperbarui-data-pengguna", csrf({ cookie: true }), UpdateDataUser);
+app.post("/dashboard/memperbarui-foto-profil", csrf({ cookie: true }), UpdateProfilePicture);
 app.post("/tentang-kami/kritik-dan-saran", csrf({ cookie: true }), CreateFeedback, rateLimit({
   keyGenerator: (request: Request) => request.body.email,
   max: 3,

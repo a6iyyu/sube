@@ -81,20 +81,6 @@ export const RequireAuth = async (request: Request, response: Response, next: Ne
   }
 };
 
-// Mengatur RESTful API agar pengguna keluar dari akun.
-export const LogoutAuth = async (request: Request, response: Response) => {
-  try {
-    const { id_user } = request.cookies["id_user"];
-    if (!id_user) return response.status(404).send("ID akun Anda tidak ditemukan di dalam cookies!");
-    
-    await Prisma.users.delete({ where: { id_user } });
-    response.status(200).send("Anda berhasil keluar, jangan lupa datang lagi!");
-  } catch (e) {
-    console.error(e);
-    response.status(500).send("Terjadi kesalahan pada server!");
-  }
-};
-
 // Mengatur RESTful API agar pengguna bisa masuk ke situs web
 // menggunakan Google.
 export const LoginWithGoogle = async (_: Request, response: Response) => {

@@ -1,7 +1,7 @@
 export interface blogs {
   id_blog: string;
-  image: string;
   title: string;
+  image: string;
   description: string;
   content: string;
   created_at: Date;
