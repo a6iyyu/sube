@@ -9,7 +9,7 @@ import { Footer } from "~/common/footer";
 export const Tantangan: React.FC = () => {
   return (
     <>
-      <WebsiteMeta title="Tantang Dirimu Menjadi yang Terdepan!" description="" />
+      <WebsiteMeta title="Course - Tantang Dirimu Menjadi yang Terdepan!" description="" />
       <ScrollIndicator />
       <ScrollToTop />
       <Header />

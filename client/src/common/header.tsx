@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { styled } from "styled-components";
 import { HamburgerMenu } from "./hamburger-menu";
 
-const Hover = styled.section`
+const NavHover = styled.section`
   a:hover {
     filter: blur(0);
     transform: scale(1.05);
@@ -18,13 +18,13 @@ export const Header: React.FC = () => {
   const Menus: string[] = ["Blog", "Kursus", "Tantangan", "Registrasi"];
 
   return (
-    <header className="mx-auto flex h-24 w-4/5 items-center text-slate-50 lg:h-36">
-      <section className="flex h-full w-2/5 items-center">
-        <a href="/" className="h-fit w-fit">
-          <img src="" alt="Icon" className="font-semibold" />
-        </a>
+    <header className="mx-auto flex h-28 w-4/5 justify-between text-slate-50 lg:h-36">
+      <section className="flex h-full w-1/5 items-center lg:w-1/6">
+        <Link to={"/"} className="grid h-full w-full place-items-center font-semibold">
+          <img src="/logo.png?url" alt="Logo" className="object-contain" />
+        </Link>
       </section>
-      <Hover className="hidden h-full w-3/5 text-lg font-semibold lg:flex lg:items-center lg:justify-end">
+      <NavHover className="hidden h-full w-4/5 text-lg font-semibold lg:flex lg:w-5/6 lg:items-center lg:justify-end">
         {Menus.map((menu, i) => (
           <Link
             to={`/${menu.toLowerCase().replace(/ /g, "-")}`}
@@ -34,7 +34,7 @@ export const Header: React.FC = () => {
             {menu}
           </Link>
         ))}
-      </Hover>
+      </NavHover>
       <HamburgerMenu />
     </header>
   );

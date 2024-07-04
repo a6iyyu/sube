@@ -9,7 +9,7 @@ import { Footer } from "~/common/footer";
 export const KritikDanSaran: React.FC = () => {
   return (
     <>
-      <WebsiteMeta title="Kritik dan Saran" description="" />
+      <WebsiteMeta title="Help - Ajukan Kritik dan Saran" description="" />
       <ScrollIndicator />
       <Header />
       <KritikDanSaranHero />

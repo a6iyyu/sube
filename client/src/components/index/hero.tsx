@@ -4,7 +4,7 @@ import { HandleMouseEnter, HandleMouseLeave, Headline } from "~/utils/hover-seti
 export const IndeksHero: React.FC = () => {
   return (
     <main className="z-20 mx-auto mt-16 flex h-fit w-4/5 flex-col-reverse items-center justify-center gap-x-20 text-slate-50 xl:flex-row xl:justify-between">
-      <span className="absolute left-0 top-0 z-0 h-40 w-40 bg-[#ff85ad] [filter:blur(8rem)]" />
+      <span className="absolute left-0 top-24 z-0 h-40 w-40 bg-[#ff85ad] [filter:blur(8rem)]" />
       <section className="mt-10 flex h-full w-full cursor-default flex-col items-center text-justify xl:mt-0 xl:items-start">
         <h2 className="hidden text-left text-5xl font-bold [line-height:1.175] xl:inline">
           {Headline("Manajemen Cerdas,", HandleMouseEnter, HandleMouseLeave)}

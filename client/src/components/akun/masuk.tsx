@@ -19,9 +19,7 @@ export const FormulirMasuk: React.FC = () => {
   });
 
   const ToggleVisible = () => {
-    if (centang.current && kata_sandi.current) {
-      (kata_sandi.current as HTMLInputElement || null).type = centang.current!.querySelector("input")!.checked ? "text" : "password";
-    }
+    if (centang.current && kata_sandi.current) (kata_sandi.current as HTMLInputElement || null).type = centang.current!.querySelector("input")!.checked ? "text" : "password";
   };
 
   useEffect(() => {

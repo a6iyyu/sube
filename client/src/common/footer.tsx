@@ -8,7 +8,7 @@ export const Footer: React.FC = () => {
     <footer className="z-0 -mt-16 h-fit w-full bg-gradient-to-r from-[#141b1f] to-[#1a1f25] py-24 [border-radius:45%_55%_10%_10%_/_2.5%_2.5%_0%_0%] lg:-mt-10 lg:[border-radius:20%_20%_10%_10%_/_10%_10%_0%_0%]">
       <main className="mx-auto mt-10 flex h-full w-4/5 flex-col gap-x-10 text-slate-50 lg:flex-row">
         <section className="flex h-full w-full cursor-default flex-col lg:w-1/3">
-          <img src="" alt="Logo" className="mx-auto font-bold italic lg:mx-0" />
+          <img src="/logo.png?url" alt="Logo" className="mx-auto w-44 font-bold italic lg:mx-0" />
           <h4 className="mt-7 text-center text-2xl font-semibold lg:text-left">
             E-Learning Sube
           </h4>

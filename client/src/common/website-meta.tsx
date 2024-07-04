@@ -15,7 +15,7 @@ export const WebsiteMeta: React.FC<WebsiteMetaProps> = ({ title, description }) 
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <meta name="description" content={description} />
         <title>{title}</title>
-        <link rel="icon" href="" />
+        <link rel="icon" href="/favicon.ico?url" />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" />
         <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&display=swap" rel="stylesheet" />

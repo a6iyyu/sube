@@ -17,9 +17,7 @@ export const FormulirRegistrasi: React.FC = () => {
   });
 
   const ToggleChecked = () => {
-    if (centang.current && kata_sandi.current && konfirmasi_kata_sandi.current) {
-      (kata_sandi.current as HTMLInputElement || null).type = (konfirmasi_kata_sandi.current as HTMLInputElement || null).type = centang.current!.querySelector("input")!.checked ? "text" : "password";
-    }
+    if (centang.current && kata_sandi.current && konfirmasi_kata_sandi.current) (kata_sandi.current as HTMLInputElement || null).type = (konfirmasi_kata_sandi.current as HTMLInputElement || null).type = centang.current!.querySelector("input")!.checked ? "text" : "password";
   };
 
   useEffect(() => {
@@ -34,11 +32,11 @@ export const FormulirRegistrasi: React.FC = () => {
   const HandleSubmit = (e: React.FormEvent) => HandleRegisterSubmit(e, registerData, setErrorForm, CSRFToken);
 
   return (
-    <main className="grid h-[70rem] max-h-[300vh] w-full grid-cols-1 overflow-x-hidden bg-gradient-to-r from-[#0c0c1e] to-[#141414] lg:max-h-[200vh] lg:grid-cols-2">
+    <main className="grid h-[72.5rem] max-h-[300vh] w-full grid-cols-1 overflow-x-hidden bg-gradient-to-r from-[#0c0c1e] to-[#141414] lg:max-h-[200vh] lg:grid-cols-2">
       <span className="absolute left-0 top-0 h-40 w-40 bg-[#1fddff] opacity-80 [filter:blur(8rem)]" />
       <section className="flex h-full w-full flex-col items-center justify-center text-slate-50">
-        <img src="" alt="Logo" className="h-16 w-16 italic" />
-        <h3 className="mx-auto h-fit w-4/5 cursor-default text-center text-3xl font-bold lg:text-4xl">
+        <img src="/logo.png?url" alt="Logo" className="w-32 italic" />
+        <h3 className="mx-auto mt-10 h-fit w-4/5 cursor-default text-center text-3xl font-bold lg:text-4xl">
           Buat Akun
         </h3>
         <h5 className="mx-auto mt-3 h-fit w-4/5 cursor-default text-center text-lg font-medium">

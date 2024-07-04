@@ -1,11 +1,11 @@
-interface Fitur {
+interface InitPropsFitur {
   id: string;
   gambar: string;
   judul: string;
   deskripsi: string;
 }
 
-export const Fitur: Fitur[] = [
+export const PropsFitur: InitPropsFitur[] = [
   {
     id: "1",
     gambar: "/test.png?url",
