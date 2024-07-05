@@ -12,3 +12,13 @@ export interface loginusers {
   username_or_email: string;
   password: string;
 }
+
+export interface forgotpassword {
+  id_user: string;
+  username_or_email: string;
+}
+
+export interface resetpassword {
+  id_user: string;
+  password: string;
+}

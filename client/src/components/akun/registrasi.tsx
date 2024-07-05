@@ -1,13 +1,13 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { ChangeEvent, FormEvent, useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
-import { FetchCSRFToken, HandleChangeForm, HandleRegisterSubmit } from "~/utils/menangani-akun";
+import { FetchXSRFToken, HandleChangeForm, HandleRegisterSubmit } from "~/utils/menangani-akun";
 import School from "/school.jpg?url";
 
 export const FormulirRegistrasi: React.FC = () => {
   const centang = useRef<HTMLDivElement | null>(null);
   const kata_sandi = useRef<HTMLInputElement | null>(null);
   const konfirmasi_kata_sandi = useRef<HTMLInputElement | null>(null);
-  const [CSRFToken, setCSRFToken] = useState<string>("");
+  const [XSRFToken, setXSRFToken] = useState<string>("");
   const [errorForm, setErrorForm] = useState<Partial<typeof registerData>>({});
   const [registerData, setRegisterData] = useState({
     username: "",
@@ -21,18 +21,18 @@ export const FormulirRegistrasi: React.FC = () => {
   };
 
   useEffect(() => {
-    FetchCSRFToken(setCSRFToken, "registrasi");
+    FetchXSRFToken(setXSRFToken, "registrasi");
     if (centang.current) centang.current.addEventListener("click", ToggleChecked);
     return () => {
       if (centang.current) centang.current.removeEventListener("click", ToggleChecked);
     }
   }, [centang.current]);
 
-  const HandleChange = (e: React.ChangeEvent<HTMLInputElement>) => HandleChangeForm(e, setRegisterData, registerData);
-  const HandleSubmit = (e: React.FormEvent) => HandleRegisterSubmit(e, registerData, setErrorForm, CSRFToken);
+  const HandleChange = (e: ChangeEvent<HTMLInputElement>) => HandleChangeForm(e, setRegisterData, registerData);
+  const HandleSubmit = (e: FormEvent) => HandleRegisterSubmit(e, registerData, setErrorForm, XSRFToken);
 
   return (
-    <main className="grid h-[72.5rem] max-h-[300vh] w-full grid-cols-1 overflow-x-hidden bg-gradient-to-r from-[#0c0c1e] to-[#141414] lg:max-h-[200vh] lg:grid-cols-2">
+    <main className="grid h-[80rem] max-h-[300vh] w-full grid-cols-1 overflow-x-hidden bg-gradient-to-r from-[#0c0c1e] to-[#141414] lg:max-h-[200vh] lg:grid-cols-2">
       <span className="absolute left-0 top-0 h-40 w-40 bg-[#1fddff] opacity-80 [filter:blur(8rem)]" />
       <section className="flex h-full w-full flex-col items-center justify-center text-slate-50">
         <img src="/logo.png?url" alt="Logo" className="w-32 italic" />
@@ -114,18 +114,22 @@ export const FormulirRegistrasi: React.FC = () => {
               </Link>
             </span>
           </div>
-          <button className="mx-auto mt-12 h-fit w-full rounded-lg bg-[#0000ee] py-4 text-base font-semibold transition-all duration-300 ease-in-out md:py-5 lg:hover:bg-[#4d4dff]">
+          <button type="submit" className="mx-auto mt-12 h-fit w-full rounded-lg bg-[#0000ee] py-4 text-base font-semibold transition-all duration-300 ease-in-out md:py-5 lg:hover:bg-[#4d4dff]">
             Registrasi
           </button>
         </form>
         <span className="h-fit w-4/5">
           <Link to={`/auth/google`}>
-            <button className="mx-auto mt-7 flex h-fit w-full items-center justify-center gap-x-3 rounded-lg bg-slate-50 py-4 text-base font-semibold text-slate-950 transition-all duration-300 ease-in-out hover:bg-slate-300 md:py-5">
+            <button type="submit" className="mx-auto mt-7 flex h-fit w-full items-center justify-center gap-x-3 rounded-lg bg-slate-50 py-4 text-base font-semibold text-slate-950 transition-all duration-300 ease-in-out hover:bg-slate-300 md:py-5">
               <img src="/google.png?url" alt="" className="h-5 w-5" />
               <h5>Masuk dengan Google</h5>
             </button>
           </Link>
         </span>
+        <Link to={`/`} className="mx-auto mt-10 flex h-fit w-4/5 items-center justify-center font-semibold transition-all duration-300 ease-in-out lg:hover:text-slate-200 lg:hover:underline">
+          <i className="fa-solid fa-arrow-left" />
+          <h4>&emsp;Kembali Ke Halaman Awal</h4>
+        </Link>
       </section>
       <section className="hidden h-full w-full cursor-default flex-col items-end justify-center bg-cover bg-center bg-no-repeat text-slate-50 lg:flex" style={{ backgroundImage: `url(${School})` }}>
         <span className="absolute"></span>

@@ -29,11 +29,10 @@ const MenanganiValidasi = (FormData: RegisterAttributes | LoginAttributes, FormT
       });
       return FieldError;
     }
-    return { general: "Validasi gagal dilakukan!" };
   }
 };
 
-const MenanganiPengiriman = async <T extends RegisterAttributes | LoginAttributes>(e: FormEvent, FormData: T, FormType: TipeFormulir, setErrorForm: Dispatch<SetStateAction<Partial<T>>>, CSRFToken: string) => {
+const MenanganiPengiriman = async <T extends RegisterAttributes | LoginAttributes>(e: FormEvent, FormData: T, FormType: TipeFormulir, setErrorForm: Dispatch<SetStateAction<Partial<T>>>, XSRFToken: string) => {
   e.preventDefault();
 
   const ValidasiGagal = MenanganiValidasi(FormData, FormType);
@@ -43,24 +42,22 @@ const MenanganiPengiriman = async <T extends RegisterAttributes | LoginAttribute
     const response = await axios.post(FormType === "registrasi" ? "http://localhost:2001/auth/registrasi" : "http://localhost:2001/auth/masuk", FormData, {
       headers: {
         "Content-Type": "application/json",
-        "XSRF-Token": CSRFToken,
+        "XSRF-Token": XSRFToken,
       },
       withCredentials: true,
     });
-    
     FormType === "registrasi" ? (response.status === 201 ? window.location.href = "http://localhost:2000/masuk" : console.error(`${response.data.message}`)) : (response.status === 200 ? window.location.href = "http://localhost:2000/dashboard" : console.error(`${response.data.message}`));
   } catch (e) {
     if (isAxiosError(e) && e.response) console.error(e.response.data);
   }
 };
 
-export const FetchCSRFToken = async (setCSRFToken: Dispatch<SetStateAction<string>>, FormType: TipeFormulir) => {
+export const FetchXSRFToken = async (setXSRFToken: Dispatch<SetStateAction<string>>, FormType: TipeFormulir) => {
   try {
     const response = await axios.get(FormType === "registrasi" ? "http://localhost:2001/auth/registrasi" : "http://localhost:2001/auth/masuk", {
       withCredentials: true,
     });
-
-    setCSRFToken(await response.data["XSRF-Token"]);
+    setXSRFToken(await response.data["XSRF-Token"]);
   } catch (e) {
     if (isAxiosError(e) && e.response) console.error(`${e.response.data}`);
   }
@@ -71,10 +68,10 @@ export const HandleChangeForm = <T extends RegisterAttributes | LoginAttributes>
   setFormData({ ...formData, [name]: value });
 };
 
-export const HandleRegisterSubmit = (e: FormEvent, registerData: RegisterAttributes, setErrorForm: Dispatch<SetStateAction<Partial<RegisterAttributes>>>, CSRFToken: string) => {
-  MenanganiPengiriman(e, registerData, "registrasi", setErrorForm, CSRFToken);
+export const HandleRegisterSubmit = (e: FormEvent, registerData: RegisterAttributes, setErrorForm: Dispatch<SetStateAction<Partial<RegisterAttributes>>>, XSRFToken: string) => {
+  MenanganiPengiriman(e, registerData, "registrasi", setErrorForm, XSRFToken);
 };
 
-export const HandleLoginSubmit = (e: FormEvent, loginData: LoginAttributes, setErrorForm: Dispatch<SetStateAction<Partial<LoginAttributes>>>, CSRFToken: string) => {
-  MenanganiPengiriman(e, loginData, "masuk", setErrorForm, CSRFToken);
+export const HandleLoginSubmit = (e: FormEvent, loginData: LoginAttributes, setErrorForm: Dispatch<SetStateAction<Partial<LoginAttributes>>>, XSRFToken: string) => {
+  MenanganiPengiriman(e, loginData, "masuk", setErrorForm, XSRFToken);
 };

@@ -38,19 +38,18 @@ const MenanganiPengiriman = async <T extends KritikSaranAttributes>(e: FormEvent
       },
       withCredentials: true,
     });
-    response.status !== 201 ? console.error(`${response.data.message}`) : (setSuccessForm(true), ResetForm());
+    response.status === 201 ? (setSuccessForm(true), ResetForm()) : console.error(`${response.data.message}`);
   } catch (e) {
     if (isAxiosError(e) && e.response) console.error(e.response.data);
   }
 };
 
-export const FetchCSRFToken = async (setCSRFToken: Dispatch<SetStateAction<string>>) => {
+export const FetchXSRFToken = async (setXSRFToken: Dispatch<SetStateAction<string>>) => {
   try {
     const response = await axios.get("http://localhost:2001/tentang-kami/kritik-dan-saran", {
       withCredentials: true,
     });
-    
-    setCSRFToken(await response.data["XSRF-Token"]);
+    setXSRFToken(await response.data["XSRF-Token"]);
   } catch (e) {
     if (isAxiosError(e) && e.response) console.error(e.response.data);
   }
