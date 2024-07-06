@@ -1,5 +1,6 @@
 import React, { ChangeEvent, FormEvent, useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
+import { Notifikasi } from "~/common/notification";
 import { FetchXSRFToken, HandleChangeForm, HandleLoginSubmit } from "~/utils/menangani-akun";
 import Student3 from "/student-3.jpg?url"
 
@@ -13,6 +14,7 @@ export const FormulirMasuk: React.FC = () => {
   const kata_sandi = useRef<HTMLInputElement | null>(null);
   const [XSRFToken, setXSRFToken] = useState<string>("");
   const [errorForm, setErrorForm] = useState<Partial<LoginAttributes>>({});
+  const [isError, setIsError] = useState<boolean>(false);
   const [loginData, setLoginData] = useState<LoginAttributes>({
     username_or_email: "",
     password: "",
@@ -28,13 +30,14 @@ export const FormulirMasuk: React.FC = () => {
     return () => {
       if (centang.current) centang.current.removeEventListener("click", ToggleVisible);
     };
-  }, [centang.current]);
+  }, []);
 
   const HandleChange = (e: ChangeEvent<HTMLInputElement>) => HandleChangeForm(e, setLoginData, loginData);
-  const HandleSubmit = (e: FormEvent) => HandleLoginSubmit(e, loginData, setErrorForm, XSRFToken);
+  const HandleSubmit = (e: FormEvent) => HandleLoginSubmit(e, loginData, setErrorForm, setIsError, XSRFToken);
 
   return (
     <main className="grid h-[60rem] max-h-[300vh] w-full grid-cols-1 overflow-x-hidden bg-gradient-to-r from-[#0c0c1e] to-[#141414] lg:max-h-[200vh] lg:grid-cols-2">
+      {isError && <Notifikasi title={errorForm.username_or_email || errorForm.password ? "Periksa kembali formulir Anda." : "Terjadi kesalahan pada server."} onclose={() => setIsError(true)} />}
       <span className="absolute left-0 top-0 h-40 w-40 bg-[#ff1fa9] opacity-80 [filter:blur(8rem)]" />
       <section className="flex h-full w-full flex-col items-center justify-center text-slate-50">
         <img src="/logo.png?url" alt="Logo" className="w-32 italic" />
@@ -51,7 +54,7 @@ export const FormulirMasuk: React.FC = () => {
               type="text"
               name="username_or_email"
               placeholder="Masukkan Nama atau Surel Anda"
-              className="mt-4 rounded-lg px-6 py-4 text-slate-950 focus:outline-none lg:px-4 lg:py-3"
+              className="mt-4 border-b-2 border-slate-50/50 bg-transparent text-slate-50 focus:border-slate-50 focus:outline-none lg:py-3"
               onChange={HandleChange}
               value={loginData.username_or_email}
             />
@@ -66,7 +69,7 @@ export const FormulirMasuk: React.FC = () => {
               type="password"
               name="password"
               placeholder="Masukkan Kata Sandi"
-              className="mt-4 rounded-lg px-6 py-4 text-slate-950 focus:outline-none lg:px-4 lg:py-3"
+              className="mt-4 border-b-2 border-slate-50/50 bg-transparent text-slate-50 focus:border-slate-50 focus:outline-none lg:py-3"
               onChange={HandleChange}
               value={loginData.password}
             />

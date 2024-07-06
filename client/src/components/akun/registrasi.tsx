@@ -1,5 +1,6 @@
 import React, { ChangeEvent, FormEvent, useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
+import { Notifikasi } from "~/common/notification";
 import { FetchXSRFToken, HandleChangeForm, HandleRegisterSubmit } from "~/utils/menangani-akun";
 import School from "/school.jpg?url";
 
@@ -9,6 +10,7 @@ export const FormulirRegistrasi: React.FC = () => {
   const konfirmasi_kata_sandi = useRef<HTMLInputElement | null>(null);
   const [XSRFToken, setXSRFToken] = useState<string>("");
   const [errorForm, setErrorForm] = useState<Partial<typeof registerData>>({});
+  const [isError, setIsError] = useState<boolean>(false);
   const [registerData, setRegisterData] = useState({
     username: "",
     email: "",
@@ -26,13 +28,14 @@ export const FormulirRegistrasi: React.FC = () => {
     return () => {
       if (centang.current) centang.current.removeEventListener("click", ToggleChecked);
     }
-  }, [centang.current]);
+  }, []);
 
   const HandleChange = (e: ChangeEvent<HTMLInputElement>) => HandleChangeForm(e, setRegisterData, registerData);
-  const HandleSubmit = (e: FormEvent) => HandleRegisterSubmit(e, registerData, setErrorForm, XSRFToken);
+  const HandleSubmit = (e: FormEvent) => HandleRegisterSubmit(e, registerData, setErrorForm, setIsError, XSRFToken);
 
   return (
     <main className="grid h-[80rem] max-h-[300vh] w-full grid-cols-1 overflow-x-hidden bg-gradient-to-r from-[#0c0c1e] to-[#141414] lg:max-h-[200vh] lg:grid-cols-2">
+      {isError && <Notifikasi title={errorForm.username || errorForm.email || errorForm.password || errorForm.confirm_password ? "Periksa kembali formulir Anda." : "Terjadi kesalahan pada server"} onclose={() => setIsError(true)} />}
       <span className="absolute left-0 top-0 h-40 w-40 bg-[#1fddff] opacity-80 [filter:blur(8rem)]" />
       <section className="flex h-full w-full flex-col items-center justify-center text-slate-50">
         <img src="/logo.png?url" alt="Logo" className="w-32 italic" />
@@ -51,7 +54,7 @@ export const FormulirRegistrasi: React.FC = () => {
               type="text"
               name="username"
               placeholder="Masukkan Nama"
-              className="mt-4 rounded-lg px-6 py-4 text-slate-950 focus:outline-none lg:px-4 lg:py-3"
+              className="mt-4 border-b-2 border-slate-50/50 bg-transparent text-slate-50 focus:border-slate-50 focus:outline-none lg:py-3"
               onChange={HandleChange}
               value={registerData.username}
             />
@@ -65,7 +68,7 @@ export const FormulirRegistrasi: React.FC = () => {
               type="email"
               name="email"
               placeholder="Masukkan Surel"
-              className="mt-4 rounded-lg px-6 py-4 text-slate-950 focus:outline-none lg:px-4 lg:py-3"
+              className="mt-4 border-b-2 border-slate-50/50 bg-transparent text-slate-50 focus:border-slate-50 focus:outline-none lg:py-3"
               onChange={HandleChange}
               value={registerData.email}
             />
@@ -80,7 +83,7 @@ export const FormulirRegistrasi: React.FC = () => {
               type="password"
               name="password"
               placeholder="Masukkan Kata Sandi"
-              className="mt-4 rounded-lg px-6 py-4 text-slate-950 focus:outline-none lg:px-4 lg:py-3"
+              className="mt-4 border-b-2 border-slate-50/50 bg-transparent text-slate-50 focus:border-slate-50 focus:outline-none lg:py-3"
               onChange={HandleChange}
               value={registerData.password}
             />
@@ -95,7 +98,7 @@ export const FormulirRegistrasi: React.FC = () => {
               type="password"
               name="confirm_password"
               placeholder="Konfirmasi Kata Sandi"
-              className="mt-4 rounded-lg px-6 py-4 text-slate-950 focus:outline-none lg:px-4 lg:py-3"
+              className="mt-4 border-b-2 border-slate-50/50 bg-transparent text-slate-50 focus:border-slate-50 focus:outline-none lg:py-3"
               onChange={HandleChange}
               value={registerData.confirm_password}
             />

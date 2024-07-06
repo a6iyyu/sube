@@ -4,7 +4,7 @@
   "scripts": {
     "build": "webpack --config webpack.prod.ts --mode production",
     "dev": "webpack --config webpack.dev.ts --mode development",
-    "eslint": "eslint ./ && eslint ./ --fix",
+    "lint": "eslint ./ && eslint ./ --fix",
     "start": "nodemon server.ts",
     "test": "echo \"Error: no test specified\" && exit 1"
   },

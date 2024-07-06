@@ -39,7 +39,7 @@ export const KaroselBlog: React.FC = () => {
     <main ref={karosel} className="splide h-fit w-full overflow-x-hidden">
       <section className="splide__track h-full w-full">
         <ul className="splide__list">
-          {PropsKaroselBlog.slice(0, 5).map(karosel => (
+          {PropsKaroselBlog.slice(5, 10).map(karosel => (
             <Link to={`/${karosel.judul.replace(/ /g, "-").toLowerCase()}`} key={karosel.id} className="splide__slide flex h-full w-full">
               <div className="mx-auto h-full w-[90%] flex-col items-center">
                 <img src={karosel.gambar} alt={karosel.judul} className="h-72 w-full rounded-2xl object-cover [box-shadow:0.3rem_0.3rem_0_#bcbcbc]" />

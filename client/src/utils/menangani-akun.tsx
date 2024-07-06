@@ -32,7 +32,7 @@ const MenanganiValidasi = (FormData: RegisterAttributes | LoginAttributes, FormT
   }
 };
 
-const MenanganiPengiriman = async <T extends RegisterAttributes | LoginAttributes>(e: FormEvent, FormData: T, FormType: TipeFormulir, setErrorForm: Dispatch<SetStateAction<Partial<T>>>, XSRFToken: string) => {
+const MenanganiPengiriman = async <T extends RegisterAttributes | LoginAttributes>(e: FormEvent, FormData: T, FormType: TipeFormulir, setErrorForm: Dispatch<SetStateAction<Partial<T>>>, setIsError: Dispatch<SetStateAction<boolean>>, XSRFToken: string) => {
   e.preventDefault();
 
   const ValidasiGagal = MenanganiValidasi(FormData, FormType);
@@ -46,7 +46,9 @@ const MenanganiPengiriman = async <T extends RegisterAttributes | LoginAttribute
       },
       withCredentials: true,
     });
-    FormType === "registrasi" ? (response.status === 201 ? window.location.href = "http://localhost:2000/masuk" : console.error(`${response.data.message}`)) : (response.status === 200 ? window.location.href = "http://localhost:2000/dashboard" : console.error(`${response.data.message}`));
+    // FormType === "registrasi" ? (response.status === 201 ? window.location.href = "http://localhost:2000/masuk" : (console.error(`${response.data.message}`, setIsError(true)))) : (response.status === 200 ? window.location.href = "http://localhost:2000/dashboard" : (console.error(`${response.data.message}`), setIsError(true)));
+    (FormType === "registrasi" && response.status === 500 || response.status === 400) ? (console.error(`${response.data.message}`), setIsError(true)) : window.location.href = "http://localhost:2000/masuk";
+    (FormType === "masuk" && response.status === 500 || response.status === 404 || response.status === 403) ? (console.error(`${response.data.message}`)) : window.location.href = "http://localhost:2000/dashboard";
   } catch (e) {
     if (isAxiosError(e) && e.response) console.error(e.response.data);
   }
@@ -68,10 +70,10 @@ export const HandleChangeForm = <T extends RegisterAttributes | LoginAttributes>
   setFormData({ ...formData, [name]: value });
 };
 
-export const HandleRegisterSubmit = (e: FormEvent, registerData: RegisterAttributes, setErrorForm: Dispatch<SetStateAction<Partial<RegisterAttributes>>>, XSRFToken: string) => {
-  MenanganiPengiriman(e, registerData, "registrasi", setErrorForm, XSRFToken);
+export const HandleRegisterSubmit = (e: FormEvent, registerData: RegisterAttributes, setErrorForm: Dispatch<SetStateAction<Partial<RegisterAttributes>>>, setIsError: Dispatch<SetStateAction<boolean>>, XSRFToken: string) => {
+  MenanganiPengiriman(e, registerData, "registrasi", setErrorForm, setIsError, XSRFToken);
 };
 
-export const HandleLoginSubmit = (e: FormEvent, loginData: LoginAttributes, setErrorForm: Dispatch<SetStateAction<Partial<LoginAttributes>>>, XSRFToken: string) => {
-  MenanganiPengiriman(e, loginData, "masuk", setErrorForm, XSRFToken);
+export const HandleLoginSubmit = (e: FormEvent, loginData: LoginAttributes, setErrorForm: Dispatch<SetStateAction<Partial<LoginAttributes>>>, setIsError: Dispatch<SetStateAction<boolean>>, XSRFToken: string) => {
+  MenanganiPengiriman(e, loginData, "masuk", setErrorForm, setIsError, XSRFToken);
 };

@@ -20,6 +20,13 @@ const GlobalStyles = createGlobalStyle`
     ::-webkit-scrollbar {
       display: none !important;
     }
+    input:-webkit-autofill,
+    input:-webkit-autofill:hover,
+    input:-webkit-autofill:focus,
+    input:-webkit-autofill:active {
+      transition: background-color 5000s ease-in-out 0s;
+      -webkit-text-fill-color: #fff !important;
+    }
   }
   @media screen and (max-width: 324px) {
     * {

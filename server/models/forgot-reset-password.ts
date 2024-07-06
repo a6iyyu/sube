@@ -6,7 +6,7 @@ import { forgotpassword, resetpassword } from "~/types/users";
 
 const Prisma = new PrismaClient();
 
-export const ForgotPassword = async (request: Request, response: Response, next: NextFunction) => {
+export const RequireUserAccount = async (request: Request, response: Response, next: NextFunction) => {
   try {
     ForgotPasswordValidation.parse(request.body);
     const { id_user, username_or_email }: forgotpassword = request.body;
@@ -45,26 +45,6 @@ export const ResetPassword = async (request: Request, response: Response, next: 
     next();
   } catch (e) {
     console.error(e);
-    response.status(500).send("Terjdi kesalahan pada server saat ingin mengatur ulang kata sandi Anda!");
-  }
-};
-
-export const RequireAccountUser = async (request: Request, response: Response) => {
-  try {
-    const { id_user, username_or_email } = request.query;
-    const FindUser = await Prisma.users.findFirst({
-      where: {
-        OR: [
-          { id_user: id_user as string },
-          { username: username_or_email as string },
-          { email: username_or_email as string },
-        ],
-      },
-    });
-    if (!FindUser) return response.status(404).send("Nama atau surel Anda tidak ada dalam basis data!");
-    response.status(200).send("Nama atau surel Anda ditemukan!");
-  } catch (e) {
-    console.error(e);
-    response.status(500).send("Terjadi kesalahan pada server!");
+    response.status(500).send("Terjadi kesalahan pada server saat ingin mengatur ulang kata sandi Anda!");
   }
 };

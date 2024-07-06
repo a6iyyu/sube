@@ -40,7 +40,7 @@ export const ForgotPasswordForm: React.FC = () => {
               type="text"
               name="username_or_email"
               placeholder="Masukkan Nama atau Surel Anda"
-              className="mt-4 rounded-lg px-6 py-4 text-slate-950 focus:outline-none lg:px-4 lg:py-3"
+              className="mt-4 border-b-2 border-slate-50/50 bg-transparent text-slate-50 focus:border-slate-50 focus:outline-none lg:py-3"
               onChange={HandleChange}
               value={forgotPasswordData.username_or_email}
             />

@@ -1,17 +1,6 @@
 import React, { useEffect, useState } from "react";
-import styled from "styled-components";
+import { Notifikasi } from "~/common/notification";
 import { FetchXSRFToken, HandleChangeForm, HandleSubmitForm } from "~/utils/menangani-kritik-&-saran";
-import { PengirimanBerhasil } from "./pengiriman-berhasil";
-
-const MainForm = styled.main`
-  input:-webkit-autofill,
-  input:-webkit-autofill:hover,
-  input:-webkit-autofill:focus,
-  input:-webkit-autofill:active {
-    transition: background-color 5000s ease-in-out 0s;
-    -webkit-text-fill-color: #fff !important;
-  }
-`;
 
 export const FormulirKritikDanSaran: React.FC = () => {
   const [countCharacter, setCountCharacter] = useState<number>(0);
@@ -39,8 +28,8 @@ export const FormulirKritikDanSaran: React.FC = () => {
   const HandleSubmit = (e: React.FormEvent) => HandleSubmitForm(e, feedbackData, setErrorForm, XSRFToken, setSuccessForm, () => setFeedbackData({ email: "", subject: "", description: "" }));
 
   return (
-    <MainForm className="mx-auto mb-60 mt-24 h-fit w-4/5 text-slate-50 lg:mt-32">
-      {successForm && <PengirimanBerhasil />}
+    <main className="mx-auto mb-60 mt-24 h-fit w-4/5 text-slate-50 lg:mt-32">
+      {successForm && <Notifikasi title="Pengiriman Berhasil!" onclose={() => setSuccessForm(false)} />}
       <form onSubmit={HandleSubmit} className="flex flex-col">
         <section className="grid grid-cols-1 gap-x-10 lg:grid-cols-2">
           <div className="flex flex-col">
@@ -92,6 +81,6 @@ export const FormulirKritikDanSaran: React.FC = () => {
           Kirim
         </button>
       </form>
-    </MainForm>
+    </main>
   );
 };
