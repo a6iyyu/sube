@@ -4,7 +4,7 @@ import { ScrollIndicator } from "~/common/scroll-indicator";
 import { ScrollToTop } from "~/common/scroll-to-top";
 import { Header } from "~/common/header";
 import { FAQHero } from "~/components/faq/hero";
-import { PertanyaanYangSeringDiajukan } from "~/components/faq/pertanyaan-yang-sering-diajukan";
+import { DaftarPertanyaanDanJawaban } from "~/components/faq/daftar-pertanyaan-dan-jawaban";
 import { Footer } from "~/common/footer";
 
 export const FAQ: React.FC = () => {
@@ -15,7 +15,7 @@ export const FAQ: React.FC = () => {
       <ScrollToTop />
       <Header />
       <FAQHero />
-      <PertanyaanYangSeringDiajukan />
+      <DaftarPertanyaanDanJawaban />
       <Footer />
     </>
   );

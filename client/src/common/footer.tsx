@@ -15,7 +15,7 @@ export const Footer: React.FC = () => {
           <h5 className="mt-4 text-justify text-base font-thin [text-align-last:center] lg:text-justify lg:[text-align-last:left]">
             Sube berupaya dan mendukung dalam mencerdaskan anak bangsa serta
             merupakan langkah kecil untuk mewujudkan cita-cita Indonesia di
-            bidang kepemimpinan.
+            bidang kepemimpinan, inovasi, dan teknologi.
           </h5>
         </section>
         <section className="grid h-full w-full grid-cols-1 grid-rows-2 lg:w-2/3 lg:grid-cols-2 lg:grid-rows-1">
