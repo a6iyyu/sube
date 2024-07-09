@@ -80,13 +80,3 @@ export const RequireAuth = async (request: Request, response: Response, next: Ne
     response.status(500).send("Terjadi kesalahan pada server!");
   }
 };
-
-// Mengatur RESTful API agar pengguna bisa masuk ke situs web
-// menggunakan Google.
-export const LoginWithGoogle = async (_: Request, response: Response) => {
-  try {
-  } catch (e) {
-    console.error(e);
-    response.status(500).send("Terjadi kesalahan pada server!");
-  }
-};

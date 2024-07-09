@@ -5,7 +5,7 @@ import { DetailPertanyaanDanJawaban } from "./detail-pertanyaan-dan-jawaban";
 import { TipeMenu } from "~/data/props-daftar-faq";
 
 export const DaftarPertanyaanDanJawaban: React.FC = () => {
-  const [filteredQuestions, setFilteredQuestions] = useState<TipeMenu>("Semua");
+  const [filteredQuestions, setFilteredQuestions] = useState<TipeMenu[]>(["Semua", "Akun", "Kursus", "Memulai", "Tantangan", "Umum"]);
 
   return (
     <main className="mx-auto mb-32 mt-20 flex h-fit w-4/5 flex-col items-center justify-center">

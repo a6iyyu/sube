@@ -20,8 +20,14 @@ export const TigaPertanyaan: React.FC = () => {
       <div className="flex h-full w-full flex-col">
         {PropsDaftarFAQ.slice(0, 3).map((faq, index: number) => (
           <div key={faq.id} className="flex h-fit w-full cursor-pointer flex-col border-t border-y-slate-200 last:border-b" onClick={() => HandleDetails(index)}>
-            {faq.pertanyaan && <h3 className="my-4 h-fit w-fit text-lg font-semibold transition-all duration-300 ease-in-out hover:underline lg:hover:text-slate-200">{faq.pertanyaan}</h3>}
-            {details === index && <h5 className="mb-4">{faq.jawaban}</h5>}
+            {faq.pertanyaan && 
+              <h3 className="group my-4 text-lg font-semibold transition-all duration-300 ease-in-out lg:hover:text-slate-200">
+                <span className="lg:bg-gradient-to-r lg:from-sky-500 lg:to-sky-500 lg:bg-[length:0%_0.125rem] lg:bg-left-bottom lg:bg-no-repeat lg:transition-all lg:duration-500 lg:ease-out lg:group-hover:bg-[length:100%_0.125rem]">
+                  {faq.pertanyaan}
+                </span>
+              </h3>
+            }
+            {details === index && <h5 className="mb-6 text-justify">{faq.jawaban}</h5>}
           </div>
         ))}
       </div>

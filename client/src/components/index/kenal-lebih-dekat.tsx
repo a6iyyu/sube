@@ -9,7 +9,7 @@ export const KenalLebihDekat: React.FC = () => {
       <Link to={`/tentang-kami`}>
         <section className="mx-auto h-full w-4/5 rounded-xl bg-[#222831] bg-cover bg-center bg-no-repeat text-slate-50 transition-all duration-300 ease-in-out [box-shadow:0.3rem_0.3rem_0_#bcbcbc50] lg:bg-contain lg:bg-right lg:hover:scale-[1.025]" style={{ backgroundImage: `url(${Teamwork})` }}>
           <h4 className="group hidden h-fit w-1/2 p-12 text-justify font-medium leading-relaxed text-slate-50 transition-all duration-300 ease-in-out lg:inline-block">
-            <span className="bg-gradient-to-r from-sky-500 to-sky-500 bg-[length:0%_0.125rem] bg-left-bottom bg-no-repeat transition-all duration-500 ease-out group-hover:bg-[length:100%_0.125rem]">
+            <span className="lg:bg-gradient-to-r lg:from-sky-500 lg:to-sky-500 lg:bg-[length:0%_0.125rem] lg:bg-left-bottom lg:bg-no-repeat lg:transition-all lg:duration-500 lg:ease-out lg:group-hover:bg-[length:100%_0.125rem]">
               Kami adalah program edukasi yang berkomitmen untuk mengembangkan
               keterampilan dalam manajemen proyek, kepemimpinan, dan inovasi
               digital. Melalui berbagai kelas daring, program pelatihan, dan

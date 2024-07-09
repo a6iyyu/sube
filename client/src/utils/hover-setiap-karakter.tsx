@@ -1,14 +1,14 @@
-import React from "react";
+import { MouseEvent } from "react";
 
-const HandleMouseEnter = (e: React.MouseEvent<HTMLElement, MouseEvent>) => {
+const HandleMouseEnter = (e: MouseEvent<HTMLElement | MouseEvent>) => {
   (e.target as HTMLElement).style.transform = "scale(1.25)";
 };
 
-const HandleMouseLeave = (e: React.MouseEvent<HTMLElement, MouseEvent>) => {
+const HandleMouseLeave = (e: MouseEvent<HTMLElement | MouseEvent>) => {
   (e.target as HTMLElement).style.transform = "scale(1)";
 };
 
-const Headline = (Text: string | null, HandleMouseEnter: (e: React.MouseEvent<HTMLElement, MouseEvent>) => void, HandleMouseLeave: (e: React.MouseEvent<HTMLElement, MouseEvent>) => void) => {
+const Headline = (Text: string | null, HandleMouseEnter: (e: MouseEvent<HTMLElement | MouseEvent>) => void, HandleMouseLeave: (e: MouseEvent<HTMLElement | MouseEvent>) => void) => {
   return Text?.split("").map((char, i) => (
     <span
       key={i}
