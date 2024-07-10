@@ -46,9 +46,8 @@ const MenanganiPengiriman = async <T extends RegisterAttributes | LoginAttribute
       },
       withCredentials: true,
     });
-    // FormType === "registrasi" ? (response.status === 201 ? window.location.href = "http://localhost:2000/masuk" : (console.error(`${response.data.message}`, setIsError(true)))) : (response.status === 200 ? window.location.href = "http://localhost:2000/dashboard" : (console.error(`${response.data.message}`), setIsError(true)));
-    (FormType === "registrasi" && response.status === 500 || response.status === 400) ? (console.error(`${response.data.message}`), setIsError(true)) : window.location.href = "http://localhost:2000/masuk";
-    (FormType === "masuk" && response.status === 500 || response.status === 404 || response.status === 403) ? (console.error(`${response.data.message}`)) : window.location.href = "http://localhost:2000/dashboard";
+
+    FormType === "registrasi" ? (response.status === 201 ? window.location.href = "http://localhost:2000/masuk" : (console.error(`${response.data.message}`, setIsError(true)))) : (response.status === 200 ? window.location.href = "http://localhost:2000/dashboard" : (console.error(`${response.data.message}`), setIsError(true)));
   } catch (e) {
     if (isAxiosError(e) && e.response) console.error(e.response.data);
   }
@@ -56,9 +55,7 @@ const MenanganiPengiriman = async <T extends RegisterAttributes | LoginAttribute
 
 export const FetchXSRFToken = async (setXSRFToken: Dispatch<SetStateAction<string>>, FormType: TipeFormulir) => {
   try {
-    const response = await axios.get(FormType === "registrasi" ? "http://localhost:2001/auth/registrasi" : "http://localhost:2001/auth/masuk", {
-      withCredentials: true,
-    });
+    const response = await axios.get(FormType === "registrasi" ? "http://localhost:2001/auth/registrasi" : "http://localhost:2001/auth/masuk", { withCredentials: true });
     setXSRFToken(await response.data["XSRF-Token"]);
   } catch (e) {
     if (isAxiosError(e) && e.response) console.error(`${e.response.data}`);

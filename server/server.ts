@@ -5,12 +5,15 @@ import cors from "cors";
 import csrf from "csurf";
 import dotenv from "dotenv";
 import logger from "morgan";
+import passport from "passport";
 import rateLimit from "express-rate-limit";
+import session from "express-session";
 import { ImportBlog, RenderBlog } from "./models/blogs";
 import { LogoutAuth, UpdateDataUser, UpdateProfilePicture } from "./models/dashboard";
 import { CreateFeedback } from "./models/feedback";
 import { RequireUserAccount, ResetPassword } from "./models/forgot-reset-password";
-import { RegisterAuth, LoginAuth, RequireAuth, LoginWithGoogle } from "./models/users";
+import LoginWithGoogle from "./models/login-with-google";
+import { RegisterAuth, LoginAuth, RequireAuth } from "./models/users";
 
 dotenv.config();
 
@@ -24,11 +27,14 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(logger("common"));
 app.use(csrf({ cookie: true }));
+app.use(session({ secret: process.env.SESSION_SECRET || "", resave: false, saveUninitialized: false }));
+app.use(passport.initialize());
+app.use(passport.session());
+app.use(LoginWithGoogle);
 
 app.post("/auth/registrasi", csrf({ cookie: true }), RegisterAuth);
 app.post("/auth/masuk", csrf({ cookie: true }), LoginAuth);
 app.post("/auth/keluar", csrf({ cookie: true }), LogoutAuth);
-app.post("/auth/google", csrf({ cookie: true }), LoginWithGoogle);
 app.post("/auth/lupa-kata-sandi", csrf({ cookie: true }), RequireUserAccount);
 app.post("/auth/reset-kata-sandi", csrf({ cookie: true }), ResetPassword);
 app.post("/dashboard/memperbarui-data-pengguna", csrf({ cookie: true }), UpdateDataUser);

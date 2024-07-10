@@ -1,7 +1,9 @@
+import { Router } from "express";
 import passport from "passport";
 import { Strategy as GoogleStrategy } from "passport-google-oauth20";
 import { PrismaClient } from "@prisma/client";
 
+const router = Router();
 const Prisma = new PrismaClient();
 
 // Mengatur RESTful API agar pengguna bisa masuk ke situs web
@@ -43,3 +45,11 @@ passport.deserializeUser(async (id: string, done) => {
     done(error);
   }
 });
+
+router.get("/auth/google", passport.authenticate("google", { scope: ["profile", "email"] }));
+router.get("/auth/google/callback", passport.authenticate("google", {
+  failureRedirect: "http://localhost:2000/masuk",
+  successRedirect: "http://localhost:2000/dashboard",
+}));
+
+export default router;
