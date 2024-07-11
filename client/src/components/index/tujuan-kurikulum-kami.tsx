@@ -34,7 +34,7 @@ export const SilabusKurikulum: React.FC = () => {
           {PropsSilabusKurikulum.map((item) => (
             <div key={item.id} className="mt-24 flex h-full w-full flex-col justify-start rounded-2xl bg-[#222831] text-slate-50 transition-all duration-300 ease-in-out [box-shadow:0.3rem_0.3rem_0_#bcbcbc50] first:mt-0 lg:mt-0 lg:w-[90%]">
               <span className="mx-auto -mt-16 grid h-32 w-32 place-items-center rounded-full bg-[#272d37]">
-                <img src={item.gambar} alt={item.judul} className="h-[4.5rem] w-[4.5rem] text-xs italic" />
+                <img src={item.gambar} alt={item.judul} className="h-[4.5rem] w-[4.5rem] text-xs italic" loading="lazy" />
               </span>
               <h3 className="mx-auto my-6 h-fit w-4/5 text-xl font-bold lg:text-2xl xl:text-xl">
                 {item.judul}

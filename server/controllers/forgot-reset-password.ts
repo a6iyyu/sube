@@ -1,7 +1,7 @@
 import { Request, Response, NextFunction } from "express";
 import { PrismaClient } from "@prisma/client";
 import bcrypt from "bcryptjs";
-import { ForgotPasswordValidation, ResetPasswordValidation } from "./validation";
+import { ForgotPasswordValidation, ResetPasswordValidation } from "../utils/validation";
 import { forgotpassword, resetpassword } from "~/types/users";
 
 const Prisma = new PrismaClient();

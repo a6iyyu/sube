@@ -3,9 +3,9 @@
   "version": "1.0.0",
   "scripts": {
     "build": "webpack --config webpack.prod.ts --mode production",
-    "dev": "webpack --config webpack.dev.ts --mode development",
+    "dev": "nodemon server.ts",
     "lint": "eslint ./ && eslint ./ --fix",
-    "start": "nodemon server.ts",
+    "start": "webpack --config webpack.dev.ts --mode development",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
@@ -31,6 +31,7 @@
     "path": "^0.12.7",
     "readfile": "^1.0.1",
     "typescript": "^5.4.5",
+    "uuid": "^10.0.0",
     "zod": "^3.23.8"
   },
   "devDependencies": {
@@ -50,6 +51,7 @@
     "@types/node": "^20.14.9",
     "@types/passport": "^1.0.16",
     "@types/passport-google-oauth20": "^2.0.16",
+    "@types/uuid": "^10.0.0",
     "aws-sdk": "^2.1653.0",
     "dotenv": "^16.4.5",
     "eslint": "^9.6.0",

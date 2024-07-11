@@ -1,9 +1,10 @@
 import { Request, Response, NextFunction } from "express";
 import { PrismaClient } from "@prisma/client";
-import { RegisterValidation, LoginValidation } from "./validation";
+import { RegisterValidation, LoginValidation } from "../utils/validation";
 import { registerusers, loginusers } from "../types/users";
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
+import { ZodError } from "zod";
 
 const Prisma = new PrismaClient();
 
@@ -12,6 +13,13 @@ export const RegisterAuth = async (request: Request, response: Response, next: N
   try {
     RegisterValidation.parse(request.body);
     const { id_user, username, email, password, created_at }: registerusers = request.body;
+    const FindUser = await Prisma.users.findFirst({
+      where: {
+        OR: [{ username }, { email }],
+      },
+    });
+    if (FindUser) return response.status(409).send("Pengguna dengan nama atau surel tersebut sudah ada!");
+
     const HashedPassword = await bcrypt.hash(password, 10);
     const User = await Prisma.users.create({
       data: {
@@ -22,13 +30,12 @@ export const RegisterAuth = async (request: Request, response: Response, next: N
         created_at
       },
     });
-
     if (!User) return response.status(400).send("Proses registrasi Anda mengalami kesalahan, harap coba lagi!");
     response.status(201).json({ User });
     next();
   } catch (e) {
     console.error(e);
-    response.status(500).send("Terjadi kesalahan pada server saat membuat akun Anda!");
+    e instanceof ZodError ? response.status(400).send("Data yang dikirim tidak valid!") : response.status(500).send("Terjadi kesalahan pada server saat membuat akun Anda!");
   }
 };
 
@@ -56,7 +63,7 @@ export const LoginAuth = async (request: Request, response: Response) => {
     response.status(200).json({ Token });
   } catch (e) {
     console.error(e);
-    response.status(500).send("Terjadi kesalahan pada server saat proses masuk ke Sube!");
+    e instanceof ZodError ? response.status(400).send("Data yang dikirim tidak valid!") : response.status(500).send("Terjadi kesalahan pada server saat proses masuk ke Sube!");
   }
 };
 
@@ -68,15 +75,14 @@ export const RequireAuth = async (request: Request, response: Response, next: Ne
     const Token = request.cookies["id_user"];
     if (!Token) return response.status(401).send("Autentikasi diperlukan untuk mengakses halaman profil!");
 
-    const Decoded = jwt.verify(Token, process.env.JWT_SECRET || "");
+    const Decoded = jwt.verify(Token, process.env.JWT_SECRET || "") as { id_user: string };
     if (!Decoded) return response.status(403).send("Token Anda tidak valid!");
 
-    const id_user = (Decoded as { id_user: string }).id_user;
-    const FindUser = await Prisma.users.findUnique({ where: { id_user } });
+    const FindUser = await Prisma.users.findUnique({ where: { id_user: Decoded.id_user } });
     if (!FindUser) return response.status(404).send("Pengguna tidak ditemukan!");
     next();
   } catch (e) {
     console.error(e);
-    response.status(500).send("Terjadi kesalahan pada server!");
+    e instanceof jwt.JsonWebTokenError ? response.status(403).send("Token Anda tidak valid!") : response.status(500).send("Terjadi kesalahan pada server!");
   }
 };

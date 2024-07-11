@@ -10,7 +10,7 @@ export const DaftarPertanyaanDanJawaban: React.FC = () => {
   return (
     <main className="mx-auto mb-32 mt-20 flex h-fit w-4/5 flex-col items-center justify-center">
       <TigaPertanyaan />
-      <img src="/faq.png?url" alt="Frequently Asked Question" className="mt-20 h-fit w-fit italic text-slate-50 transition-all duration-300 ease-in-out lg:hover:scale-105" />
+      <img src="/faq.png?url" alt="Frequently Asked Question" className="mt-20 h-fit w-fit italic text-slate-50 transition-all duration-300 ease-in-out lg:hover:scale-105" loading="lazy" />
       <section className="mt-20 flex h-fit w-full flex-col lg:flex-row">
         <MenuPertanyaan SetFilterMenuQuestion={setFilteredQuestions} />
         <DetailPertanyaanDanJawaban FilterQuestions={filteredQuestions} />

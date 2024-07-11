@@ -21,7 +21,7 @@ export const Header: React.FC = () => {
     <header className="mx-auto flex h-28 w-4/5 justify-between text-slate-50 lg:h-36">
       <section className="flex h-full w-1/5 items-center lg:w-1/6">
         <Link to={"/"} className="grid h-full w-full place-items-center font-semibold">
-          <img src="/logo.png?url" alt="Logo" className="object-contain" />
+          <img src="/logo.png?url" alt="Logo" className="object-contain" loading="lazy" />
         </Link>
       </section>
       <NavHover className="hidden h-full w-4/5 text-lg font-semibold lg:flex lg:w-5/6 lg:items-center lg:justify-end">

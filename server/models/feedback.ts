@@ -1,6 +1,6 @@
 import { Request, Response, NextFunction } from "express";
 import { PrismaClient } from "@prisma/client";
-import { FeedbackValidation } from "./validation";
+import { FeedbackValidation } from "../utils/validation";
 import { feedback } from "../types/feedback";
 
 const Prisma = new PrismaClient();

@@ -1,5 +1,9 @@
 import React from "react";
 
 export const KursusHero: React.FC = () => {
-  return null;
+  return (
+    <main className="">
+      <section></section>
+    </main>
+  );
 };

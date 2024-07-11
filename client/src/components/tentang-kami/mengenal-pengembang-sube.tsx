@@ -13,7 +13,7 @@ export const MengenalPengembangSube: React.FC = () => {
       </section>
       <main className="mx-auto mt-14 flex h-fit w-4/5 cursor-default flex-col text-justify text-slate-50 lg:flex-row">
         <section className="h-80 w-full lg:h-full lg:w-1/4">
-          <img src="/rafi-abiyyu-airlangga.jpg?url" alt="Rafi Abiyyu Airlangga" className="h-full w-full rounded-3xl object-cover transition-all duration-300 ease-in-out lg:hover:scale-105" />
+          <img src="/rafi-abiyyu-airlangga.jpg?url" alt="Rafi Abiyyu Airlangga" className="h-full w-full rounded-3xl object-cover transition-all duration-300 ease-in-out lg:hover:scale-105" loading="lazy" />
         </section>
         <section className="mt-10 flex h-full w-full flex-col lg:ml-10 lg:mt-0 lg:w-3/4">
           <h3 className="text-3xl">Rafi Abiyyu Airlangga</h3>
@@ -25,10 +25,10 @@ export const MengenalPengembangSube: React.FC = () => {
           </h5>
           <br />
           <div className="flex">
-            <Link to={"https://www.linkedin.com/in/rafiabiyyuairlangga"} className="flex h-fit w-fit" target="_blank">
+            <Link to="https://www.linkedin.com/in/rafiabiyyuairlangga" className="flex h-fit w-fit" target="_blank">
               <img src="/linkedin.png?url" alt="LinkedIn" className="h-7 w-7" />
             </Link>
-            <Link to={"https://www.github.com/a6iyyu"} className="ml-4 flex h-fit w-fit" target="_blank">
+            <Link to="https://www.github.com/a6iyyu" className="ml-4 flex h-fit w-fit" target="_blank">
               <img src="/github.png?url" alt="GitHub" className="h-7 w-7" />
             </Link>
           </div>

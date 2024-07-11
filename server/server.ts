@@ -9,9 +9,9 @@ import passport from "passport";
 import rateLimit from "express-rate-limit";
 import session from "express-session";
 import { ImportBlog, RenderBlog } from "./models/blogs";
-import { LogoutAuth, UpdateDataUser, UpdateProfilePicture } from "./models/dashboard";
+import { LogoutAuth, UpdateDataUser, UpdateProfilePicture } from "./controllers/dashboard";
 import { CreateFeedback } from "./models/feedback";
-import { RequireUserAccount, ResetPassword } from "./models/forgot-reset-password";
+import { RequireUserAccount, ResetPassword } from "./controllers/forgot-reset-password";
 import LoginWithGoogle from "./models/login-with-google";
 import { RegisterAuth, LoginAuth, RequireAuth } from "./models/users";
 

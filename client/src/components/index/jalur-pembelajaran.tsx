@@ -34,7 +34,7 @@ export const JalurPembelajaran: React.FC = () => {
         {ModulPembelajaran.slice(0, 4).map((modul) => (
           <Link key={modul.id} to={`/kursus/${modul.judul.replace(/ /g, "-").toLowerCase()}`} className="mt-8 flex h-fit w-fit flex-col transition-all duration-300 ease-in-out">
             <div className="h-72 w-full lg:h-60">
-              <img src={modul.gambar} alt={modul.judul} className="h-full w-full rounded-lg object-cover [box-shadow:0.3rem_0.3rem_0_#bcbcbc]" />
+              <img src={modul.gambar} alt={modul.judul} className="h-full w-full rounded-lg object-cover [box-shadow:0.3rem_0.3rem_0_#bcbcbc]" loading="lazy" />
             </div>
             <h2 className="group mt-6 text-center text-2xl font-bold text-slate-50 transition-all duration-300 ease-in-out lg:text-left lg:text-3xl">
               <span className="lg:bg-gradient-to-r lg:from-sky-500 lg:to-sky-500 lg:bg-[length:0%_0.125rem] lg:bg-left-bottom lg:bg-no-repeat lg:transition-all lg:duration-500 lg:ease-out lg:group-hover:bg-[length:100%_0.125rem]">
