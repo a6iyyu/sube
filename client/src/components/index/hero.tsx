@@ -22,10 +22,10 @@ export const IndeksHero: React.FC = () => {
           perjalanan Anda menuju kesuksesan dengan mendaftar sekarang!
         </h4>
         <button id="jelajahi-sekarang" className="mt-10 h-fit w-fit cursor-pointer rounded-xl bg-slate-50 px-9 py-5 text-lg font-bold text-slate-950 transition-all duration-300 ease-in-out [box-shadow:0.3rem_0.3rem_0_#bcbcbc] hover:bg-slate-200 xl:hover:scale-105">
-          Jelajahi Sekarang
+          Jelajahi Sekarang&ensp;<i className="fa-solid fa-arrow-right text-base" />
         </button>
       </section>
-      <img src="/student.png" alt="Welcome to Sube!" className="transition-all duration-300 ease-in-out xl:hover:scale-105" loading="lazy" />
+      <img src="/student.png?url" alt="Welcome to Sube!" className="transition-all duration-300 ease-in-out xl:hover:scale-105" loading="lazy" />
     </main>
   );
 };
