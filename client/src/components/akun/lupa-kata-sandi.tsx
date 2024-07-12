@@ -4,13 +4,9 @@ import { FetchXSRFToken } from "~/utils/menangani-lupa-kata-sandi";
 import { HandleChangeForm, HandleForgotPasswordForm } from "~/utils/menangani-lupa-kata-sandi";
 import ForgotPasswordImage from "/forgot-password.jpg?url";
 
-interface LupaKataSandi {
-  username_or_email: string;
-}
-
 export const ForgotPasswordForm: React.FC = () => {
   const [XSRFToken, setXSRFToken] = useState<string>("");
-  const [errorForm, setErrorForm] = useState<Partial<LupaKataSandi>>({});
+  const [errorForm, setErrorForm] = useState<Partial<{ username_or_email: string }>>({});
   const [forgotPasswordData, setForgotPasswordData] = useState({
     username_or_email: "",
   });
@@ -47,7 +43,7 @@ export const ForgotPasswordForm: React.FC = () => {
             {errorForm.username_or_email && <span className="mt-3 cursor-default text-base italic text-red-500">{errorForm.username_or_email}</span>}
           </div>
           <button type="submit" className="mx-auto mt-12 h-fit w-full rounded-lg bg-[#0000ee] py-4 text-base font-semibold transition-all duration-300 ease-in-out md:py-5 lg:hover:bg-[#4d4dff]">
-            Reset Kata Sandi
+            Perbarui Kata Sandi
           </button>
         </form>
         <Link to={`/masuk`} className="mx-auto mt-10 flex h-fit w-4/5 items-center justify-center font-semibold transition-all duration-300 ease-in-out lg:hover:text-slate-200 lg:hover:underline">
@@ -55,10 +51,7 @@ export const ForgotPasswordForm: React.FC = () => {
           <h4>&emsp;Kembali Ke Halaman Masuk</h4>
         </Link>
       </section>
-      <section className="hidden h-full w-full cursor-default flex-col items-end justify-center bg-cover bg-center bg-no-repeat text-slate-50 lg:flex" style={{ backgroundImage: `url(${ForgotPasswordImage})` }}>
-        <span className="absolute"></span>
-        <h3></h3>
-      </section>
+      <section className="hidden h-full w-full cursor-default flex-col items-end justify-center bg-cover bg-center bg-no-repeat text-slate-50 lg:flex" style={{ backgroundImage: `url(${ForgotPasswordImage})` }} />
     </main>
   );
 };

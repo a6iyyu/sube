@@ -60,7 +60,7 @@ export const FetchXSRFToken = async (setXSRFToken: Dispatch<SetStateAction<strin
   }
 };
 
-export const HandleChangeForm = (e: React.ChangeEvent<HTMLInputElement>, setFormData: Dispatch<SetStateAction<LupaKataSandi>>, formData: LupaKataSandi) => {
+export const HandleChangeForm = <T extends LupaKataSandi | ResetKataSandi>(e: React.ChangeEvent<HTMLInputElement>, setFormData: Dispatch<SetStateAction<T>>, formData: T) => {
   const { name, value } = e.target;
   setFormData({ ...formData, [name]: value });
 };

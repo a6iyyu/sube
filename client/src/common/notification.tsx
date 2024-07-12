@@ -11,7 +11,7 @@ export const Notifikasi: React.FC<NotificationProps> = ({ title, onclose = () =>
   return (
     <>
       {isVisible && (
-        <main className="fixed bottom-12 left-1/2 flex h-fit max-h-screen w-fit max-w-full -translate-x-1/2 items-center justify-center rounded-md bg-slate-200 py-3 pl-6 pr-4 text-slate-950 md:left-12 md:-translate-x-0">
+        <main className="fixed bottom-12 left-1/2 flex h-fit max-h-screen w-fit max-w-full -translate-x-1/2 items-center justify-center rounded-md bg-slate-200 py-3 pl-6 pr-4 text-slate-950 md:left-[4.25rem] md:-translate-x-0">
           <h4 className="inline cursor-default text-base font-medium md:text-lg">
             {title}
           </h4>

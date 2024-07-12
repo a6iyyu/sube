@@ -18,7 +18,7 @@ export const RegisterAuth = async (request: Request, response: Response, next: N
         OR: [{ username }, { email }],
       },
     });
-    if (FindUser) return response.status(409).send("Pengguna dengan nama atau surel tersebut sudah ada!");
+    if (FindUser) return response.status(409).send("Data sudah ada!");
 
     const HashedPassword = await bcrypt.hash(password, 10);
     const User = await Prisma.users.create({
@@ -30,12 +30,12 @@ export const RegisterAuth = async (request: Request, response: Response, next: N
         created_at
       },
     });
-    if (!User) return response.status(400).send("Proses registrasi Anda mengalami kesalahan, harap coba lagi!");
+    if (!User) return response.status(422).send("Validasi gagal!");
     response.status(201).json({ User });
     next();
   } catch (e) {
     console.error(e);
-    e instanceof ZodError ? response.status(400).send("Data yang dikirim tidak valid!") : response.status(500).send("Terjadi kesalahan pada server saat membuat akun Anda!");
+    e instanceof ZodError ? response.status(400).send("Permintaan tidak valid!") : response.status(500).send("Terjadi kesalahan!");
   }
 };
 

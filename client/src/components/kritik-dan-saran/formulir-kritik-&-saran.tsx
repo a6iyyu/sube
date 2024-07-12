@@ -17,12 +17,19 @@ export const FormulirKritikDanSaran: React.FC = () => {
     FetchXSRFToken(setXSRFToken);
     setCountCharacter(feedbackData.description.length);
 
+    if (successForm) {
+      const NotificationUnmounted = setTimeout(() => {
+        setSuccessForm(false);
+      }, 4000);
+      return () => clearTimeout(NotificationUnmounted);
+    };
+
     const textarea = (document.querySelector("textarea") as HTMLTextAreaElement) || null;
     if (textarea) {
       textarea.style.height = "auto";
       textarea.style.height = `${textarea.scrollHeight}px`;
     }
-  }, [feedbackData.description]);
+  }, [feedbackData.description, successForm]);
 
   const HandleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => HandleChangeForm(e, setFeedbackData, feedbackData);
   const HandleSubmit = (e: React.FormEvent) => HandleSubmitForm(e, feedbackData, setErrorForm, XSRFToken, setSuccessForm, () => setFeedbackData({ email: "", subject: "", description: "" }));
