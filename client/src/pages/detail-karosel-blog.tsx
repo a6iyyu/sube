@@ -37,7 +37,7 @@ export const DetailKaroselBlog: React.FC = () => {
   }, [slug]);
 
   if (loading) return <MemuatHalaman />;
-  if (!MDXContent || notFound)  return <NotFoundPage />;
+  if (!MDXContent || notFound) return <NotFoundPage />;
 
   return (
     <>

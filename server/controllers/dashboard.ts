@@ -8,13 +8,13 @@ const Prisma = new PrismaClient();
 export const LogoutAuth = async (request: Request, response: Response) => {
   try {
     const { id_user } = request.cookies["id_user"];
-    if (!id_user) return response.status(404).send("ID akun Anda tidak ditemukan di dalam cookies!");
+    if (!id_user) return response.status(404).send("Pengguna tidak ditemukan!");
 
     await Prisma.users.delete({ where: { id_user } });
-    response.status(200).send("Anda berhasil keluar, jangan lupa datang lagi!");
+    response.status(200);
   } catch (e) {
     console.error(e);
-    response.status(500).send("Terjadi kesalahan pada server!");
+    response.status(500).send("Terjadi kesalahan!");
   } finally {
     await Prisma.$disconnect();
   }
@@ -25,20 +25,18 @@ export const LogoutAuth = async (request: Request, response: Response) => {
 export const UpdateProfilePicture = async (request: Request, response: Response) => {
   try {
     const { id_user, profile_picture }: dashboard = request.body;
-    if (!id_user) return response.status(404).send("ID profil Anda tidak ditemukan!");
-
     const FindUser = await Prisma.users.findUnique({ where: { id_user } });
-    if (!FindUser) return response.status(404).send("Pengguna tidak ditemukan!");
+    if (!id_user || !FindUser) return response.status(404).send("Pengguna tidak ditemukan!");
 
     const UpdateProfile = await Prisma.dashboard.update({
       data: { profile_picture, updated_at: new Date() },
       where: { id_user },
     });
-    if (!UpdateProfile) return response.status(400).send("Permintaan Anda untuk mengganti foto profil mengalami masalah!");
-    response.status(200).send("Foto profil Anda sudah diganti!");
+    if (!UpdateProfile) return response.status(400).send("Permintaan Anda mengalami masalah!");
+    response.status(200).send("Foto profil sudah diganti!");
   } catch (e) {
     console.error(e);
-    response.status(500).send("Terjadi kesalahan pada server!");
+    response.status(500).send("Terjadi kesalahan!");
   }
 };
 
@@ -47,10 +45,8 @@ export const UpdateProfilePicture = async (request: Request, response: Response)
 export const UpdateDataUser = async (request: Request, response: Response) => {
   try {
     const { id_user, bio, nationality }: dashboard = request.body;
-    if (!id_user) return response.status(404).send("ID profil Anda tidak ditemukan!");
-
     const FindUser = await Prisma.users.findUnique({ where: { id_user } });
-    if (!FindUser) return response.status(404).send("Pengguna tidak ditemukan!");
+    if (!id_user || !FindUser) return response.status(404).send("Pengguna tidak ditemukan!");
 
     const UpdateData = await Prisma.dashboard.update({
       data: { bio, nationality, updated_at: new Date() },

@@ -63,7 +63,7 @@ export const LoginAuth = async (request: Request, response: Response) => {
     response.status(200).json({ Token });
   } catch (e) {
     console.error(e);
-    e instanceof ZodError ? response.status(400).send("Data yang dikirim tidak valid!") : response.status(500).send("Terjadi kesalahan pada server saat proses masuk ke Sube!");
+    e instanceof ZodError ? response.status(400).send("Data Anda tidak valid!") : response.status(500).send("Terjadi kesalahan pada server saat proses masuk ke Sube!");
   }
 };
 

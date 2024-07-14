@@ -11,7 +11,7 @@ import session from "express-session";
 import { ImportBlog, RenderBlog } from "./models/blogs";
 import { LogoutAuth, UpdateDataUser, UpdateProfilePicture } from "./controllers/dashboard";
 import { CreateFeedback } from "./models/feedback";
-import { RequireUserAccount, ResetPassword } from "./controllers/forgot-reset-password";
+import { ForgotPassword, ResetPassword } from "./controllers/forgot-reset-password";
 import LoginWithGoogle from "./models/login-with-google";
 import { RegisterAuth, LoginAuth, RequireAuth } from "./models/users";
 
@@ -35,7 +35,7 @@ app.use(LoginWithGoogle);
 app.post("/auth/registrasi", csrf({ cookie: true }), RegisterAuth);
 app.post("/auth/masuk", csrf({ cookie: true }), LoginAuth);
 app.post("/auth/keluar", csrf({ cookie: true }), LogoutAuth);
-app.post("/auth/lupa-kata-sandi", csrf({ cookie: true }), RequireUserAccount);
+app.post("/auth/lupa-kata-sandi", csrf({ cookie: true }), ForgotPassword);
 app.post("/auth/reset-kata-sandi", csrf({ cookie: true }), ResetPassword);
 app.post("/dashboard/memperbarui-data-pengguna", csrf({ cookie: true }), UpdateDataUser);
 app.post("/dashboard/memperbarui-foto-profil", csrf({ cookie: true }), UpdateProfilePicture);
