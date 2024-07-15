@@ -9,3 +9,8 @@ export interface loginusers {
   username_or_email: string;
   password: string;
 }
+
+export interface resetpassword {
+  password: string;
+  confirm_password: string;
+}

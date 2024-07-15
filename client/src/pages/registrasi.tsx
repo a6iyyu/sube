@@ -2,7 +2,9 @@ import React, { ChangeEvent, FormEvent, useEffect, useRef, useState } from "reac
 import { Link } from "react-router-dom";
 import { Notifikasi } from "~/common/notification";
 import { WebsiteMeta } from "~/common/website-meta";
-import { FetchXSRFToken, HandleChangeForm, HandleRegisterSubmit } from "~/utils/menangani-akun";
+import { HandleRegisterSubmit } from "~/utils/menangani-akun";
+import { HandleChangeForm } from "~/utils/menangani-perubahan-formulir";
+import { HandleCSRF } from "~/utils/menangani-csrf";
 import School from "/school.jpg?url";
 
 export const Registrasi: React.FC = () => {
@@ -22,12 +24,10 @@ export const Registrasi: React.FC = () => {
   const ToggleChecked = () => centang.current && kata_sandi.current && konfirmasi_kata_sandi.current && ((kata_sandi.current as HTMLInputElement || null).type = (konfirmasi_kata_sandi.current as HTMLInputElement || null).type = centang.current!.querySelector("input")!.checked ? "text" : "password");
 
   useEffect(() => {
-    FetchXSRFToken(setXSRFToken, "registrasi");
+    HandleCSRF(setXSRFToken, "auth", "registrasi");
 
     if (showNotification.isVisible) {
-      const NotificationUnmounted = setTimeout(() => {
-        setShowNotification({ showMessage: "", isVisible: false });
-      }, 5000);
+      const NotificationUnmounted = setTimeout(() => setShowNotification({ showMessage: "", isVisible: false }), 5000);
       return () => clearTimeout(NotificationUnmounted);
     };
 

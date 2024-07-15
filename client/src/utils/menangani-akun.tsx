@@ -1,4 +1,4 @@
-import React, { Dispatch, FormEvent, SetStateAction } from "react";
+import { Dispatch, FormEvent, SetStateAction } from "react";
 import axios, { isAxiosError } from "axios";
 import { ZodError } from "zod";
 import { RegisterSkema, LoginSkema } from "~/utils/skema";
@@ -36,24 +36,10 @@ const MenanganiPengiriman = async <T extends registerusers | loginusers>(e: Form
       withCredentials: true,
     });
 
-    FormType === "registrasi" ? (response.status === 201 ? window.location.href = "http://localhost:2000/masuk" : setShowNotification({ showMessage: response.data.message || "", isVisible: true })) : (response.status === 200 ? window.location.href = "http://localhost:2000/dashboard" : setShowNotification({ showMessage: response.data.message || "", isVisible: true }));
+    FormType === "registrasi" ? (response.status === 201 ? window.location.href = "http://localhost:2000/masuk" : setShowNotification({ showMessage: response.data.message, isVisible: true })) : (response.status === 200 ? window.location.href = "http://localhost:2000/dashboard" : setShowNotification({ showMessage: response.data.message, isVisible: true }));
   } catch (e) {
     if (isAxiosError(e) && e.response) setShowNotification({ showMessage: e.response.data.message || "Terjadi kesalahan!", isVisible: true });
   }
-};
-
-export const FetchXSRFToken = async (setXSRFToken: Dispatch<SetStateAction<string>>, FormType: TipeFormulir) => {
-  try {
-    const response = await axios.get(FormType === "registrasi" ? "http://localhost:2001/auth/registrasi" : "http://localhost:2001/auth/masuk", { withCredentials: true });
-    setXSRFToken(await response.data["XSRF-Token"]);
-  } catch (e) {
-    if (isAxiosError(e) && e.response) console.error(`${e.response.data}`);
-  }
-};
-
-export const HandleChangeForm = <T extends registerusers | loginusers>(e: React.ChangeEvent<HTMLInputElement>, setFormData: Dispatch<SetStateAction<T>>, formData: T) => {
-  const { name, value } = e.target;
-  setFormData({ ...formData, [name]: value });
 };
 
 export const HandleRegisterSubmit = (e: FormEvent, registerData: registerusers, setErrorForm: Dispatch<SetStateAction<Partial<registerusers>>>, XSRFToken: string, setShowNotification: Dispatch<SetStateAction<{ showMessage: string, isVisible: boolean }>>) => {

@@ -30,6 +30,7 @@ export const RegisterAuth = async (request: Request, response: Response, next: N
         created_at
       },
     });
+
     if (!User) return response.status(422).send("Validasi gagal!");
     response.status(201).json({ User });
     next();
@@ -46,13 +47,9 @@ export const LoginAuth = async (request: Request, response: Response) => {
     LoginValidation.parse(request.body);
     const { username_or_email, password }: loginusers = request.body;
     const User = await Prisma.users.findFirst({
-      where: {
-        OR: [
-          { username: username_or_email },
-          { email: username_or_email },
-        ],
-      },
+      where: { OR: [{ username: username_or_email }, { email: username_or_email }] },
     });
+
     if (!User) return response.status(404).send("Pengguna tidak ditemukan!");
 
     const CheckPasswordValidation = await bcrypt.compare(password, User.password);
@@ -73,7 +70,7 @@ export const LoginAuth = async (request: Request, response: Response) => {
 export const RequireAuth = async (request: Request, response: Response, next: NextFunction) => {
   try {
     const Token = request.cookies["id_user"];
-    if (!Token) return response.status(401).send("Autentikasi diperlukan untuk mengakses halaman profil!");
+    if (!Token) return response.status(401).send("Autentikasi diperlukan!");
 
     const Decoded = jwt.verify(Token, process.env.JWT_SECRET || "") as { id_user: string };
     if (!Decoded) return response.status(403).send("Token Anda tidak valid!");
@@ -83,6 +80,6 @@ export const RequireAuth = async (request: Request, response: Response, next: Ne
     next();
   } catch (e) {
     console.error(e);
-    e instanceof jwt.JsonWebTokenError ? response.status(403).send("Token Anda tidak valid!") : response.status(500).send("Terjadi kesalahan pada server!");
+    e instanceof jwt.JsonWebTokenError ? response.status(403).send("Token Anda tidak valid!") : response.status(500).send("Terjadi kesalahan!");
   }
 };

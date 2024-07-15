@@ -1,35 +1,34 @@
 import React, { ChangeEvent, FormEvent, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import axios, { isAxiosError } from "axios";
+import { Notifikasi } from "~/common/notification";
 import { WebsiteMeta } from "~/common/website-meta";
-import { FetchXSRFToken } from "~/utils/menangani-lupa-kata-sandi";
-import { HandleChangeForm, HandleForgotPasswordForm } from "~/utils/menangani-lupa-kata-sandi";
+import { HandleCSRF } from "~/utils/menangani-csrf";
+import { HandleForgotPasswordForm } from "~/utils/menangani-lupa-kata-sandi";
+import { HandleChangeForm } from "~/utils/menangani-perubahan-formulir";
 import ForgotPasswordImage from "/forgot-password.jpg?url";
 
 export const LupaKataSandi: React.FC = () => {
   const [XSRFToken, setXSRFToken] = useState<string>("");
   const [errorForm, setErrorForm] = useState<Partial<typeof forgotPasswordData>>({});
-  const [forgotPasswordData, setForgotPasswordData] = useState<{ username_or_email: string }>({ username_or_email: "" });
+  const [showNotification, setShowNotification] = useState<{ showMessage: string, isVisible: boolean }>({ showMessage: "", isVisible: false });
+  const [forgotPasswordData, setForgotPasswordData] = useState({ username_or_email: "" });
 
   useEffect(() => {
-    FetchXSRFToken(setXSRFToken, "lupa-kata-sandi");
-    (async () => {
-      try {
-        const response = await axios.get("http://localhost:2001/auth/lupa-kata-sandi", { withCredentials: true });
-        response.status === 404 ?? (window.location.href = "http://localhost:2000/lupa-kata-sandi");
-      } catch (e) {
-        if (isAxiosError(e) && e.response) window.location.href = "http://localhost:2000/lupa-kata-sandi";
-      }
-    })();
-  }, []);
+    HandleCSRF(setXSRFToken, "auth", "lupa-kata-sandi");
+    if (showNotification.isVisible) {
+      const NotificationUnmounted = setTimeout(() => setShowNotification({ showMessage: "", isVisible: false }), 5000);
+      return () => clearTimeout(NotificationUnmounted);
+    };
+  }, [forgotPasswordData, showNotification.isVisible]);
 
   const HandleChange = (e: ChangeEvent<HTMLInputElement>) => HandleChangeForm(e, setForgotPasswordData, forgotPasswordData);
-  const HandleSubmit = (e: FormEvent) => HandleForgotPasswordForm(e, forgotPasswordData, setErrorForm, XSRFToken);
+  const HandleSubmit = (e: FormEvent) => HandleForgotPasswordForm(e, forgotPasswordData, setErrorForm, XSRFToken, setShowNotification);
 
   return (
     <>
       <WebsiteMeta title="Lupa Kata Sandi?" description="" />
       <main className="grid h-[50rem] max-h-[300vh] w-full grid-cols-1 overflow-x-hidden bg-gradient-to-r from-[#0c0c1e] to-[#141414] lg:max-h-[200vh] lg:grid-cols-2">
+        {showNotification.isVisible && <Notifikasi title={showNotification.showMessage} onclose={() => setShowNotification({ ...showNotification, isVisible: false })} />}
         <span className="absolute left-0 top-0 h-40 w-40 bg-[#1fddff] opacity-80 [filter:blur(8rem)]" />
         <section className="flex h-full w-full flex-col items-center justify-center text-slate-50">
           <img src="/logo.png?url" alt="Logo" className="w-32 italic" />

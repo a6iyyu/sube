@@ -1,11 +1,10 @@
 import React, { ChangeEvent, FormEvent, useEffect, useState } from "react";
-import { useLocation } from "react-router-dom";
-import axios from "axios";
 import { WebsiteMeta } from "~/common/website-meta";
-import { FetchXSRFToken, HandleChangeForm, HandleResetPasswordForm } from "~/utils/menangani-lupa-kata-sandi";
+import { HandleCSRF } from "~/utils/menangani-csrf";
+import { HandleResetPasswordForm } from "~/utils/menangani-lupa-kata-sandi";
+import { HandleChangeForm } from "~/utils/menangani-perubahan-formulir";
 
 export const ResetKataSandi: React.FC = () => {
-  const location = useLocation();
   const [XSRFToken, setXSRFToken] = useState<string>("");
   const [errorForm, setErrorForm] = useState<Partial<typeof resetPasswordData>>({});
   const [resetPasswordData, setResetPasswordData] = useState<{ password: string, confirm_password: string }>({ password: "", confirm_password: "" });
@@ -14,25 +13,8 @@ export const ResetKataSandi: React.FC = () => {
   const HandleSubmit = (e: FormEvent) => HandleResetPasswordForm(e, resetPasswordData, setErrorForm, XSRFToken);
 
   useEffect(() => {
-    FetchXSRFToken(setXSRFToken, "reset-kata-sandi");
-    (async () => {
-      try {
-        const request_params = new URLSearchParams(location.search);
-        const username = request_params.get("username");
-        const email = request_params.get("email");
-        if (!username || !email) window.location.href = "http://localhost:2000/lupa-kata-sandi";
-
-        const response = await axios.get("http://localhost:2001/auth/lupa-kata-sandi", {
-          params: { username, email },
-          withCredentials: true,
-        });
-          
-        if (response.status === 404) window.location.href = "http://localhost:2000/lupa-kata-sandi";
-      } catch (e) {
-        if (axios.isAxiosError(e) && e.response) console.error(e);
-      }
-    })();
-  }, [location.search]);
+    HandleCSRF(setXSRFToken, "auth", "reset-kata-sandi");
+  }, []);
 
   return (
     <>
@@ -46,7 +28,9 @@ export const ResetKataSandi: React.FC = () => {
           </h3>
           <form onSubmit={HandleSubmit} className="mx-auto mt-10 h-fit w-4/5">
             <div className="flex flex-col">
-              <label htmlFor="password">Kata Sandi Baru</label>
+              <label htmlFor="password" className="font-semibold">
+                Kata Sandi Baru
+              </label>
               <input
                 type="password"
                 name="password"
@@ -58,11 +42,13 @@ export const ResetKataSandi: React.FC = () => {
               {errorForm.password && <span className="mt-3 cursor-default text-base italic text-red-500">{errorForm.password}</span>}
             </div>
             <div className="flex flex-col">
-              <label htmlFor="confirm_password">Kata Sandi Baru</label>
+              <label htmlFor="confirm_password" className="mt-5 font-semibold">
+                Kata Sandi Baru
+              </label>
               <input
                 type="password"
                 name="confirm_password"
-                placeholder="KOnfirmasi Kata Sandi Baru"
+                placeholder="Konfirmasi Kata Sandi Baru"
                 className="mt-4 border-b-2 border-slate-50/50 bg-transparent text-slate-50 focus:border-slate-50 focus:outline-none lg:py-3"
                 onChange={HandleChange}
                 value={resetPasswordData.password}

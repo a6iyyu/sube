@@ -2,7 +2,9 @@ import React, { ChangeEvent, FormEvent, useEffect, useRef, useState } from "reac
 import { Link } from "react-router-dom";
 import { WebsiteMeta } from "~/common/website-meta";
 import { Notifikasi } from "~/common/notification";
-import { FetchXSRFToken, HandleChangeForm, HandleLoginSubmit } from "~/utils/menangani-akun";
+import { HandleLoginSubmit } from "~/utils/menangani-akun";
+import { HandleChangeForm } from "~/utils/menangani-perubahan-formulir";
+import { HandleCSRF } from "~/utils/menangani-csrf";
 import Student3 from "/student-3.jpg?url";
 
 export const Masuk: React.FC = () => {
@@ -19,7 +21,7 @@ export const Masuk: React.FC = () => {
   const ToggleVisible = () => centang.current && kata_sandi.current && ((kata_sandi.current as HTMLInputElement || null).type = centang.current!.querySelector("input")!.checked ? "text" : "password");
 
   useEffect(() => {
-    FetchXSRFToken(setXSRFToken, "masuk");
+    HandleCSRF(setXSRFToken, "auth", "masuk");
 
     if (showNotification.isVisible) {
       const NotificationUnmounted = setTimeout(() => {

@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { Notifikasi } from "~/common/notification";
-import { FetchXSRFToken, HandleChangeForm, HandleSubmitForm } from "~/utils/menangani-kritik-&-saran";
+import { HandleCSRF } from "~/utils/menangani-csrf";
+import { HandleSubmitForm } from "~/utils/menangani-kritik-&-saran";
+import { HandleChangeForm } from "~/utils/menangani-perubahan-formulir";
 
 export const FormulirKritikDanSaran: React.FC = () => {
   const [countCharacter, setCountCharacter] = useState<number>(0);
@@ -14,21 +16,17 @@ export const FormulirKritikDanSaran: React.FC = () => {
   });
 
   useEffect(() => {
-    FetchXSRFToken(setXSRFToken);
+    HandleCSRF(setXSRFToken, "tentang-kami", "kritik-dan-saran");
     setCountCharacter(feedbackData.description.length);
 
     if (successForm) {
-      const NotificationUnmounted = setTimeout(() => {
-        setSuccessForm(false);
-      }, 4000);
+      const NotificationUnmounted = setTimeout(() => setSuccessForm(false), 4000);
       return () => clearTimeout(NotificationUnmounted);
     };
 
     const textarea = (document.querySelector("textarea") as HTMLTextAreaElement) || null;
-    if (textarea) {
-      textarea.style.height = "auto";
-      textarea.style.height = `${textarea.scrollHeight}px`;
-    }
+    if (textarea) textarea.style.height = "auto", textarea.style.height = `${textarea.scrollHeight}px`;
+    
   }, [feedbackData.description, successForm]);
 
   const HandleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => HandleChangeForm(e, setFeedbackData, feedbackData);

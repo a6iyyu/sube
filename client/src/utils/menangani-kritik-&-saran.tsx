@@ -44,22 +44,6 @@ const MenanganiPengiriman = async <T extends KritikSaranAttributes>(e: FormEvent
   }
 };
 
-export const FetchXSRFToken = async (setXSRFToken: Dispatch<SetStateAction<string>>) => {
-  try {
-    const response = await axios.get("http://localhost:2001/tentang-kami/kritik-dan-saran", {
-      withCredentials: true,
-    });
-    setXSRFToken(await response.data["XSRF-Token"]);
-  } catch (e) {
-    if (isAxiosError(e) && e.response) console.error(e.response.data);
-  }
-};
-
-export const HandleChangeForm = <T extends KritikSaranAttributes>(e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>, setFormData: Dispatch<SetStateAction<T>>, FormData: T) => {
-  const { name, value } = e.target;
-  setFormData({ ...FormData, [name]: value });
-};
-
 export const HandleSubmitForm = (e: FormEvent, FormData: KritikSaranAttributes, setErrorForm: Dispatch<SetStateAction<Partial<KritikSaranAttributes>>>, XSRFToken: string, setSuccessForm: Dispatch<SetStateAction<boolean>>, ResetForm: () => void) => {
   MenanganiPengiriman(e, FormData, setErrorForm, XSRFToken, setSuccessForm, ResetForm);
 };
