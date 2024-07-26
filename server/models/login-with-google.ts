@@ -1,4 +1,4 @@
-import { Router } from "express";
+import { Request, Response, Router } from "express";
 import jwt from "jsonwebtoken";
 import passport from "passport";
 import { Strategy as GoogleStrategy, Profile } from "passport-google-oauth20";
@@ -14,7 +14,7 @@ passport.use(new GoogleStrategy({
     clientID: process.env.GOOGLE_CLIENT_ID!,
     clientSecret: process.env.GOOGLE_CLIENT_SECRET!,
     callbackURL: "http://localhost:2001/auth/google/callback",
-  }, async (accessToken, refreshToken, profile: Profile, done) => {
+  }, async (_accessToken, _refreshToken, profile: Profile, done) => {
     try {
       const email = profile.emails?.[0].value;
       if (!email) return done(null, false, { message: "Tidak ada surel yang terasosiasi di akun ini!" });
@@ -29,30 +29,34 @@ passport.use(new GoogleStrategy({
           created_at: new Date(),
         },
       });
-
-      const Token = jwt.sign({ id_user: user.id_user }, process.env.JWT_SECRET || "", { expiresIn: "4h" });
-      return done(null, user, { Token });
-    } catch (error) {
-      return done(error);
+      
+      return done(null, user);
+    } catch (e) {
+      return done(e);
     }
   })
 );
 
 passport.serializeUser((user: any, done) => done(null, user.id_user));
 
-passport.deserializeUser(async (id: string, done) => {
+passport.deserializeUser(async (id_user: string, done) => {
   try {
-    const user = await Prisma.users.findUnique({ where: { id_user: id } });
+    const user = await Prisma.users.findUnique({ where: { id_user: id_user } });
     done(null, user);
-  } catch (error) {
-    done(error);
+  } catch (e) {
+    done(e);
   }
 });
 
 router.get("/auth/google", passport.authenticate("google", { scope: ["profile", "email"] }));
-router.get("/auth/google/callback", passport.authenticate("google", {
-  failureRedirect: "http://localhost:2000/masuk",
-  successRedirect: "http://localhost:2000/dashboard",
-}));
+router.get("/auth/google/callback",
+  passport.authenticate("google", { failureRedirect: "http://localhost:2000/masuk" }),
+  (request: Request, response: Response) => {
+    const User = request.user as any;
+    const Token = jwt.sign({ id_user: User.id_user }, process.env.JWT_SECRET! || "", { expiresIn: "4h" });
+    response.cookie("id_user", Token, { httpOnly: true, secure: true, maxAge: 4 * 60 * 60 * 1000 });
+    response.redirect("http://localhost:2000/dashboard");
+  }
+);
 
 export default router;

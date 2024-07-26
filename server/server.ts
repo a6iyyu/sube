@@ -13,7 +13,7 @@ import { LogoutAuth, UpdateDataUser, UpdateProfilePicture } from "./controllers/
 import { CreateFeedback } from "./models/feedback";
 import { ForgotPassword, ResetPassword } from "./controllers/forgot-reset-password";
 import LoginWithGoogle from "./models/login-with-google";
-import { RegisterAuth, LoginAuth, RequireAuth } from "./models/users";
+import { RegisterAuth, LoginAuth, RequireAuth, UserAuthenticated } from "./models/users";
 
 dotenv.config();
 
@@ -32,8 +32,8 @@ app.use(passport.initialize());
 app.use(passport.session());
 app.use(LoginWithGoogle);
 
-app.post("/auth/registrasi", csrf({ cookie: true }), RegisterAuth);
-app.post("/auth/masuk", csrf({ cookie: true }), LoginAuth);
+app.post("/auth/registrasi", csrf({ cookie: true }), RegisterAuth, UserAuthenticated);
+app.post("/auth/masuk", csrf({ cookie: true }), LoginAuth, UserAuthenticated);
 app.post("/auth/keluar", csrf({ cookie: true }), LogoutAuth);
 app.post("/auth/lupa-kata-sandi", csrf({ cookie: true }), ForgotPassword);
 app.post("/auth/reset-kata-sandi", csrf({ cookie: true }), ResetPassword);

@@ -56,7 +56,7 @@ export const LoginAuth = async (request: Request, response: Response) => {
     if (!CheckPasswordValidation) return response.status(403).send("Akun Anda tidak valid!");
 
     const Token = jwt.sign({ id_user: User.id_user }, process.env.JWT_SECRET || "", { expiresIn: "4h" });
-    response.cookie("id_user", Token, { httpOnly: true });
+    response.cookie("id_user", Token, { httpOnly: true, secure: true, maxAge: 4 * 60 * 60 * 1000 });
     response.status(200).json({ Token });
   } catch (e) {
     console.error(e);
@@ -81,5 +81,17 @@ export const RequireAuth = async (request: Request, response: Response, next: Ne
   } catch (e) {
     console.error(e);
     e instanceof jwt.JsonWebTokenError ? response.status(403).send("Token Anda tidak valid!") : response.status(500).send("Terjadi kesalahan!");
+  }
+};
+
+export const UserAuthenticated = async (request: Request, response: Response) => {
+  try {
+    const Token = request.cookies["id_user"];
+    const Decoded = jwt.verify(Token, process.env.JWT_SECRET || "") as { id_user: string };
+    const FindUser = await Prisma.users.findUnique({ where: { id_user: Decoded.id_user } });
+    if (FindUser) response.redirect(request.headers.referer || "/");
+  } catch (e) {
+    console.error(e);
+    response.status(500).send("Terjadi kesalahan!");
   }
 };

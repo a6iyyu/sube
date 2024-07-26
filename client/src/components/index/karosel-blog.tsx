@@ -14,6 +14,8 @@ export const KaroselBlog: React.FC = () => {
         arrows: false,
         autoplay: true,
         pagination: false,
+        pauseOnFocus: false,
+        pauseOnHover: false,
         perPage: 1,
         snap: true,
         type: "loop",

@@ -13,6 +13,8 @@ export const KaroselBlog: React.FC = () => {
       new Splide(karosel.current, {
         arrows: false,
         pagination: false,
+        pauseOnFocus: false,
+        pauseOnHover: false,
         type: "loop",
         snap: true,
         breakpoints: {
