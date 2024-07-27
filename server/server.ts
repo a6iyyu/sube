@@ -9,7 +9,7 @@ import passport from "passport";
 import rateLimit from "express-rate-limit";
 import session from "express-session";
 import { ImportBlog, RenderBlog } from "./models/blogs";
-import { GetUserData, LogoutAuth, UpdateDataUser, UpdateProfilePicture } from "./controllers/dashboard";
+import { GetUserData, LogoutAuth, UpdateDataUser } from "./controllers/dashboard";
 import { CreateFeedback } from "./models/feedback";
 import { ForgotPassword, ResetPassword } from "./controllers/forgot-reset-password";
 import LoginWithGoogle from "./models/login-with-google";
@@ -38,7 +38,6 @@ app.post("/auth/keluar", csrf({ cookie: true }), LogoutAuth);
 app.post("/auth/lupa-kata-sandi", csrf({ cookie: true }), ForgotPassword);
 app.post("/auth/reset-kata-sandi", csrf({ cookie: true }), ResetPassword);
 app.post("/dashboard/memperbarui-data-pengguna", csrf({ cookie: true }), UpdateDataUser);
-app.post("/dashboard/memperbarui-foto-profil", csrf({ cookie: true }), UpdateProfilePicture);
 app.post("/tentang-kami/kritik-dan-saran", csrf({ cookie: true }), CreateFeedback, rateLimit({
   keyGenerator: (request: Request) => request.body.email,
   max: 3,
@@ -66,7 +65,7 @@ app.get("/tentang-kami/kritik-dan-saran", (request: Request, response: Response)
   response.json({ "XSRF-Token": request.csrfToken() });
 });
 
-app.get("/dashboard", RequireAuth, GetUserData, (request: Request, response: Response) => {
+app.get("/dashboard", RequireAuth, GetUserData, UpdateDataUser, (request: Request, response: Response) => {
   response.json({ "XSRF-Token": request.csrfToken() });
 });
 

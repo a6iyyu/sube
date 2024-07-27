@@ -1,4 +1,5 @@
 export interface Users {
+  id_user?: string;
   username?: string;
   email?: string;
   username_or_email?: string;
