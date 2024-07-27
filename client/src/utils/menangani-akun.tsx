@@ -2,13 +2,13 @@ import { Dispatch, FormEvent, SetStateAction } from "react";
 import axios, { isAxiosError } from "axios";
 import { ZodError } from "zod";
 import { RegisterSkema, LoginSkema } from "~/utils/skema";
-import { registerusers, loginusers } from "~/types/users";
+import { Users } from "~/types/users";
 
 type TipeFormulir = "registrasi" | "masuk";
 
-const MenanganiValidasi = (FormData: registerusers | loginusers, FormType: TipeFormulir) => {
+const MenanganiValidasi = (FormData: Users, FormType: TipeFormulir) => {
   try {
-    FormType === "registrasi" ? RegisterSkema.parse(FormData as registerusers) : LoginSkema.parse(FormData as loginusers);
+    FormType === "registrasi" ? RegisterSkema.parse(FormData) : LoginSkema.parse(FormData);
     return null;
   } catch (e) {
     if (e instanceof ZodError) {
@@ -21,7 +21,7 @@ const MenanganiValidasi = (FormData: registerusers | loginusers, FormType: TipeF
   }
 };
 
-const MenanganiPengiriman = async <T extends registerusers | loginusers>(e: FormEvent, FormData: T, FormType: TipeFormulir, setErrorForm: Dispatch<SetStateAction<Partial<T>>>, XSRFToken: string, setShowNotification: Dispatch<SetStateAction<{ showMessage: string, isVisible: boolean }>>) => {
+const MenanganiPengiriman = async <T extends Users>(e: FormEvent, FormData: T, FormType: TipeFormulir, setErrorForm: Dispatch<SetStateAction<Partial<T>>>, XSRFToken: string, setShowNotification: Dispatch<SetStateAction<{ showMessage: string, isVisible: boolean }>>) => {
   e.preventDefault();
 
   const ValidasiGagal = MenanganiValidasi(FormData, FormType);
@@ -42,10 +42,10 @@ const MenanganiPengiriman = async <T extends registerusers | loginusers>(e: Form
   }
 };
 
-export const HandleRegisterSubmit = (e: FormEvent, registerData: registerusers, setErrorForm: Dispatch<SetStateAction<Partial<registerusers>>>, XSRFToken: string, setShowNotification: Dispatch<SetStateAction<{ showMessage: string, isVisible: boolean }>>) => {
+export const HandleRegisterSubmit = (e: FormEvent, registerData: Users, setErrorForm: Dispatch<SetStateAction<Partial<Users>>>, XSRFToken: string, setShowNotification: Dispatch<SetStateAction<{ showMessage: string, isVisible: boolean }>>) => {
   MenanganiPengiriman(e, registerData, "registrasi", setErrorForm, XSRFToken, setShowNotification);
 };
 
-export const HandleLoginSubmit = (e: FormEvent, loginData: loginusers, setErrorForm: Dispatch<SetStateAction<Partial<loginusers>>>, XSRFToken: string, setShowNotification: Dispatch<SetStateAction<{ showMessage: string, isVisible: boolean }>>) => {
+export const HandleLoginSubmit = (e: FormEvent, loginData: Users, setErrorForm: Dispatch<SetStateAction<Partial<Users>>>, XSRFToken: string, setShowNotification: Dispatch<SetStateAction<{ showMessage: string, isVisible: boolean }>>) => {
   MenanganiPengiriman(e, loginData, "masuk", setErrorForm, XSRFToken, setShowNotification);
 };

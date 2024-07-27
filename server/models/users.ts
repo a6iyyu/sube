@@ -1,7 +1,7 @@
 import { Request, Response, NextFunction } from "express";
 import { PrismaClient } from "@prisma/client";
 import { RegisterValidation, LoginValidation } from "../utils/validation";
-import { registerusers, loginusers } from "../types/users";
+import { Users } from "../types/users";
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 import { ZodError } from "zod";
@@ -12,7 +12,7 @@ const Prisma = new PrismaClient();
 export const RegisterAuth = async (request: Request, response: Response, next: NextFunction) => {
   try {
     RegisterValidation.parse(request.body);
-    const { id_user, username, email, password, created_at }: registerusers = request.body;
+    const { id_user, username, email, password, created_at }: Users = request.body;
     const FindUser = await Prisma.users.findFirst({
       where: {
         OR: [{ username }, { email }],
@@ -45,7 +45,7 @@ export const RegisterAuth = async (request: Request, response: Response, next: N
 export const LoginAuth = async (request: Request, response: Response) => {
   try {
     LoginValidation.parse(request.body);
-    const { username_or_email, password }: loginusers = request.body;
+    const { username_or_email, password }: Users = request.body;
     const User = await Prisma.users.findFirst({
       where: { OR: [{ username: username_or_email }, { email: username_or_email }] },
     });

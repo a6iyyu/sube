@@ -9,7 +9,7 @@ import passport from "passport";
 import rateLimit from "express-rate-limit";
 import session from "express-session";
 import { ImportBlog, RenderBlog } from "./models/blogs";
-import { LogoutAuth, UpdateDataUser, UpdateProfilePicture } from "./controllers/dashboard";
+import { GetUserData, LogoutAuth, UpdateDataUser, UpdateProfilePicture } from "./controllers/dashboard";
 import { CreateFeedback } from "./models/feedback";
 import { ForgotPassword, ResetPassword } from "./controllers/forgot-reset-password";
 import LoginWithGoogle from "./models/login-with-google";
@@ -66,7 +66,7 @@ app.get("/tentang-kami/kritik-dan-saran", (request: Request, response: Response)
   response.json({ "XSRF-Token": request.csrfToken() });
 });
 
-app.get("/dashboard", RequireAuth, (request: Request, response: Response) => {
+app.get("/dashboard", RequireAuth, GetUserData, (request: Request, response: Response) => {
   response.json({ "XSRF-Token": request.csrfToken() });
 });
 

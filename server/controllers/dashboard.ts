@@ -1,8 +1,25 @@
 import { Request, Response } from "express";
 import { PrismaClient } from "@prisma/client";
-import { dashboard } from "~/types/dashboard";
+import { Users } from "~/types/users";
 
 const Prisma = new PrismaClient();
+
+export const GetUserData = async (request: Request, response: Response) => {
+  try {
+    const { username, email, password }: Users = request.body;
+    const FindUser = await Prisma.users.findFirst({
+      where: {
+        AND: [{ username }, { email }, { password }],
+      },
+    });
+
+    if (!FindUser) return response.status(404).send("Pengguna tidak dtemukan!");
+    response.status(200).json({ FindUser });
+  } catch (e) {
+    console.error(e);
+    response.status(500).send("Terjadi kesalahan!");
+  }
+};
 
 // Mengatur RESTful API agar pengguna keluar dari akun.
 export const LogoutAuth = async (request: Request, response: Response) => {
@@ -24,12 +41,12 @@ export const LogoutAuth = async (request: Request, response: Response) => {
 // di halaman dashboard.
 export const UpdateProfilePicture = async (request: Request, response: Response) => {
   try {
-    const { id_user, profile_picture }: dashboard = request.body;
+    const { id_user, dashboard }: Users = request.body;
     const FindUser = await Prisma.users.findUnique({ where: { id_user } });
     if (!id_user || !FindUser) return response.status(404).send("Pengguna tidak ditemukan!");
 
     const UpdateProfile = await Prisma.dashboard.update({
-      data: { profile_picture, updated_at: new Date() },
+      data: { profile_picture: dashboard.profile_picture, updated_at: new Date() },
       where: { id_user },
     });
     if (!UpdateProfile) return response.status(400).send("Permintaan Anda mengalami masalah!");
@@ -44,12 +61,12 @@ export const UpdateProfilePicture = async (request: Request, response: Response)
 // mengunggah data pribadi di halaman dashboard.
 export const UpdateDataUser = async (request: Request, response: Response) => {
   try {
-    const { id_user, bio, nationality }: dashboard = request.body;
+    const { id_user, dashboard }: Users = request.body;
     const FindUser = await Prisma.users.findUnique({ where: { id_user } });
     if (!id_user || !FindUser) return response.status(404).send("Pengguna tidak ditemukan!");
 
     const UpdateData = await Prisma.dashboard.update({
-      data: { bio, nationality, updated_at: new Date() },
+      data: { bio: dashboard.bio, nationality: dashboard.nationality, updated_at: new Date() },
       where: { id_user },
     });
     if (!UpdateData) return response.status(400).send("Permintaan Anda untuk memperbarui data mengalami masalah!");

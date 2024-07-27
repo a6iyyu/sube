@@ -3,14 +3,14 @@ import { PrismaClient } from "@prisma/client";
 import bcrypt from "bcryptjs";
 import { ZodError } from "zod";
 import { ForgotPasswordValidation, ResetPasswordValidation } from "../utils/validation";
-import { registerusers, loginusers } from "~/types/users";
+import { Users } from "~/types/users";
 
 const Prisma = new PrismaClient();
 
 export const ForgotPassword = async (request: Request, response: Response, next: NextFunction) => {
   try {
     ForgotPasswordValidation.parse(request.body);
-    const { username_or_email }: loginusers = request.body;
+    const { username_or_email }: Users = request.body;
     const FindUser = await Prisma.users.findFirst({
       where: {
         OR: [
@@ -32,7 +32,7 @@ export const ForgotPassword = async (request: Request, response: Response, next:
 export const ResetPassword = async (request: Request, response: Response, next: NextFunction) => {
   try {
     ResetPasswordValidation.parse(request.body);
-    const { id_user, password, updated_at }: registerusers = request.body;
+    const { id_user, password, updated_at }: Users = request.body;
     const FindUser = await Prisma.users.findUnique({ where: { id_user } });
     if (!FindUser) return response.status(404).send("Data tidak ditemukan!");
 

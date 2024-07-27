@@ -2,13 +2,13 @@ import { Dispatch, FormEvent, SetStateAction } from "react";
 import axios, { isAxiosError } from "axios";
 import { ZodError } from "zod";
 import { LupaKataSandiSkema, ResetKataSandiSkema } from "./skema";
-import { resetpassword } from "~/types/users";
+import { Users } from "~/types/users";
 
 type TipeFormulir = "lupa-kata-sandi" | "reset-kata-sandi";
 
-const MenanganiValidasi = (FormData: { username_or_email: string } | resetpassword, FormType: TipeFormulir) => {
+const MenanganiValidasi = (FormData: Users, FormType: TipeFormulir) => {
   try {
-    FormType === "lupa-kata-sandi" ? LupaKataSandiSkema.parse(FormData as { username_or_email: string }) : ResetKataSandiSkema.parse(FormData as resetpassword);
+    FormType === "lupa-kata-sandi" ? LupaKataSandiSkema.parse(FormData) : ResetKataSandiSkema.parse(FormData);
     return null;
   } catch (e) {
     if (e instanceof ZodError) {
@@ -21,7 +21,7 @@ const MenanganiValidasi = (FormData: { username_or_email: string } | resetpasswo
   }
 };
 
-const MenanganiPengiriman = async <T extends { username_or_email: string } | resetpassword>(e: FormEvent, FormData: T, FormType: TipeFormulir, setErrorForm: Dispatch<SetStateAction<Partial<T>>>, XSRFToken: string, setShowNotification: Dispatch<SetStateAction<{ showMessage: string, isVisible: boolean }>>) => {
+const MenanganiPengiriman = async <T extends Users>(e: FormEvent, FormData: T, FormType: TipeFormulir, setErrorForm: Dispatch<SetStateAction<Partial<T>>>, XSRFToken: string, setShowNotification: Dispatch<SetStateAction<{ showMessage: string, isVisible: boolean }>>) => {
   e.preventDefault();
 
   const ValidasiGagal = MenanganiValidasi(FormData, FormType);
@@ -41,10 +41,10 @@ const MenanganiPengiriman = async <T extends { username_or_email: string } | res
   }
 };
 
-export const HandleForgotPasswordForm = <T extends { username_or_email: string }>(e: FormEvent, forgotPasswordData: T, setErrorForm: Dispatch<SetStateAction<Partial<T>>>, XSRFToken: string, setShowNotification: Dispatch<SetStateAction<{ showMessage: string, isVisible: boolean }>>) => {
+export const HandleForgotPasswordForm = <T extends Users>(e: FormEvent, forgotPasswordData: T, setErrorForm: Dispatch<SetStateAction<Partial<T>>>, XSRFToken: string, setShowNotification: Dispatch<SetStateAction<{ showMessage: string, isVisible: boolean }>>) => {
   MenanganiPengiriman(e, forgotPasswordData, "lupa-kata-sandi", setErrorForm, XSRFToken, setShowNotification);
 };
 
-export const HandleResetPasswordForm = <T extends resetpassword>(e: FormEvent, resetPasswordData: T, setErrorForm: Dispatch<SetStateAction<Partial<T>>>, XSRFToken: string, setShowNotification: Dispatch<SetStateAction<{ showMessage: string, isVisible: boolean }>>) => {
+export const HandleResetPasswordForm = <T extends Users>(e: FormEvent, resetPasswordData: T, setErrorForm: Dispatch<SetStateAction<Partial<T>>>, XSRFToken: string, setShowNotification: Dispatch<SetStateAction<{ showMessage: string, isVisible: boolean }>>) => {
   MenanganiPengiriman(e, resetPasswordData, "reset-kata-sandi", setErrorForm, XSRFToken, setShowNotification);
 };

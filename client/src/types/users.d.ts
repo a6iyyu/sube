@@ -1,16 +1,15 @@
-export interface registerusers {
-  username: string;
-  email: string;
-  password: string;
-  confirm_password: string;
+export interface Users {
+  username?: string;
+  email?: string;
+  username_or_email?: string;
+  password?: string;
+  confirm_password?: string;
+  dashboard?: Dashboard;
 }
 
-export interface loginusers {
-  username_or_email: string;
-  password: string;
-}
-
-export interface resetpassword {
-  password: string;
-  confirm_password: string;
+interface Dashboard {
+  profile_picture?: string;
+  username?: string;
+  bio?: string;
+  nationality?: string;
 }
