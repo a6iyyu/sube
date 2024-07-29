@@ -1,22 +1,17 @@
 import { Request, Response } from "express";
 import { PrismaClient } from "@prisma/client";
-import CryptoJS from "crypto-js";
 import { Users } from "~/types/users";
 
 const Prisma = new PrismaClient();
 
+// Mengambil data pengguna di basis data.
 export const GetUserData = async (request: Request, response: Response) => {
   try {
-    const { username, email, password }: Users = request.body;
-    const DecryptedPassword = CryptoJS.AES.decrypt(password, process.env.ENCRYPT_KEY || "").toString(CryptoJS.enc.Utf8);
-    const User = await Prisma.users.findMany({
-      where: {
-        AND: [{ username }, { email }, { password: DecryptedPassword }],
-      },
+    const { username, email }: Users = request.body;
+    const user = await Prisma.users.findMany({
+      where: { AND: [{ username }, { email }] },
     });
-
-    if (!User || User.length === 0) return response.status(404).send("Pengguna tidak dtemukan!");
-    response.status(200).json({ User });
+    response.status(200).json({ user });
   } catch (e) {
     console.error(e);
     response.status(500).send("Terjadi kesalahan!");
@@ -28,7 +23,6 @@ export const LogoutAuth = async (request: Request, response: Response) => {
   try {
     const { id_user } = request.cookies["id_user"];
     if (!id_user) return response.status(404).send("Pengguna tidak ditemukan!");
-
     await Prisma.users.delete({ where: { id_user } });
     response.status(200);
   } catch (e) {

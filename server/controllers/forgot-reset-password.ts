@@ -1,5 +1,6 @@
 import { Request, Response, NextFunction } from "express";
 import { PrismaClient } from "@prisma/client";
+import bcrypt from "bcryptjs";
 import { ZodError } from "zod";
 import { ForgotPasswordValidation, ResetPasswordValidation } from "../utils/validation";
 import { Users } from "~/types/users";
@@ -35,9 +36,9 @@ export const ResetPassword = async (request: Request, response: Response, next: 
     const FindUser = await Prisma.users.findUnique({ where: { id_user } });
     if (!FindUser) return response.status(404).send("Data tidak ditemukan!");
 
-    const EncryptedPassword = CryptoJS.AES.encrypt(password, process.env.ENCRYPT_KEY || "").toString();
+    const HashedPassword = await bcrypt.hash(password, 10);
     const ResetPassword = await Prisma.users.update({
-      data: { password: EncryptedPassword, updated_at },
+      data: { password: HashedPassword, updated_at },
       where: { id_user },
     });
 

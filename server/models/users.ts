@@ -2,7 +2,7 @@ import { Request, Response, NextFunction } from "express";
 import { PrismaClient } from "@prisma/client";
 import { RegisterValidation, LoginValidation } from "../utils/validation";
 import { Users } from "../types/users";
-import CryptoJS from "crypto-js";
+import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 import { ZodError } from "zod";
 
@@ -20,13 +20,13 @@ export const RegisterAuth = async (request: Request, response: Response, next: N
     });
     if (FindUser) return response.status(409).send("Data sudah ada!");
 
-    const EncryptedPassword = CryptoJS.AES.encrypt(password, process.env.ENCRYPT_KEY || "").toString();
+    const HashedPassword = await bcrypt.hash(password, 10);
     const User = await Prisma.users.create({
       data: {
         id_user,
         username,
         email,
-        password: EncryptedPassword,
+        password: HashedPassword,
         created_at
       },
     });
@@ -52,7 +52,7 @@ export const LoginAuth = async (request: Request, response: Response) => {
 
     if (!User) return response.status(404).send("Pengguna tidak ditemukan!");
 
-    const CheckPasswordValidation = CryptoJS.AES.decrypt(User.password, process.env.ENCRYPT_KEY || "").toString(CryptoJS.enc.Utf8);
+    const CheckPasswordValidation = await bcrypt.compare(password, User.password);
     if (!CheckPasswordValidation) return response.status(403).send("Akun Anda tidak valid!");
 
     const Token = jwt.sign({ id_user: User.id_user }, process.env.JWT_SECRET || "", { expiresIn: "4h" });

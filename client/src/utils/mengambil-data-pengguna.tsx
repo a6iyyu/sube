@@ -6,7 +6,7 @@ export const MengambilDataPengguna = async (setGetUserData: Dispatch<SetStateAct
   try {
     const response = await axios.get("http://localhost:2001/dashboard", { withCredentials: true });
     if (response.status !== 200) setShowNotification({ showMessage: response.data.message, isVisible: true });
-    setGetUserData(response.data.User);
+    setGetUserData(response.data.user);
   } catch (e) {
     if (isAxiosError(e) && e.response) setShowNotification({ showMessage: e.response.data.message || "Terjadi kesalahan!", isVisible: true }); 
   }

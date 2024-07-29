@@ -1,4 +1,5 @@
 import express, { Request, Response } from "express";
+import { PrismaClient } from "@prisma/client";
 import bodyParser from "body-parser";
 import cookieParser from "cookie-parser";
 import cors from "cors";
@@ -8,17 +9,20 @@ import logger from "morgan";
 import passport from "passport";
 import rateLimit from "express-rate-limit";
 import session from "express-session";
+import connectPgSimple from "connect-pg-simple";
 import { ImportBlog, RenderBlog } from "./models/blogs";
-import { GetUserData, LogoutAuth, UpdateDataUser } from "./controllers/dashboard";
+import { LogoutAuth, UpdateDataUser, GetUserData } from "./controllers/dashboard";
 import { CreateFeedback } from "./models/feedback";
 import { ForgotPassword, ResetPassword } from "./controllers/forgot-reset-password";
 import LoginWithGoogle from "./models/login-with-google";
-import { RegisterAuth, LoginAuth, RequireAuth, UserAuthenticated } from "./models/users";
+import { RegisterAuth, LoginAuth, RequireAuth } from "./models/users";
 
 dotenv.config();
 
 const app = express();
 const port = process.env.PORT || 2001;
+const Prisma = new PrismaClient();
+const PgStore = connectPgSimple(session);
 
 app.use(bodyParser.json());
 app.use(cookieParser());
@@ -27,13 +31,13 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(logger("common"));
 app.use(csrf({ cookie: true }));
-app.use(session({ secret: process.env.SESSION_SECRET || "", resave: false, saveUninitialized: false }));
+app.use(session({ secret: process.env.SESSION_SECRET || "", store: new PgStore(), resave: false, saveUninitialized: false }));
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(LoginWithGoogle);
 
-app.post("/auth/registrasi", csrf({ cookie: true }), RegisterAuth, UserAuthenticated);
-app.post("/auth/masuk", csrf({ cookie: true }), LoginAuth, UserAuthenticated);
+app.post("/auth/registrasi", csrf({ cookie: true }), RegisterAuth);
+app.post("/auth/masuk", csrf({ cookie: true }), LoginAuth);
 app.post("/auth/keluar", csrf({ cookie: true }), LogoutAuth);
 app.post("/auth/lupa-kata-sandi", csrf({ cookie: true }), ForgotPassword);
 app.post("/auth/reset-kata-sandi", csrf({ cookie: true }), ResetPassword);
