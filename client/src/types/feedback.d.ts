@@ -1,5 +1,5 @@
-export interface feedback {
-  email: string;
-  subject: string;
-  description: string;
+export interface Feedback {
+  email?: string;
+  subject?: string;
+  description?: string;
 }

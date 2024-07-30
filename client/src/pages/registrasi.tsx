@@ -2,9 +2,10 @@ import React, { ChangeEvent, FormEvent, useEffect, useRef, useState } from "reac
 import { Link } from "react-router-dom";
 import { Notifikasi } from "~/common/notification";
 import { WebsiteMeta } from "~/common/website-meta";
-import { HandleRegisterSubmit } from "~/utils/menangani-akun";
+import { MenanganiPengiriman } from "~/utils/menangani-pengiriman";
 import { HandleChangeForm } from "~/utils/menangani-perubahan-formulir";
 import { HandleCSRF } from "~/utils/menangani-csrf";
+import { RegisterSkema } from "~/utils/skema";
 import School from "/school.jpg?url";
 
 export const Registrasi: React.FC = () => {
@@ -38,7 +39,7 @@ export const Registrasi: React.FC = () => {
   }, [registerData, showNotification.isVisible]);
 
   const HandleChange = (e: ChangeEvent<HTMLInputElement>) => HandleChangeForm(e, setRegisterData, registerData);
-  const HandleSubmit = (e: FormEvent) => HandleRegisterSubmit(e, registerData, setErrorForm, XSRFToken, setShowNotification);
+  const HandleSubmit = (e: FormEvent) => MenanganiPengiriman(e, RegisterSkema, registerData, setErrorForm, setShowNotification, null, "auth/registrasi", "masuk", XSRFToken, () => null);
 
   return (
     <>

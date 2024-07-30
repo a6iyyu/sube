@@ -1,8 +1,9 @@
 import React, { ChangeEvent, FormEvent, useEffect, useState } from "react";
 import { WebsiteMeta } from "~/common/website-meta";
 import { HandleCSRF } from "~/utils/menangani-csrf";
-import { HandleResetPasswordForm } from "~/utils/menangani-lupa-kata-sandi";
+import { MenanganiPengiriman } from "~/utils/menangani-pengiriman";
 import { HandleChangeForm } from "~/utils/menangani-perubahan-formulir";
+import { ResetKataSandiSkema } from "~/utils/skema";
 
 export const ResetKataSandi: React.FC = () => {
   const [XSRFToken, setXSRFToken] = useState<string>("");
@@ -10,7 +11,7 @@ export const ResetKataSandi: React.FC = () => {
   const [resetPasswordData, setResetPasswordData] = useState<{ password: string, confirm_password: string }>({ password: "", confirm_password: "" });
 
   const HandleChange = (e: ChangeEvent<HTMLInputElement>) => HandleChangeForm(e, setResetPasswordData, resetPasswordData);
-  const HandleSubmit = (e: FormEvent) => HandleResetPasswordForm(e, resetPasswordData, setErrorForm, XSRFToken);
+  const HandleSubmit = (e: FormEvent) => MenanganiPengiriman(e, ResetKataSandiSkema, resetPasswordData, setErrorForm, null, null, "auth/reset-kata-sandi", "masuk", XSRFToken, () => null);
 
   useEffect(() => {
     HandleCSRF(setXSRFToken, "auth", "reset-kata-sandi");

@@ -2,9 +2,10 @@ import React, { ChangeEvent, FormEvent, useEffect, useRef, useState } from "reac
 import { Link } from "react-router-dom";
 import { WebsiteMeta } from "~/common/website-meta";
 import { Notifikasi } from "~/common/notification";
-import { HandleLoginSubmit } from "~/utils/menangani-akun";
 import { HandleChangeForm } from "~/utils/menangani-perubahan-formulir";
 import { HandleCSRF } from "~/utils/menangani-csrf";
+import { MenanganiPengiriman } from "~/utils/menangani-pengiriman";
+import { LoginSkema } from "~/utils/skema";
 import Student3 from "/student-3.jpg?url";
 
 export const Masuk: React.FC = () => {
@@ -24,9 +25,7 @@ export const Masuk: React.FC = () => {
     HandleCSRF(setXSRFToken, "auth", "masuk");
 
     if (showNotification.isVisible) {
-      const NotificationUnmounted = setTimeout(() => {
-        setShowNotification({ showMessage: "", isVisible: false });
-      }, 4000);
+      const NotificationUnmounted = setTimeout(() => setShowNotification({ showMessage: "", isVisible: false }), 4000);
       return () => clearTimeout(NotificationUnmounted);
     };
 
@@ -37,7 +36,7 @@ export const Masuk: React.FC = () => {
   }, []);
 
   const HandleChange = (e: ChangeEvent<HTMLInputElement>) => HandleChangeForm(e, setLoginData, loginData);
-  const HandleSubmit = (e: FormEvent) => HandleLoginSubmit(e, loginData, setErrorForm, XSRFToken, setShowNotification);
+  const HandleSubmit = (e: FormEvent) => MenanganiPengiriman(e, LoginSkema, loginData, setErrorForm, setShowNotification, null, "auth/masuk", "dashboard", XSRFToken, () => null);
 
   return (
     <>

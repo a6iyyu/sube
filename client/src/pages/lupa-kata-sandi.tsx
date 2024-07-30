@@ -3,9 +3,10 @@ import { Link } from "react-router-dom";
 import { Notifikasi } from "~/common/notification";
 import { WebsiteMeta } from "~/common/website-meta";
 import { HandleCSRF } from "~/utils/menangani-csrf";
-import { HandleForgotPasswordForm } from "~/utils/menangani-lupa-kata-sandi";
+import { MenanganiPengiriman } from "~/utils/menangani-pengiriman";
 import { HandleChangeForm } from "~/utils/menangani-perubahan-formulir";
 import ForgotPasswordImage from "/forgot-password.jpg?url";
+import { LupaKataSandiSkema } from "~/utils/skema";
 
 export const LupaKataSandi: React.FC = () => {
   const [XSRFToken, setXSRFToken] = useState<string>("");
@@ -22,7 +23,7 @@ export const LupaKataSandi: React.FC = () => {
   }, [forgotPasswordData, showNotification.isVisible]);
 
   const HandleChange = (e: ChangeEvent<HTMLInputElement>) => HandleChangeForm(e, setForgotPasswordData, forgotPasswordData);
-  const HandleSubmit = (e: FormEvent) => HandleForgotPasswordForm(e, forgotPasswordData, setErrorForm, XSRFToken, setShowNotification);
+  const HandleSubmit = (e: FormEvent) => MenanganiPengiriman(e, LupaKataSandiSkema, forgotPasswordData, setErrorForm, setShowNotification, null, "auth/lupa-kata-sandi", "reset-kata-sandi", XSRFToken, () => null);
 
   return (
     <>

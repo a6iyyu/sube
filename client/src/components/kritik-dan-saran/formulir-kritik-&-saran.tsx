@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { Notifikasi } from "~/common/notification";
 import { HandleCSRF } from "~/utils/menangani-csrf";
-import { HandleSubmitForm } from "~/utils/menangani-kritik-&-saran";
+import { MenanganiPengiriman } from "~/utils/menangani-pengiriman";
 import { HandleChangeForm } from "~/utils/menangani-perubahan-formulir";
+import { KritikSaranSkema } from "~/utils/skema";
 
 export const FormulirKritikDanSaran: React.FC = () => {
   const [countCharacter, setCountCharacter] = useState<number>(0);
@@ -30,7 +31,7 @@ export const FormulirKritikDanSaran: React.FC = () => {
   }, [feedbackData.description, successForm]);
 
   const HandleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => HandleChangeForm(e, setFeedbackData, feedbackData);
-  const HandleSubmit = (e: React.FormEvent) => HandleSubmitForm(e, feedbackData, setErrorForm, XSRFToken, setSuccessForm, () => setFeedbackData({ email: "", subject: "", description: "" }));
+  const HandleSubmit = (e: React.FormEvent) => MenanganiPengiriman(e, KritikSaranSkema, feedbackData, setErrorForm, null, setSuccessForm, "tentang-kami/kritik-dan-saran", null, XSRFToken, () => setFeedbackData({ email: "", subject: "", description: "" }));
 
   return (
     <main className="mx-auto mb-60 mt-24 h-fit w-4/5 text-slate-50 lg:mt-32">
