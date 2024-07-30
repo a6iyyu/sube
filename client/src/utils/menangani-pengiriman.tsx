@@ -7,17 +7,15 @@ import { Users } from "~/types/users";
 const MenanganiValidasi = <T extends Feedback | Users>(
   Skema: ZodSchema,
   FormData: T,
-  POSTRoute: string | T,
 ) => {
   try {
-    Skema.parse(FormData as typeof POSTRoute);
+    Skema.parse(FormData);
     return null;
   } catch (e) {
     if (e instanceof ZodError) {
       const SchemaError: any = {};
-      e.errors.forEach((err) => {
-        if (err.path.length) SchemaError[err.path[0]] = err.message;
-      });
+      e.errors.forEach(err => err.path.length && (SchemaError[err.path[0]] = err.message));
+      return SchemaError;
     }
   }
 };
@@ -37,8 +35,8 @@ export const MenanganiPengiriman = async <T extends Feedback | Users>(
 ) => {
   e.preventDefault();
 
-  const ValidasiGagal = MenanganiValidasi(Skema, FormData, POSTRoute);
-  if (ValidasiGagal) setErrorForm(ValidasiGagal);
+  const ValidasiGagal = MenanganiValidasi(Skema, FormData);
+  if (ValidasiGagal) return setErrorForm(ValidasiGagal);
 
   try {
     const response = await axios.post(`http://localhost:2001/${POSTRoute}`, FormData, {
