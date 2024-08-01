@@ -42,12 +42,12 @@ export const KaroselBlog: React.FC = () => {
       <section className="splide__track h-full w-full">
         <ul className="splide__list">
           {PropsKaroselBlog.slice(5, 10).map(karosel => (
-            <Link to={`/blog/${karosel.judul.replace(/ /g, "-").toLowerCase()}`} key={karosel.id} className="splide__slide flex h-full w-full">
+            <Link to={`/blog/${karosel.judul.replace(/ /g, "-").replace(/.0,/g, "").toLowerCase()}`} key={karosel.id} className="splide__slide flex h-full w-full">
               <div className="mx-auto h-full w-[90%] flex-col items-center">
                 <img src={karosel.gambar} alt={karosel.judul} className="h-72 w-full rounded-2xl object-cover [box-shadow:0.3rem_0.3rem_0_#bcbcbc]" />
                 <h2 className="group mt-4 text-justify text-xl font-bold text-slate-50 transition-all duration-300 ease-in-out [text-align-last:left] lg:text-2xl">
                   <span className="lg:bg-gradient-to-r lg:from-sky-500 lg:to-sky-500 lg:bg-[length:0%_0.125rem] lg:bg-left-bottom lg:bg-no-repeat lg:transition-all lg:duration-500 lg:ease-out lg:group-hover:bg-[length:100%_0.125rem]">
-                    {karosel.judul}
+                    {MemendekkanKalimat(karosel.judul, 75)}
                   </span>
                 </h2>
                 <h2 className="group mt-4 text-justify text-base font-medium text-slate-50 transition-all duration-300 ease-in-out [text-align-last:left]">

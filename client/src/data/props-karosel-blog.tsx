@@ -45,7 +45,7 @@ export const PropsKaroselBlog: InitPropsKaroselBlog[] = [
   {
     id: "7",
     gambar: "",
-    judul: "Kecerdasan Buatan dalam Kehidupan Sehari-hari, Manfaat, dan Tantangannya",
+    judul: "Implikasi dan Manfaat Kecerdasan Buatan dalam Kehidupan Sehari-hari serta Tantangannya",
     deskripsi: "Kecerdasan buatan (AI) semakin terintegrasi dalam kehidupan sehari-hari, dari asisten virtual hingga kendaraan otonom. AI memberikan kemudahan dan efisiensi, tetapi juga menimbulkan tantangan terkait etika dan privasi.",
   },
   {
