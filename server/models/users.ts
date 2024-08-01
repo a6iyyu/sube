@@ -1,10 +1,10 @@
 import { Request, Response, NextFunction } from "express";
 import { PrismaClient } from "@prisma/client";
-import { RegisterValidation, LoginValidation } from "../utils/validation";
-import { Users } from "../types/users";
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 import { ZodError } from "zod";
+import { RegisterValidation, LoginValidation } from "../utils/validation";
+import { Users } from "../types/users";
 
 const Prisma = new PrismaClient();
 
@@ -13,11 +13,7 @@ export const RegisterAuth = async (request: Request, response: Response, next: N
   try {
     RegisterValidation.parse(request.body);
     const { id_user, username, email, password, created_at }: Users = request.body;
-    const FindUser = await Prisma.users.findFirst({
-      where: {
-        OR: [{ username }, { email }],
-      },
-    });
+    const FindUser = await Prisma.users.findFirst({ where: { OR: [{ username }, { email }] }});
     if (FindUser) return response.status(409).send("Data sudah ada!");
 
     const HashedPassword = await bcrypt.hash(password, 10);
@@ -32,7 +28,7 @@ export const RegisterAuth = async (request: Request, response: Response, next: N
     });
 
     if (!User) return response.status(422).send("Validasi gagal!");
-    response.status(201).json({ User });
+    response.status(201).json(User);
     next();
   } catch (e) {
     console.error(e);
@@ -47,7 +43,9 @@ export const LoginAuth = async (request: Request, response: Response) => {
     LoginValidation.parse(request.body);
     const { username_or_email, password }: Users = request.body;
     const User = await Prisma.users.findFirst({
-      where: { OR: [{ username: username_or_email }, { email: username_or_email }] },
+      where: {
+        OR: [{ username: username_or_email }, { email: username_or_email }],
+      },
     });
 
     if (!User) return response.status(404).send("Pengguna tidak ditemukan!");
@@ -57,30 +55,10 @@ export const LoginAuth = async (request: Request, response: Response) => {
 
     const Token = jwt.sign({ id_user: User.id_user }, process.env.JWT_SECRET || "", { expiresIn: "4h" });
     response.cookie("id_user", Token, { httpOnly: true, secure: true, maxAge: 4 * 60 * 60 * 1000 });
-    response.status(200).json({ Token });
+    response.status(200).json(Token);
   } catch (e) {
     console.error(e);
     e instanceof ZodError ? response.status(400).send("Data Anda tidak valid!") : response.status(500).send("Terjadi kesalahan pada server saat proses masuk ke Sube!");
-  }
-};
-
-// Jika pengguna tidak melakukan proses masuk atau belum membuat akun,
-// tetapi masuk ke halaman profil secara paksa, maka halaman profil
-// akan otomatis mengarahkan ke halaman masuk.
-export const RequireAuth = async (request: Request, response: Response, next: NextFunction) => {
-  try {
-    const Token = request.cookies["id_user"];
-    if (!Token) return response.status(401).send("Autentikasi diperlukan!");
-
-    const Decoded = jwt.verify(Token, process.env.JWT_SECRET || "") as { id_user: string };
-    if (!Decoded) return response.status(403).send("Token Anda tidak valid!");
-
-    const FindUser = await Prisma.users.findUnique({ where: { id_user: Decoded.id_user } });
-    if (!FindUser) return response.status(404).send("Pengguna tidak ditemukan!");
-    next();
-  } catch (e) {
-    console.error(e);
-    e instanceof jwt.JsonWebTokenError ? response.status(403).send("Token Anda tidak valid!") : response.status(500).send("Terjadi kesalahan!");
   }
 };
 

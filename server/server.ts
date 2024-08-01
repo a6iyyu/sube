@@ -11,11 +11,11 @@ import rateLimit from "express-rate-limit";
 import session from "express-session";
 import connectPgSimple from "connect-pg-simple";
 import { ImportBlog, RenderBlog } from "./models/blogs";
-import { LogoutAuth, UpdateDataUser, GetUserData } from "./controllers/dashboard";
+import { LogoutAuth, UpdateDataUser, RequireAuthAndGetUserData } from "./controllers/dashboard";
 import { CreateFeedback } from "./models/feedback";
 import { ForgotPassword, ResetPassword } from "./controllers/forgot-reset-password";
 import LoginWithGoogle from "./models/login-with-google";
-import { RegisterAuth, LoginAuth, RequireAuth } from "./models/users";
+import { RegisterAuth, LoginAuth } from "./models/users";
 
 dotenv.config();
 
@@ -69,7 +69,7 @@ app.get("/tentang-kami/kritik-dan-saran", (request: Request, response: Response)
   response.json({ "XSRF-Token": request.csrfToken() });
 });
 
-app.get("/dashboard", RequireAuth, GetUserData, UpdateDataUser, (request: Request, response: Response) => {
+app.get("/dashboard", RequireAuthAndGetUserData, UpdateDataUser, (request: Request, response: Response) => {
   response.json({ "XSRF-Token": request.csrfToken() });
 });
 

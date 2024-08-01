@@ -1,20 +1,32 @@
-import { Request, Response } from "express";
+import { Request, Response, NextFunction } from "express";
 import { PrismaClient } from "@prisma/client";
-import { Users } from "~/types/users";
+import jwt from "jsonwebtoken";
 
 const Prisma = new PrismaClient();
 
-// Mengambil data pengguna di basis data.
-export const GetUserData = async (request: Request, response: Response) => {
+// Jika pengguna tidak melakukan proses masuk atau belum membuat akun,
+// tetapi masuk ke halaman profil secara paksa, maka halaman profil
+// akan otomatis mengarahkan ke halaman masuk.
+// Mendapatkan data pengguna di dalam basis data.
+export const RequireAuthAndGetUserData = async (request: Request, response: Response, next: NextFunction) => {
   try {
-    const { username, email }: Users = request.body;
-    const user = await Prisma.users.findMany({
-      where: { AND: [{ username }, { email }] },
+    const Token = request.cookies["id_user"];
+    if (!Token) return response.status(401).send("Autentikasi diperlukan!");
+
+    const Decoded = jwt.verify(Token, process.env.JWT_SECRET || "") as { id_user: string };
+    if (!Decoded) return response.status(403).send("Token Anda tidak valid!");
+
+    const user = await Prisma.users.findUnique({
+      where: { id_user: Decoded.id_user },
+      include: { dashboard: true },
     });
-    response.status(200).json({ user });
+    
+    if (!user) return response.status(404).send("Pengguna tidak ditemukan!");
+    response.status(200).json(user);
+    next();
   } catch (e) {
     console.error(e);
-    response.status(500).send("Terjadi kesalahan!");
+    e instanceof jwt.JsonWebTokenError ? response.status(403).send("Token Anda tidak valid!") : response.status(500).send("Terjadi kesalahan!");
   }
 };
 
