@@ -47,7 +47,7 @@ export const DetailKaroselBlog: React.FC = () => {
       <Header />
       <main className="mx-auto mb-40 mt-16 h-fit w-4/5 cursor-default text-justify font-normal text-slate-50 lg:mt-28">
         <MDXProvider>
-          <section className="mb-10 h-fit w-full">
+          <section className="mb-10 inline h-fit w-full lg:hidden">
             <img src={frontmatter?.gambar} alt={frontmatter?.judul} className="h-full w-full rounded-xl object-cover transition-all duration-300 ease-in-out [box-shadow:0.4rem_0.4rem_0_#bcbcbc50] lg:hover:scale-[1.025]" />
           </section>
           <MDXContent />
