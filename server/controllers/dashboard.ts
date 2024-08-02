@@ -33,10 +33,8 @@ export const RequireAuthAndGetUserData = async (request: Request, response: Resp
 // Mengatur RESTful API agar pengguna keluar dari akun.
 export const LogoutAuth = async (request: Request, response: Response) => {
   try {
-    const { id_user } = request.cookies["id_user"];
-    if (!id_user) return response.status(404).send("Pengguna tidak ditemukan!");
-    await Prisma.users.delete({ where: { id_user } });
-    response.status(200);
+    response.clearCookie("id_user");
+    response.status(200).send("Berhasil keluar!");
   } catch (e) {
     console.error(e);
     response.status(500).send("Terjadi kesalahan!");

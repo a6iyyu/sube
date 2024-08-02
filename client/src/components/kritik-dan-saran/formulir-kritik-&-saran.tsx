@@ -31,7 +31,7 @@ export const FormulirKritikDanSaran: React.FC = () => {
   }, [feedbackData.description, successForm]);
 
   const HandleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => HandleChangeForm(e, setFeedbackData, feedbackData);
-  const HandleSubmit = (e: React.FormEvent) => MenanganiPengiriman(e, KritikSaranSkema, feedbackData, setErrorForm, null, setSuccessForm, "tentang-kami/kritik-dan-saran", null, XSRFToken, () => setFeedbackData({ email: "", subject: "", description: "" }));
+  const HandleSubmit = (e: React.FormEvent) => MenanganiPengiriman(e, KritikSaranSkema, feedbackData, setErrorForm, null, setSuccessForm, "tentang-kami/kritik-dan-saran", "kritik-dan-saran", XSRFToken, () => setFeedbackData({ email: "", subject: "", description: "" }));
 
   return (
     <main className="mx-auto mb-60 mt-24 h-fit w-4/5 text-slate-50 lg:mt-32">

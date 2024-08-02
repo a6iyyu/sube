@@ -1,28 +1,42 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { Notifikasi } from "~/common/notification";
+import { HandleCSRF } from "~/utils/menangani-csrf";
 
 export const PengaturanPengguna: React.FC = () => {
   const [notification, setNotification] = useState<{ showMessage: string, isVisible: boolean }>({ showMessage: "", isVisible: false });
+  const [XSRFToken, setXSRFToken] = useState<string>("");
+
+  const HandleLogout = async () => {
+    try {
+      const response = await axios.post("http://localhost:2001/auth/keluar", {}, {
+        headers: {
+          "Content-Type": "application/json",
+          "XSRF-Token": XSRFToken,
+        },
+        withCredentials: true,
+      });
+      response.status === 200 ? window.location.href = "http://localhost:2000/masuk" : setNotification({ showMessage: response.data.message, isVisible: true });
+    } catch (e) {
+      console.error(e);
+      setNotification({ showMessage: "Terjadi kesalahan!", isVisible: true });
+    }
+  };
 
   useEffect(() => {
-    (async () => {
-      try {
-        const response = await axios.get("http://localhost:2001/auth/logout", { withCredentials: true });
-        response.status !== 200 ? setNotification({ showMessage: response.data.message, isVisible: true }) : window.location.href = "http://localhost:2000/masuk"
-      } catch (e) {
-        console.error(e);
-      }
-    })();
+    HandleCSRF(setXSRFToken, "auth", "keluar");
+
+    const NotificationTimeout = setTimeout(() => setNotification({ showMessage: "", isVisible: false }), 3000);
+    return () => clearTimeout(NotificationTimeout);
   }, []);
 
   return (
-    <main className="mx-auto mb-60 mt-10 h-fit w-4/5 text-slate-50 lg:mt-20">
+    <main className="mx-auto mb-40 mt-10 h-fit w-4/5 text-slate-50 lg:mt-20">
       {notification.isVisible && <Notifikasi title={notification.showMessage} onclose={() => setNotification({ ...notification, isVisible: false })} />}
       <hr className="h-0.5 w-full rounded-full" />
       <h3 className="mt-10 cursor-default text-3xl font-bold">Pengaturan</h3>
-      <section className="flex items-center justify-between">
-        <div className="flex h-full w-4/5 flex-col">
+      <section className="flex flex-col items-center justify-between lg:flex-row">
+        <div className="flex h-full w-full flex-col lg:w-4/5">
           <h3 className="mt-10 cursor-default text-xl font-bold">
             Selesai Beraktivitas?
           </h3>
@@ -31,11 +45,11 @@ export const PengaturanPengguna: React.FC = () => {
             memastikan data pribadi Anda tetap terlindungi dan aman.
           </h5>
         </div>
-        <form action="" method="post" className="grid h-full w-1/5 place-items-center">
-          <button className="cursor-pointer rounded-xl bg-slate-50 px-9 py-4 text-lg font-bold text-slate-950 transition-all duration-300 ease-in-out hover:bg-slate-200" type="submit">
+        <div className="mt-6 flex h-full w-full items-center lg:mt-0 lg:w-1/5 lg:justify-end">
+          <button onClick={HandleLogout} className="cursor-pointer rounded-md bg-slate-50 px-9 py-3 text-lg font-bold text-slate-950 transition-all duration-300 ease-in-out hover:bg-slate-200" type="submit">
             Keluar
           </button>
-        </form>
+        </div>
       </section>
     </main>
   );

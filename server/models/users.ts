@@ -61,15 +61,3 @@ export const LoginAuth = async (request: Request, response: Response) => {
     e instanceof ZodError ? response.status(400).send("Data Anda tidak valid!") : response.status(500).send("Terjadi kesalahan pada server saat proses masuk ke Sube!");
   }
 };
-
-export const UserAuthenticated = async (request: Request, response: Response) => {
-  try {
-    const Token = request.cookies["id_user"];
-    const Decoded = jwt.verify(Token, process.env.JWT_SECRET || "") as { id_user: string };
-    const FindUser = await Prisma.users.findUnique({ where: { id_user: Decoded.id_user } });
-    if (FindUser) response.redirect(request.headers.referer || "/");
-  } catch (e) {
-    console.error(e);
-    response.status(500).send("Terjadi kesalahan!");
-  }
-};

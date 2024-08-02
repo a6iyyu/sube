@@ -9,7 +9,6 @@ import logger from "morgan";
 import passport from "passport";
 import rateLimit from "express-rate-limit";
 import session from "express-session";
-import connectPgSimple from "connect-pg-simple";
 import { ImportBlog, RenderBlog } from "./models/blogs";
 import { LogoutAuth, UpdateDataUser, RequireAuthAndGetUserData } from "./controllers/dashboard";
 import { CreateFeedback } from "./models/feedback";
@@ -22,7 +21,6 @@ dotenv.config();
 const app = express();
 const port = process.env.PORT || 2001;
 const Prisma = new PrismaClient();
-const PgStore = connectPgSimple(session);
 
 app.use(bodyParser.json());
 app.use(cookieParser());
@@ -31,7 +29,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(logger("common"));
 app.use(csrf({ cookie: true }));
-app.use(session({ secret: process.env.SESSION_SECRET || "", store: new PgStore(), resave: false, saveUninitialized: false }));
+app.use(session({ secret: process.env.SESSION_SECRET || "", resave: false, saveUninitialized: false }));
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(LoginWithGoogle);
@@ -54,6 +52,10 @@ app.get("/auth/registrasi", (request: Request, response: Response) => {
 });
 
 app.get("/auth/masuk", (request: Request, response: Response) => {
+  response.json({ "XSRF-Token": request.csrfToken() });
+});
+
+app.get("/auth/keluar", (request: Request, response: Response) => {
   response.json({ "XSRF-Token": request.csrfToken() });
 });
 

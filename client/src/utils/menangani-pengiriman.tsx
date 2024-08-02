@@ -49,6 +49,9 @@ export const MenanganiPengiriman = async <T extends Feedback | Users>(
 
     POSTRoute ? (response.status === 201 || response.status === 200 ? window.location.href = `http://localhost:2000/${GETRoute}` : (setShowNotification && setShowNotification({ showMessage: response.data.message, isVisible: true }))) : (response.status === 200 ? window.location.href = `http://localhost:2000/${GETRoute}` : (setShowNotification && setShowNotification({ showMessage: response.data.message, isVisible: true })));
     POSTRoute === "tentang-kami/kritik-dan-saran" && response.status === 201 ? (setSuccessForm && setSuccessForm(true), ResetForm()) : (setShowNotification && setShowNotification({ showMessage: response.data.message, isVisible: true }));
+  
+    const NotificationTimeout = setTimeout(() => setShowNotification && setShowNotification({ showMessage: "", isVisible: false }), 3000);
+    return () => clearTimeout(NotificationTimeout);
   } catch (e) {
     if (isAxiosError(e) && e.response) setShowNotification && setShowNotification({ showMessage: e.response.data.message, isVisible: true });
   }
