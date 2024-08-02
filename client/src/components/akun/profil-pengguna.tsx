@@ -13,16 +13,16 @@ export const ProfilPengguna: React.FC = () => {
   }, []);
 
   return (
-    <main id={getUserData?.id_user} className="mx-auto mb-60 mt-24 flex h-fit w-4/5 flex-col items-center gap-x-12 text-slate-50 lg:mt-32 lg:flex-row">
+    <main id={getUserData?.id_user} className="mx-auto mt-24 flex h-fit w-4/5 flex-col items-center gap-y-8 text-slate-50 lg:mt-32 lg:flex-row lg:gap-x-12 lg:gap-y-0">
       {showNotification.isVisible && <Notifikasi title={showNotification.showMessage} onclose={() => setShowNotification({ ...showNotification, isVisible: false })} />}
       <span className="absolute right-0 top-24 z-0 h-40 w-40 bg-[#ff85ad] [filter:blur(8rem)]" />
-      <section className="flex h-full w-1/4 items-center justify-end">
+      <section className="flex h-full w-1/2 items-center justify-end lg:w-1/4">
         <label htmlFor={`profile-picture-${getUserData?.username}`} className="flex h-full w-full cursor-pointer items-center justify-center">
           <img src={getUserData?.dashboard?.profile_picture || "/blank-profile-picture.webp?url"} alt={getUserData?.username} className="h-full w-full rounded-full object-cover" />
         </label>
         <input type="file" accept="image/*" id={`profile-picture-${getUserData?.username}`} className="hidden" />
       </section>
-      <section className="flex h-full w-3/4 cursor-default flex-col justify-center">
+      <section className="flex h-full w-full cursor-default flex-col justify-center lg:w-3/4">
         <h4 className="text-2xl font-semibold">@{getUserData?.username}</h4>
         <h4 className="mt-2 italic">
           {getUserData?.dashboard?.nationality || "🇮🇩\u2002Indonesia"}
