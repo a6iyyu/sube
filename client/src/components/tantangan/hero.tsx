@@ -2,7 +2,7 @@ import React from "react";
 
 export const TantanganHero: React.FC = () => {
   return (
-    <main className="z-20 mx-auto mb-60 mt-28 flex h-fit w-4/5 flex-col-reverse items-center justify-center gap-x-20 text-slate-50 lg:flex-row lg:justify-between">
+    <main className="z-20 mx-auto mb-20 mt-28 flex h-fit w-4/5 flex-col-reverse items-center justify-center gap-x-20 text-slate-50 lg:flex-row lg:justify-between">
       <section className="mt-10 flex h-full w-full cursor-default flex-col items-center text-justify lg:mt-0 lg:w-[55%] lg:items-start">
         <h2 className="text-center text-4xl font-bold lg:text-left lg:text-5xl" style={{ lineHeight: "3.5rem" }}>
           Bersiap Menghadapi Tantangan Nyata

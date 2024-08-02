@@ -26,7 +26,7 @@ export const ModulPembelajaran: InitModulPembelajaran[] = [
   },
   {
     id: "4",
-    judul: "Pengembangan Kepemimpinan",
+    judul: "Kepemimpinan",
     gambar: "/leadership.jpg?url",
     deskripsi: "Tingkatkan keterampilan kepemimpinan Anda untuk mengelola tim dan proyek secara efektif. Modul ini mencakup teori kepemimpinan, gaya kepemimpinan, dan praktik kepemimpinan dalam organisasi modern."
   },

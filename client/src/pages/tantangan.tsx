@@ -3,7 +3,7 @@ import { WebsiteMeta } from "~/common/website-meta";
 import { ScrollIndicator } from "~/common/scroll-indicator";
 import { ScrollToTop } from "~/common/scroll-to-top";
 import { Header } from "~/common/header";
-import { TantanganHero } from "~/components/tantangan/hero";
+import { NotReadyPage } from "~/common/not-ready-page";
 import { Footer } from "~/common/footer";
 
 export const Tantangan: React.FC = () => {
@@ -13,7 +13,7 @@ export const Tantangan: React.FC = () => {
       <ScrollIndicator />
       <ScrollToTop />
       <Header />
-      <TantanganHero />
+      <NotReadyPage />
       <Footer />
     </>
   );

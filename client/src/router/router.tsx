@@ -9,6 +9,7 @@ import { DetailTabelBlog } from "~/pages/detail-tabel-blog";
 import { FAQ } from "~/pages/faq";
 import { KritikDanSaran } from "~/pages/kritik-dan-saran";
 import { Kursus } from "~/pages/kursus";
+import { DetailKursus } from "~/pages/detail-kursus";
 import { LupaKataSandi } from "~/pages/lupa-kata-sandi";
 import { Masuk } from "~/pages/masuk";
 import { Registrasi } from "~/pages/registrasi";
@@ -30,6 +31,7 @@ export const Router: React.FC = () => {
         <Route path="/kritik-dan-saran" Component={KritikDanSaran} />
         <Route path="/lupa-kata-sandi" Component={LupaKataSandi} />
         <Route path="/kursus" Component={Kursus} />
+        <Route path="/kursus/:judul" Component={DetailKursus} />
         <Route path="/masuk" Component={Masuk} />
         <Route path="/registrasi" Component={Registrasi} />
         <Route path="/reset-kata-sandi" Component={ResetKataSandi} />

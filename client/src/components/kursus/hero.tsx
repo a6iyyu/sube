@@ -3,7 +3,7 @@ import { HandleMouseEnter, HandleMouseLeave, Headline } from "~/utils/hover-seti
 
 export const KursusHero: React.FC = () => {
   return (
-    <main className="z-20 mx-auto mb-60 mt-28 flex h-fit w-4/5 flex-col-reverse items-center justify-center gap-x-20 text-slate-50 lg:flex-row lg:justify-between">
+    <main className="z-20 mx-auto mt-28 flex h-fit w-4/5 flex-col-reverse items-center justify-center gap-x-20 text-slate-50 lg:flex-row lg:justify-between">
       <section className="mt-10 flex h-full w-full cursor-default flex-col items-center text-justify lg:mt-0 lg:w-[55%] lg:items-start">
         <h2 className="hidden text-left text-5xl font-bold [line-height:1.175] lg:inline">
           {Headline("Pelajari Keterampilan Baru di Sube", HandleMouseEnter, HandleMouseLeave)}

@@ -1,19 +1,19 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-export const Redirect: React.FC = () => {
+export const NotReadyPage: React.FC = () => {
   return (
-    <main className="mx-auto mb-60 mt-40 flex w-4/5 flex-col items-center justify-between text-gray-50 lg:flex-row">
-      <img src="/404.png?url" alt="404: Not Found!" className="font-semibold transition-all duration-300 ease-in-out lg:hover:scale-105" loading="lazy" />
+    <main className="mx-auto mb-60 mt-28 flex w-4/5 flex-col items-center justify-between text-gray-50 lg:flex-row">
+      <img src="/not-ready.png?url" alt="Sorry, this page isn't ready!" className="font-semibold transition-all duration-300 ease-in-out lg:hover:scale-105" loading="lazy" />
       <section className="mt-8 flex h-full w-full cursor-default flex-col items-center justify-center text-gray-50 lg:mt-0 lg:w-1/2 lg:items-start">
         <p className="h-fit w-fit text-4xl font-bold lg:text-5xl">Oops!</p>
         <p className="mt-2 h-fit w-fit text-3xl font-medium lg:text-4xl">
-          Tidak ada yang menarik di sini.
+          Halaman ini belum siap.
         </p>
         <br />
         <p className="text-justify text-lg font-normal lg:text-2xl">
-          Sepertinya halaman ini mengambil sapuan kuas ke arah yang salah. Mari
-          kita menavigasi kembali ke pameran utama bersama-sama.
+          Kami bekerja keras untuk menyiapkan halaman ini. Terima kasih atas
+          kesabaran Anda!
         </p>
         <br />
         <br />
