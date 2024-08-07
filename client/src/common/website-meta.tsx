@@ -12,6 +12,7 @@ export const WebsiteMeta: React.FC<WebsiteMetaProps> = ({ title, description }) 
       <Helmet>
         <meta charSet="UTF-8" />
         <meta httpEquiv="X-UA-Compatible" content="ie=edge" />
+        <meta httpEquiv="Content-Security-Policy" content="upgrade-insecure-requests" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <meta name="description" content={description} />
         <title>{title}</title>

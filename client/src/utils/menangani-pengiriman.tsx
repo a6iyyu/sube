@@ -39,7 +39,7 @@ export const MenanganiPengiriman = async <T extends Feedback | Users>(
   if (ValidasiGagal) return setErrorForm(ValidasiGagal);
 
   try {
-    const response = await axios.post(`http://sube-server.vercel.app/${POSTRoute}`, FormData, {
+    const response = await axios.post(`http://sube-server.vercel.app/${POSTRoute}/`, FormData, {
       headers: {
         "Content-Type": "application/json",
         "XSRF-Token": XSRFToken,
