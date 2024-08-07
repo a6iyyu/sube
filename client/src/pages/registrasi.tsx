@@ -132,7 +132,7 @@ export const Registrasi: React.FC = () => {
             </button>
           </form>
           <span className="h-fit w-4/5">
-            <Link to={`http://localhost:2001/auth/google`}>
+            <Link to={`http://sube-server.vercel.app/auth/google`}>
               <button type="submit" className="mx-auto mt-7 flex h-fit w-full items-center justify-center gap-x-3 rounded-lg bg-slate-50 py-4 text-base font-semibold text-slate-950 transition-all duration-300 ease-in-out hover:bg-slate-300 md:py-5">
                 <img src="/google.png?url" alt="" className="h-5 w-5" />
                 <h5>Masuk dengan Google</h5>

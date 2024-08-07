@@ -13,7 +13,7 @@ const Prisma = new PrismaClient();
 passport.use(new GoogleStrategy({
     clientID: process.env.GOOGLE_CLIENT_ID!,
     clientSecret: process.env.GOOGLE_CLIENT_SECRET!,
-    callbackURL: "http://localhost:2001/auth/google/callback",
+    callbackURL: "http://sube-server.vercel.app/auth/google/callback",
   }, async (_accessToken, _refreshToken, profile: Profile, done) => {
     try {
       const email = profile.emails?.[0].value;
@@ -50,12 +50,12 @@ passport.deserializeUser(async (id_user: string, done) => {
 
 router.get("/auth/google", passport.authenticate("google", { scope: ["profile", "email"] }));
 router.get("/auth/google/callback",
-  passport.authenticate("google", { failureRedirect: "http://localhost:2000/masuk" }),
+  passport.authenticate("google", { failureRedirect: "http://sukabelajar.vercel.app/masuk" }),
   (request: Request, response: Response) => {
     const User = request.user as any;
     const Token = jwt.sign({ id_user: User.id_user }, process.env.JWT_SECRET! || "", { expiresIn: "4h" });
     response.cookie("id_user", Token, { httpOnly: true, secure: true, maxAge: 4 * 60 * 60 * 1000 });
-    response.redirect("http://localhost:2000/dashboard");
+    response.redirect("http://sukabelajar.vercel.app/dashboard");
   }
 );
 

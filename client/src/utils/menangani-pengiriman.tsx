@@ -39,7 +39,7 @@ export const MenanganiPengiriman = async <T extends Feedback | Users>(
   if (ValidasiGagal) return setErrorForm(ValidasiGagal);
 
   try {
-    const response = await axios.post(`http://localhost:2001/${POSTRoute}`, FormData, {
+    const response = await axios.post(`http://sube-server.vercel.app/${POSTRoute}`, FormData, {
       headers: {
         "Content-Type": "application/json",
         "XSRF-Token": XSRFToken,
@@ -47,7 +47,7 @@ export const MenanganiPengiriman = async <T extends Feedback | Users>(
       withCredentials: true,
     });
 
-    POSTRoute ? (response.status === 201 || response.status === 200 ? window.location.href = `http://localhost:2000/${GETRoute}` : (setShowNotification && setShowNotification({ showMessage: response.data.message, isVisible: true }))) : (response.status === 200 ? window.location.href = `http://localhost:2000/${GETRoute}` : (setShowNotification && setShowNotification({ showMessage: response.data.message, isVisible: true })));
+    POSTRoute ? (response.status === 201 || response.status === 200 ? window.location.href = `http://sukabelajar.vercel.app/${GETRoute}` : (setShowNotification && setShowNotification({ showMessage: response.data.message, isVisible: true }))) : (response.status === 200 ? window.location.href = `http://sukabelajar.vercel.app/${GETRoute}` : (setShowNotification && setShowNotification({ showMessage: response.data.message, isVisible: true })));
     POSTRoute === "tentang-kami/kritik-dan-saran" && response.status === 201 ? (setSuccessForm && setSuccessForm(true), ResetForm()) : (setShowNotification && setShowNotification({ showMessage: response.data.message, isVisible: true }));
   
     const NotificationTimeout = setTimeout(() => setShowNotification && setShowNotification({ showMessage: "", isVisible: false }), 3000);

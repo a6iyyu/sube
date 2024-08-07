@@ -9,14 +9,14 @@ export const PengaturanPengguna: React.FC = () => {
 
   const HandleLogout = async () => {
     try {
-      const response = await axios.post("http://localhost:2001/auth/keluar", {}, {
+      const response = await axios.post("http://sube-server.vercel.app/auth/keluar", {}, {
         headers: {
           "Content-Type": "application/json",
           "XSRF-Token": XSRFToken,
         },
         withCredentials: true,
       });
-      response.status === 200 ? window.location.href = "http://localhost:2000/masuk" : setNotification({ showMessage: response.data.message, isVisible: true });
+      response.status === 200 ? window.location.href = "http://sukabelajar.vercel.app/masuk" : setNotification({ showMessage: response.data.message, isVisible: true });
     } catch (e) {
       console.error(e);
       setNotification({ showMessage: "Terjadi kesalahan!", isVisible: true });

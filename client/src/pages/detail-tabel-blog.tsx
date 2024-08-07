@@ -20,7 +20,7 @@ export const DetailTabelBlog: React.FC = () => {
     const RenderBlog = async (title: string) => {
       setLoading(true);
       try {
-        const response = await axios.get(`http://localhost:2001/blog/${title}`);
+        const response = await axios.get(`http://sube-server.vercel.app/blog/${title}`);
         response.status === 404 ? setNotFound(true) : setBlogs(response.data);
       } catch (e) {
         console.error(e);

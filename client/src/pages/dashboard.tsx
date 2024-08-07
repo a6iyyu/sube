@@ -12,12 +12,12 @@ export const Dashboard: React.FC = () => {
   useEffect(() => {
     (async () => {
       try {
-        const response = await axios.get("http://localhost:2001/dashboard", {
+        const response = await axios.get("http://sube-server.vercel.app/dashboard", {
           withCredentials: true,
         });
-        if (response.status !== 200) window.location.href = "http://localhost:2000/masuk";
+        if (response.status !== 200) window.location.href = "http://sukabelajar.vercel.app/masuk";
       } catch (e) {
-        window.location.href = "http://localhost:2000/masuk";
+        window.location.href = "http://sukabelajar.vercel.app/masuk";
         console.error(e);
       }
     })();

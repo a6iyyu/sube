@@ -4,7 +4,7 @@ import { blogs } from "~/types/blogs";
 
 export const ImporBlog = async (setImportBlogs: Dispatch<SetStateAction<blogs[]>>) => {
   try {
-    const response = await axios.get("http://localhost:2001/blog");
+    const response = await axios.get("http://sube-server.vercel.app/blog");
     setImportBlogs(response.data);
   } catch (e) {
     if (axios.isAxiosError(e) && e.response) console.error(e.message);
