@@ -24,7 +24,24 @@ const Prisma = new PrismaClient();
 
 app.use(bodyParser.json());
 app.use(cookieParser());
-app.use(cors({ credentials: true, origin: "https://sukabelajar.vercel.app" }));
+app.use(
+  cors({
+    credentials: true,
+    origin: [
+      "https://sukabelajar.vercel.app/",
+      "https://sukabelajar.vercel.app/auth/registrasi/",
+      "https://sukabelajar.vercel.app/auth/masuk/",
+      "https://sukabelajar.vercel.app/auth/keluar/",
+      "https://sukabelajar.vercel.app/auth/lupa-kata-sandi/",
+      "https://sukabelajar.vercel.app/auth/reset-kata-sandi/",
+      "https://sukabelajar.vercel.app/dashboard/memperbarui-data-pengguna/",
+      "https://sukabelajar.vercel.app/tentang-kami/kritik-dan-saran/",
+      "https://sukabelajar.vercel.app/dashboard/",
+      "https://sukabelajar.vercel.app/blog/",
+      "https://sukabelajar.vercel.app/blog/:title/",
+    ],
+  })
+);
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(logger("common"));
