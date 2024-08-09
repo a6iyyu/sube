@@ -9,12 +9,12 @@ import logger from "morgan";
 import passport from "passport";
 import rateLimit from "express-rate-limit";
 import session from "express-session";
-import { ImportBlog, RenderBlog } from "../models/blogs";
-import { LogoutAuth, UpdateDataUser, RequireAuthAndGetUserData } from "../controllers/dashboard";
-import { CreateFeedback } from "../models/feedback";
-import { ForgotPassword, ResetPassword } from "../controllers/forgot-reset-password";
-import LoginWithGoogle from "../models/login-with-google";
-import { RegisterAuth, LoginAuth } from "../models/users";
+import { ImportBlog, RenderBlog } from "./models/blogs";
+import { LogoutAuth, UpdateDataUser, RequireAuthAndGetUserData } from "./controllers/dashboard";
+import { CreateFeedback } from "./models/feedback";
+import { ForgotPassword, ResetPassword } from "./controllers/forgot-reset-password";
+import LoginWithGoogle from "./models/login-with-google";
+import { RegisterAuth, LoginAuth } from "./models/users";
 
 dotenv.config();
 
