@@ -9,7 +9,7 @@ export const PengaturanPengguna: React.FC = () => {
 
   const HandleLogout = async () => {
     try {
-      const response = await axios.post("http://sube-server.vercel.app/auth/keluar/", {}, {
+      const response = await axios.post("http://sube-server.vercel.app/auth/keluar", {}, {
         headers: {
           "Content-Type": "application/json",
           "XSRF-Token": XSRFToken,
