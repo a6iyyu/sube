@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "scripts": {
     "build": "webpack --config webpack.prod.ts --mode production",
-    "dev": "nodemon server.ts",
+    "dev": "nodemon ./api/server.ts",
     "lint": "eslint ./ && eslint ./ --fix",
     "start": "webpack --config webpack.dev.ts --mode development",
     "test": "echo \"Error: no test specified\" && exit 1"
