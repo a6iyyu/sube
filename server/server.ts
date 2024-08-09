@@ -24,7 +24,7 @@ const Prisma = new PrismaClient();
 
 app.use(bodyParser.json());
 app.use(cookieParser());
-app.use(cors({ credentials: true, origin: ["https://sukabelajar.vercel.app", "https://sukabelajar.vercel.app/auth/registrasi", "https://sukabelajar.vercel.app/auth/masuk"] }));
+app.use(cors({ credentials: true, origin: ["https://sukabelajar.vercel.app", "*"] }));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(logger("common"));
