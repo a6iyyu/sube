@@ -1,0 +1,50 @@
+{
+  "name": "sube-client",
+  "description": "",
+  "private": true,
+  "version": "0.0.0",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "@splidejs/splide": "^4.1.4",
+    "@splidejs/splide-extension-auto-scroll": "^0.5.3",
+    "autoprefixer": "^10.4.19",
+    "axios": "^1.7.2",
+    "font-awesome": "^4.7.0",
+    "postcss": "^8.4.38",
+    "prettier": "^3.3.2",
+    "prettier-plugin-tailwindcss": "^0.6.1",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-router-dom": "^6.23.1",
+    "remark-frontmatter": "^5.0.0",
+    "remark-mdx-frontmatter": "^4.0.0",
+    "styled-components": "^6.1.11",
+    "tailwindcss": "^3.4.3",
+    "ts-node": "^10.9.2",
+    "typed.js": "^2.1.0",
+    "vite-tsconfig-paths": "^4.3.2",
+    "zod": "^3.23.8"
+  },
+  "devDependencies": {
+    "@mdx-js/react": "^3.0.1",
+    "@mdx-js/rollup": "^3.0.1",
+    "@types/node": "^20.14.8",
+    "@types/react": "^18.2.66",
+    "@types/react-dom": "^18.2.22",
+    "@types/react-helmet-async": "^1.0.3",
+    "@typescript-eslint/eslint-plugin": "^7.2.0",
+    "@typescript-eslint/parser": "^7.2.0",
+    "@vitejs/plugin-react-swc": "^3.5.0",
+    "eslint": "^8.57.0",
+    "eslint-plugin-react-hooks": "^4.6.0",
+    "eslint-plugin-react-refresh": "^0.4.6",
+    "react-helmet-async": "^2.0.5",
+    "typescript": "^5.2.2",
+    "vite": "^5.2.0"
+  }
+}

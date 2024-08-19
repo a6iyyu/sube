@@ -1,0 +1,46 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model blogs {
+  id_blog     String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  title       String   @unique @default("255") @db.VarChar
+  image       String?
+  description String   @default("255") @db.VarChar
+  content     String
+  created_at  DateTime @default(dbgenerated("(now() AT TIME ZONE 'utc'::text)")) @db.Timestamptz(6)
+}
+
+model feedback {
+  id_feedback      String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  email            String   @default("255") @db.VarChar
+  subject          String   @default("255") @db.VarChar
+  description      String
+  created_at       DateTime @default(dbgenerated("(now() AT TIME ZONE 'utc'::text)")) @db.Timestamptz(6)
+  submission_count Int      @default(1) @db.SmallInt
+}
+
+model users {
+  id_user    String     @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  username   String     @unique @default("255") @db.VarChar
+  email      String     @unique @default("255") @db.VarChar
+  password   String     @default("255") @db.VarChar
+  created_at DateTime   @default(dbgenerated("(now() AT TIME ZONE 'utc'::text)")) @db.Timestamptz(6)
+  updated_at DateTime   @default(dbgenerated("(now() AT TIME ZONE 'utc'::text)")) @db.Timestamptz(6)
+  dashboard  dashboard?
+}
+
+model dashboard {
+  id_user         String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  profile_picture String?
+  bio             String?  @default("255") @db.VarChar
+  nationality     String   @default("255") @db.VarChar
+  created_at      DateTime @default(dbgenerated("(now() AT TIME ZONE 'utc'::text)")) @db.Timestamptz(6)
+  updated_at      DateTime @default(dbgenerated("(now() AT TIME ZONE 'utc'::text)")) @db.Timestamptz(6)
+  user            users    @relation(fields: [id_user], references: [id_user])
+}
