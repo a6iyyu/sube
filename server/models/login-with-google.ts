@@ -4,7 +4,7 @@ import passport from "passport";
 import { Strategy as GoogleStrategy, Profile } from "passport-google-oauth20";
 import { v4 as uuidv4 } from "uuid";
 import { PrismaClient } from "@prisma/client";
-import { Users } from "../types/users";
+import { Users } from "~/users";
 
 const router = Router();
 const Prisma = new PrismaClient();

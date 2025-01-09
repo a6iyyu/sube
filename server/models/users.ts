@@ -3,8 +3,8 @@ import { PrismaClient } from "@prisma/client";
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 import { ZodError } from "zod";
-import { RegisterValidation, LoginValidation } from "../utils/validation";
-import { Users } from "../types/users";
+import { RegisterValidation, LoginValidation } from "@/validation";
+import { Users } from "~/users";
 
 const Prisma = new PrismaClient();
 

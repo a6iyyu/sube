@@ -1,7 +1,7 @@
 import { Request, Response, NextFunction } from "express";
 import { PrismaClient } from "@prisma/client";
 import jwt from "jsonwebtoken";
-import { Users } from "~/types/users";
+import { Users } from "~/users";
 
 const Prisma = new PrismaClient();
 
